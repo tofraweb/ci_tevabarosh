@@ -112,6 +112,9 @@
                     <li>
                         <a href="<?php echo base_url();?>index.php/page/get_name/contact">צור קשר</a>
                     </li>
+                    <li>
+                        <a href="<?php echo base_url();?>index.php/upload">הוסף צמח</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
