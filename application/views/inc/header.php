@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php error_reporting(E_ALL ^ E_WARNING); ?>
 <head>
 
     <meta charset="utf-8">
@@ -32,7 +32,6 @@
 </head>
 
 <body>
-
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -103,6 +102,20 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">בסיס נתונים<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="<?php echo base_url();?>index.php/upload">הוסף ציפור</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url();?>index.php/item/getItem/1">רשימת כל הציפורים</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url();?>index.php/item/getItem/2">רשימת כל הצמחים</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="<?php echo base_url();?>index.php/page/get_name/about">מי אנחנו</a>
                     </li>
@@ -111,9 +124,6 @@
                     </li>
                     <li>
                         <a href="<?php echo base_url();?>index.php/page/get_name/contact">צור קשר</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url();?>index.php/upload">הוסף צמח</a>
                     </li>
                 </ul>
             </div>
