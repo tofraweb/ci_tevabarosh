@@ -27,7 +27,7 @@
               <?php endforeach; ?>
               </ul>
 
-              <p><?php echo anchor('upload', 'הוסף עוד צמח'); ?></p>
+              <p><?php echo anchor('item/newItem', 'הוסף עוד צמח'); ?></p>
 
             </div>
         </div>

@@ -14,9 +14,9 @@ class Upload extends CI_Controller {
   {
         $config['upload_path']          = 'assets/img/media/upload/';
         $config['allowed_types']        = 'gif|jpg|png|jpeg';
-        $config['max_size']             = 400;
-        $config['max_width']            = 1024;
-        $config['max_height']           = 768;
+        $config['max_size']             = '400';
+        $config['max_width']            = '1024';
+        $config['max_height']           = '768';
 
         $this->load->library('upload', $config);
 
@@ -33,7 +33,7 @@ class Upload extends CI_Controller {
                 //$data = array('upload_data' => $this->upload->data());
                 $data['upload_data'] = $this->upload->data();
                 $this->load->view('inc/header');
-                $this->load->view('bootstrap/upload_success', $data);
+                $this->load->view('bootstrap/upload_success_view', $data);
                 $this->load->view('inc/footer');
         }
   }

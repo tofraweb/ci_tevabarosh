@@ -114,6 +114,9 @@
                             <li>
                                 <a href="<?php echo base_url();?>index.php/item/getItem/2">רשימת כל הצמחים</a>
                             </li>
+                            <li>
+                                <a href="<?php echo base_url();?>index.php/item/newItem">הוסף אייטם חדש</a>
+                            </li>
                         </ul>
                     </li>
                     <li>
