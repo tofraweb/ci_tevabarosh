@@ -39,14 +39,33 @@ class Item extends CI_Controller {
     $this->load->view('inc/footer');
 	}
 
+
+  public function makeThumbnail($picture_name){
+    $config['image_library'] = 'gd2';
+    $config['source_image'] = 'assets/img/media/upload/'.$picture_name;
+    $config['create_thumb'] = TRUE;
+    $config['maintain_ratio'] = TRUE;
+    $config['width']         = 150;
+    $config['height']       = 100;
+    $this->load->library('image_lib', $config);
+    $this->image_lib->resize();
+
+    //updating picture name
+    $before_dot =  stristr($picture_name,'.',TRUE);
+    $after_dot =  stristr($picture_name,'.',FALSE);
+    $thumb_name =  $before_dot."_thumb".$after_dot;
+    return $thumb_name;
+  }
+
+
 	public function doUpload(){
     /*var_dump("new item");
     exit;*/
 		$config['upload_path'] = 'assets/img/media/upload/';
 		$config['allowed_types'] = 'gif|jpg|png|jpeg';
-		$config['max_size']	= '9000';
-		$config['max_width']  = '5024';
-		$config['max_height']  = '3768';
+		$config['max_size']	= '90000';
+		$config['max_width']  = '9024';
+		$config['max_height']  = '6768';
 
 		$this->load->library('upload', $config);
 
@@ -54,14 +73,17 @@ class Item extends CI_Controller {
 		{
 			$error = array('error' => $this->upload->display_errors());
 
-			$this->load->view('upload_form', $error);
+			$this->load->view('bootstrap/upload_form', $error);
 		}
 		else
 		{
 			$data = array('upload_data' => $this->upload->data());
-      $this->item_table_model->storeItem($data['upload_data']['file_name']);
+      $picture_name = $data['upload_data']['file_name'];
+      //var_dump($picture_name);
+      //exit;
+      $thumbnail_name = $this->makeThumbnail($picture_name);
+      $this->item_table_model->storeItem($thumbnail_name);
       $this->uploadMessage($data);
-			//$this->load->view('bootstrap/upload_success_view', $data);
 		}
 
 	}
