@@ -45,8 +45,8 @@ class Item extends CI_Controller {
     $config['source_image'] = 'assets/img/media/upload/'.$picture_name;
     $config['create_thumb'] = TRUE;
     $config['maintain_ratio'] = TRUE;
-    $config['width']         = 150;
-    $config['height']       = 100;
+    $config['width']         = 390;
+    $config['height']       = 260;
     $this->load->library('image_lib', $config);
     $this->image_lib->resize();
 

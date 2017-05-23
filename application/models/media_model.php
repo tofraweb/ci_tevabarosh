@@ -2,125 +2,109 @@
 Class Media_model extends CI_Model
 {
 
-    function get_catalog_count($category = null, $search = null){
-        $category = strtolower($category);
-    //    include("connection.php");
+    public function get_catalog_count($category = null, $search = null){
         try {
-            $sql = "SELECT COUNT(media_id) FROM Media";
+            $sql = " SELECT * FROM items";
             if(!empty($search)){
-                $result = $this->db->prepare($sql
-                    . " WHERE title LIKE ?"
-                );
-                $result->bindValue(1,'%'.$search.'%',PDO::PARAM_STR);
+                $sql .=  " WHERE title LIKE ?";
+                $result = $this->db->query($sql, '%'.$search.'%' ); //binding values to query
             }elseif(!empty($category)){
-                $result = $this->db->prepare($sql
-                    . " WHERE LOWER(category) = ? ");
-                $result->bindParam(1,$category,PDO::PARAM_STR);
+                $sql .= " WHERE category_id = ? ";
+                $result = $this->db->query($sql, $category);
             }else{
-                $result = $this->db->prepare($sql);
+                $result = $this->db->query($sql);
             }
-            $result->execute();
         } catch(Exception $e){
             echo "Error in sql query";
             exit;
         }
-        $count = $result->fetchColumn(0); //check fetchColumn(0)!!!!!!
+        $count = sizeof($result->result());
         return $count;
     }
 
-    function full_catalog_array($limit = null, $offset = 0){
-    //    include("connection.php");
+    public function full_catalog_array($limit = null, $offset = 0){
         try{
-            $sql = "SELECT media_id,title, category, img
-            FROM Media
-            ORDER BY REPLACE(REPLACE(REPLACE(title,'The ',''), 'An ' , ''), 'A ', '')";
+            $sql = "SELECT id,title, category_id, picture
+      FROM items
+      ORDER BY REPLACE(REPLACE(REPLACE(title,'The ',''), 'An ' , ''), 'A ', '')";
             if(is_integer($limit)){
-                $results = $this->db->prepare($sql . " LIMIT ? OFFSET ? ");
-                $results->bindParam(1,$limit,PDO::PARAM_INT);
-                $results->bindParam(2,$offset,PDO::PARAM_INT);
+                $sql .= " LIMIT ? OFFSET ? ";
+                $results = $this->db->query($sql,array($limit,$offset));
             }else{
-                $results = $this->db->prepare($sql);
+                $results = $this->db->query($sql);
             }
-            $results->execute();
         }catch(Exception $e){
             echo "Unable to retrieve results";
-            var_dump($results);
             exit;
         }
-        $catalog = $results->fetchAll();
+        $catalog = $results->result();
         return $catalog;
     }
 
-    function random_catalog_array(){
-     //   include("connection.php");
+    public function random_catalog_array(){
         try{ //pulling only 4 random items from the DB
             $results = $this->db->query(
-                "SELECT media_id,title, category, img
-       FROM Media
+                "SELECT id,title, category_id, description, picture
+       FROM items
        ORDER BY RAND()
-       LIMIT 4"
+       LIMIT 3"
             );
         }catch(Exception $e){
             echo "Unable to retrieve results";
         }
         //returning results as array with keys as number (FETCH_NUM) or assoc names (FETCH_ASSOC)
-        $catalog = $results->fetchAll();
+        $catalog = $results->result();
         return $catalog;
     }
 
-    function category_catalog_array($category, $limit = null, $offset = 0){
-     //   include("connection.php");
-        $category = strtolower($category);
+    public function category_catalog_array($category, $limit = null, $offset = 0){
+
         try{
-            $sql = "SELECT media_id,title, category, img
-      FROM Media
-      WHERE LOWER(category) = ?
+            $sql = "SELECT id,title, category_id, picture
+      FROM items
+      WHERE category_id = ?
       ORDER BY REPLACE(REPLACE(REPLACE(title,'The ',''), 'An ' , ''), 'A ', '')";
             if(is_integer($limit)){
-                $results = $this->db->prepare($sql." LIMIT ? OFFSET ? ");
-                $results->bindParam(1,$category,PDO::PARAM_INT);
-                $results->bindParam(2,$limit,PDO::PARAM_INT);
-                $results->bindParam(3,$offset,PDO::PARAM_INT);
+                $sql .= " LIMIT ? OFFSET ? ";
+                $results = $this->db->query($sql,array($category,$limit,$offset));
             }else{
-                $results = $this->db->prepare($sql);
-                $results->bindParam(1,$offset,PDO::PARAM_INT);
+                $results = $this->db->query($sql,$offset);
             }
-            $results->execute();
         }catch(Exception $e){
             echo "Unable to retrieve results";
             exit;
         }
-        $catalog = $results->fetchAll();
+        $catalog = $results->result();
         return $catalog;
     }
 
 
-    function search_catalog_array($search, $limit = null, $offset = 0){
-      //  include("connection.php");
+    public function search_catalog_array($search, $limit = null, $offset = 0){
+
         try{
-            $sql = "SELECT media_id,title, category, img
-      FROM Media
-      WHERE title LIKE ?
-      ORDER BY REPLACE(REPLACE(REPLACE(title,'The ',''), 'An ' , ''), 'A ', '')";
+            $sql = " SELECT id,title,category_id, picture
+                FROM items
+                WHERE title LIKE ?
+                ORDER BY REPLACE(REPLACE(REPLACE(title,'The ',''), 'An ' , ''), 'A ', '')";
             if(is_integer($limit)){
-                $results = $this->db->prepare($sql." LIMIT ? OFFSET ? ");
-                $results->bindValue(1,'%'.$search.'%',PDO::PARAM_STR);
-                $results->bindParam(2,$limit,PDO::PARAM_INT);
-                $results->bindParam(3,$offset,PDO::PARAM_INT);
+                $sql .= " LIMIT ? OFFSET ? ";
+                $results = $this->db->query($sql, array('%'.$search.'%',$limit,$offset));
             }else{
-                $results = $this->db->prepare($sql);
-                $results->bindValue(1,'%'.$search.'%',PDO::PARAM_STR);
+                $results = $this->db->query($sql, array('%'.$search.'%'));
             }
-            $results->execute();
         }catch(Exception $e){
             echo "Unable to retrieve results";
             exit;
         }
-        $catalog = $results->fetchAll();
+        $catalog = $results->result();
+        // echo '<pre>';
+        // var_dump($catalog);
+        // echo '</pre>';
+        // exit;
         return $catalog;
     }
 
-    function single_item_array($id){
+    public function single_item_array($id){
        // include("connection.php");
         try{
             //Execute a prepared statement with question mark placeholders
@@ -160,8 +144,8 @@ Class Media_model extends CI_Model
         }
         return $item;
     }
-
-    function full_genre_array($category = null){
+/*
+    public function full_genre_array($category = null){
         $category = strtolower($category);
       //  include("connection.php");
         try{
@@ -190,15 +174,5 @@ Class Media_model extends CI_Model
         }
         return $genres;
     }
-
-
-    function get_item_html($item){
-        $output = "<li><a href='details.php?id="
-            .$item["media_id"]. "'><img src='"
-            .$item["img"]."' alt='"
-            .$item["title"]."'>"
-            .'<a href = "details.php?id='.$item["media_id"].'">View Details</a>'
-            . "</a></li>";
-        return $output;
-    }
+*/
 }

@@ -85,6 +85,31 @@
     </div>
     <!-- /.row -->
 
+    <!-- Random From Portfolio -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">
+                תמונות מובחרות
+            </h2>
+        </div>
+        <?php
+        $pic_path = base_url();
+        foreach ($catalog as $item) {?>
+
+          <div class="col-md-4 img-portfolio">
+              <a href="portfolio-item.html">
+                  <img class="img-responsive img-hover" src="<?php echo $pic_path;?>assets/img/media/upload/<?php echo $item->picture;?>" alt="">
+              </a>
+              <h3>
+                  <a href="portfolio-item.html"><?php echo $item->title;?></a>
+              </h3>
+              <p><?php echo $item->description;?></p>
+          </div>
+
+        <?php } ?>
+    </div>
+    <!-- /.row -->
+
     <!-- Portfolio Section -->
     <div class="row">
         <div class="col-lg-12">
