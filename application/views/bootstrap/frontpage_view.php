@@ -13,7 +13,7 @@
             <div class="item active">
                 <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=סלייד 1');"></div>
                 <div class="carousel-caption">
-                    <h2>תמונה 1</h2>
+                    <img class="img-responsive img-hover" src="<?php echo base_url();?>assets/img/media/upload/IMG_1899898.jpg" alt="">
                 </div>
             </div>
             <div class="item">
@@ -97,11 +97,11 @@
         foreach ($catalog as $item) {?>
 
           <div class="col-md-4 img-portfolio">
-              <a href="portfolio-item.html">
+              <a href="<?php echo base_url();?>index.php/catalog/getItem/<?php echo $item->id;?>">
                   <img class="img-responsive img-hover" src="<?php echo $pic_path;?>assets/img/media/upload/<?php echo $item->picture;?>" alt="">
               </a>
               <h3>
-                  <a href="portfolio-item.html"><?php echo $item->title;?></a>
+                  <a href="<?php echo base_url();?>index.php/catalog/getItem/<?php echo $item->id;?>"><?php echo $item->title;?></a>
               </h3>
               <p><?php echo $item->description;?></p>
           </div>

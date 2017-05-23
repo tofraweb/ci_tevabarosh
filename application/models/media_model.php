@@ -106,43 +106,15 @@ Class Media_model extends CI_Model
 
     public function single_item_array($id){
        // include("connection.php");
-        try{
-            //Execute a prepared statement with question mark placeholders
-            $results = $this->db->prepare(
-                "SELECT title, category, img, format, year, genre, publisher, isbn
-      FROM Media
-      JOIN Genres ON Media.genre_id = Genres.genre_id
-      LEFT OUTER JOIN Books ON Media.media_id = Books.media_id
-      WHERE Media.media_id = ?"
-            ); //
-            $results->bindParam(1,$id,PDO::PARAM_INT); //binds an intiger parameter to the placeholder
-            $results->execute();
-
-        }catch(Exception $e){
-            echo "Unable to retrieve results";
-        }
-        //returning results as array with keys as number (FETCH_NUM) or assoc names (FETCH_ASSOC)
-        $item = $results->fetch();
-        if(empty($item)) return $item;
-
-        try{ //retrieving data about peoples (multidimensional array, see data.php)
-            $results = $this->db->prepare(
-                "SELECT fullname, role
-      FROM Media_People
-      JOIN People ON Media_People.people_id = People.people_id
-      WHERE Media_People.media_id = ?"
-            ); //
-            $results->bindParam(1,$id,PDO::PARAM_INT);
-            $results->execute();
-
-        }catch(Exception $e){
-            echo "Unable to retrieve results";
-        }
-        while($row = $results->fetch(PDO::FETCH_ASSOC)){
-            //assigning people to different roles depending on media genre
-            $item[$row["role"]][] = $row["fullname"];//need to fully understand !!!!!!!!!!!!!!!!
-        }
-        return $item;
+       try{
+           $sql = "SELECT id, title, description, picture FROM items WHERE id = ?";
+           $result = $this->db->query($sql,$id);
+         }catch(Exception $e){
+             echo "Unable to retrieve results";
+             exit;
+         }
+         $item = $result->result();
+         return $item;
     }
 /*
     public function full_genre_array($category = null){

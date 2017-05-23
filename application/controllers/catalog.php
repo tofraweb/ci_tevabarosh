@@ -138,5 +138,13 @@ class Catalog extends CI_Controller {
     $this->load->view('inc/footer');
   }
 
+  public function getItem($id){
+    $item = $this->media_model->single_item_array($id);
+    $data['item'] = $item;
+    $this->load->view('inc/header');
+    $this->load->view('bootstrap/portfolio_item_view',$data);
+    $this->load->view('inc/footer');
+  }
+
 
 }

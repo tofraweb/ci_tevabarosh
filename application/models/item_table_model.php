@@ -6,7 +6,7 @@ class Item_table_model extends CI_Model{
 	public $title = null;
 	public $category_id = null;
 	public $description = null;
-	public $picture = 'null';
+	public $picture = null;
 
 	public function __construct()
 	{
@@ -15,7 +15,9 @@ class Item_table_model extends CI_Model{
 		$variables = get_class_vars(__CLASS__);
 		foreach($variables as $variable=>$value){
 			$this->$variable = $input->post($variable);
+
 		}
+
 	}
 
 	public function check(){
@@ -32,8 +34,7 @@ class Item_table_model extends CI_Model{
 		return $error;
 	}
 
-	public function storeItem($pic_name){
-    $this->picture = $pic_name;
+	public function storeProduct(){
 		$this->db->set($this);
 		$this->db->insert('items');
 	}

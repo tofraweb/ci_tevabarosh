@@ -1,4 +1,5 @@
 
+
     <!-- Page Content -->
     <div class="container">
 
@@ -32,13 +33,7 @@
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner">
                         <div class="item active">
-                            <img class="img-responsive" src="http://placehold.it/750x500" alt="">
-                        </div>
-                        <div class="item">
-                            <img class="img-responsive" src="http://placehold.it/750x500" alt="">
-                        </div>
-                        <div class="item">
-                            <img class="img-responsive" src="http://placehold.it/750x500" alt="">
+                            <img class="img-responsive" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $item[0]->picture;?>" alt="">
                         </div>
                     </div>
 
@@ -53,8 +48,8 @@
             </div>
 
             <div class="col-md-4">
-                <h3>Project Description</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
+                <h3><?php echo $item[0]->title;?></h3>
+                <p><?php echo $item[0]->description;?></p>
                 <h3>Project Details</h3>
                 <ul>
                     <li>Lorem Ipsum</li>
