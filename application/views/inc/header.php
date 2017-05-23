@@ -58,7 +58,7 @@
                                 <a href="<?php echo base_url();?>index.php/page/get_name/portfolio_2_col">פורטפוליו 2 עמודים</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>index.php/page/get_name/portfolio_3_col">פורטפוליו 3 עמודים</a>
+                                <a href="<?php echo base_url();?>index.php/page/get_name/portfolio_3_col/9">פורטפוליו 3 עמודים</a>
                             </li>
                             <li>
                                 <a href="<?php echo base_url();?>index.php/page/get_name/portfolio_4_col">פרוטפוליו 4 עמודים</a>
@@ -127,6 +127,14 @@
                     </li>
                     <li>
                         <a href="<?php echo base_url();?>index.php/page/get_name/contact">צור קשר</a>
+                    </li>
+                    <li>
+                      <div style="margin-top: 15px;margin-right: 15px; ">
+                        <form method="get" action="<?php echo base_url();?>index.php/catalog">
+                          <input type="text" name="s" id="s" />
+                          <input type="submit" value="חפש" />
+                        </form>
+                      </div>
                     </li>
                 </ul>
             </div>

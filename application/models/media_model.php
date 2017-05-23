@@ -41,13 +41,13 @@ Class Media_model extends CI_Model
         return $catalog;
     }
 
-    public function random_catalog_array(){
+    public function random_catalog_array($limit = 3){
         try{ //pulling only 4 random items from the DB
             $results = $this->db->query(
                 "SELECT id,title, category_id, description, picture
        FROM items
        ORDER BY RAND()
-       LIMIT 3"
+       LIMIT $limit"
             );
         }catch(Exception $e){
             echo "Unable to retrieve results";
