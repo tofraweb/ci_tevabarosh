@@ -8,7 +8,7 @@ class Item_model extends CI_Model{
 	}
 
 	public function getCategories(){
-		$categories = $this->db->query('SELECT * FROM category');
+		$categories = $this->db->query('SELECT * FROM categories');
 		return $categories->result();
     }
 
@@ -18,7 +18,7 @@ class Item_model extends CI_Model{
     }
 
 	public function getItem($cCategory){
-		$products = $this->db->query("SELECT * FROM items WHERE category_id = $cCategory");
-		return $products->result();
+		$item = $this->db->query("SELECT * FROM items WHERE category_id = $cCategory");
+		return $item->result();
     }
 }

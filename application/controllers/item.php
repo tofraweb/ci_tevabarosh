@@ -25,36 +25,47 @@ class Item extends CI_Controller {
     $this->load->view('inc/footer');
 	}
 
-	public function newProduct($err=null){
-		$this->template->write_view('header', "header_view");
-		$this->template->write('title', "New Product");
-		$this->template->write_view('mainmenu', "main_menu_view");
-		//$this->template->write_view('sidemenu', "sidemenu_view");
-		$category_list = array('category_list'=>$this->products_model->getCategories());
+	public function newItem($err=null){
+    $this->load->view('inc/header');
+		$category_list = array('category_list'=>$this->item_model->getCategories());
 		$error_message['error_message'] = $err;
-		$this->template->write_view('content', "new_product_view", $category_list, $error_message);
-		$data = array('copyright'=>'&copy; 2011 - Tomi Frank - New Product Page');
-		$this->template->write_view('footer', "footer_view",$data);
-		$this->template->render();
+		$this->load->view('bootstrap/new_item_view', $category_list, $error_message);
+    $this->load->view('inc/footer');
 	}
 
-	public function uploadMessage(){
-		$this->template->write_view('header', "header_view");
-		$this->template->write('title', "Success Message");
-		$this->template->write_view('mainmenu', "main_menu_view");
-		//$this->template->write_view('sidemenu', "sidemenu_view");
-		$this->template->write_view('content', "upload_success_view");
-		$data = array('copyright'=>'&copy; 2011 - Tomi Frank - Success Message Page');
-		$this->template->write_view('footer', "footer_view",$data);
-		$this->template->render();
+	public function uploadMessage($message){
+    $this->load->view('inc/header');
+		$this->load->view('bootstrap/upload_success_view', $message );
+    $this->load->view('inc/footer');
 	}
+
+
+  public function makeThumbnail($picture_name){
+    $config['image_library'] = 'gd2';
+    $config['source_image'] = 'assets/img/media/upload/'.$picture_name;
+    $config['create_thumb'] = TRUE;
+    $config['maintain_ratio'] = TRUE;
+    $config['width']         = 390;
+    $config['height']       = 260;
+    $this->load->library('image_lib', $config);
+    $this->image_lib->resize();
+
+    //updating picture name
+    $before_dot =  stristr($picture_name,'.',TRUE);
+    $after_dot =  stristr($picture_name,'.',FALSE);
+    $thumb_name =  $before_dot."_thumb".$after_dot;
+    return $thumb_name;
+  }
+
 
 	public function doUpload(){
-		$config['upload_path'] = './upload/';
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']	= '100';
-		$config['max_width']  = '1024';
-		$config['max_height']  = '768';
+    /*var_dump("new item");
+    exit;*/
+		$config['upload_path'] = 'assets/img/media/upload/';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg';
+		$config['max_size']	= '90000';
+		$config['max_width']  = '9024';
+		$config['max_height']  = '6768';
 
 		$this->load->library('upload', $config);
 
@@ -62,26 +73,29 @@ class Item extends CI_Controller {
 		{
 			$error = array('error' => $this->upload->display_errors());
 
-			$this->load->view('upload_form', $error);
+			$this->load->view('bootstrap/upload_form', $error);
 		}
 		else
 		{
 			$data = array('upload_data' => $this->upload->data());
-
-			$this->load->view('upload_success_view', $data);
+      $picture_name = $data['upload_data']['file_name'];
+      //var_dump($picture_name);
+      //exit;
+      $thumbnail_name = $this->makeThumbnail($picture_name);
+      $this->item_table_model->storeItem($thumbnail_name);
+      $this->uploadMessage($data);
 		}
+
 	}
 
-	public function storeProduct(){
-		$this->load->model('products_table_model');
-		$error = $this->products_table_model->check();
+	public function checkItem(){
+		$this->load->model('item_table_model');
+		$error = $this->item_table_model->check();
 		if(count($error)){
-			$this->newProduct($error);
+			$this->newItem($error);
 			return;
 		}
 		$this->doUpload();
-		$this->products_table_model->storeProduct();
-		redirect('http://localhost/shop/products/uploadMessage');
 	}
 
 }
