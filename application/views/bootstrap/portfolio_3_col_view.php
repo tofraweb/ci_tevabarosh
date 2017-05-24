@@ -19,15 +19,13 @@
 
         <!-- Projects Row -->
         <div class="row">
-              <?php
-              $pic_path = base_url();
-              foreach ($catalog as $item) {?>
+              <?php foreach ($catalog as $item) {?>
                 <div class="col-md-4 img-portfolio">
-                    <a href="portfolio-item.html">
-                        <img class="img-responsive img-hover" src="<?php echo $pic_path;?>assets/img/media/upload/<?php echo $item->picture;?>" alt="">
+                    <a href="<?php echo base_url();?>index.php/catalog/getItem/<?php echo $item->id;?>">
+                        <img class="img-responsive img-hover" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $item->picture;?>" alt="">
                     </a>
                     <h3>
-                        <a href="portfolio-item.html"><?php echo $item->title;?></a>
+                        <a href="<?php echo base_url();?>index.php/catalog/getItem/<?php echo $item->id;?>"><?php echo $item->title;?></a>
                     </h3>
                     <p><?php echo $item->description;?></p>
                 </div>

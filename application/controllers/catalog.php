@@ -9,6 +9,7 @@ class Catalog extends CI_Controller {
   public $total_items = 0;
   public $current_page = null;
   public $offset = 0;
+  public $category = 0;
 
   public function __construct()
   {
@@ -19,17 +20,46 @@ class Catalog extends CI_Controller {
   public function index()
   {
       if(isset($_GET['cat'])){
+          $this->category = $this->media_model->get_category_name($_GET['cat']);
+          // echo "<pre>";
+          // var_dump($this->category);
+          // exit;
+          // echo "</pre>";
 
+          switch ($_GET['cat']) {
+            case '1':
+              $this->pageTitle = $this->category->name;
+              $this->section = 1;
+              break;
+            case '2':
+              $this->pageTitle = $this->category->name;
+              $this->section = 2;
+              break;
+            case '3':
+              $this->pageTitle = $this->category->name;
+              $this->section = 3;
+              break;
+            case '4':
+              $this->pageTitle = $this->category->name;
+              $this->section = 4;
+              break;
+            default:
+              # code...
+              break;
+          }
+
+/*
           if($_GET['cat'] == 1){
-              $this->pageTitle = "Books";
+              $this->pageTitle = $this->category->name;
               $this->section = 1;
           } elseif ($_GET['cat'] == 2) {
-              $this->pageTitle = "Movies";
+              $this->pageTitle = $this->category->name;
               $this->section = 2;
           }elseif ($_GET['cat'] == 3) {
-              $this->pageTitle = "Music";
+              $this->pageTitle = $this->category->name;
               $this->section = 3;
           }
+          */
       }
 //search
       if(isset($_GET["s"])){
@@ -63,6 +93,7 @@ class Catalog extends CI_Controller {
       $data['section'] = $this->section;
       $data['total_items'] = $this->total_items;
       $data['pageTitle'] = $this->pageTitle;
+      //$data['category'] = $this->category;
       $data['pagination'] = $pagination_result['pagination'];
       $data['catalog'] = $pagination_result['catalog'];
       $this->load->view('inc/header');

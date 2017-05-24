@@ -44,7 +44,7 @@ Class Media_model extends CI_Model
     public function random_catalog_array($limit = 3){
         try{ //pulling only 4 random items from the DB
             $results = $this->db->query(
-                "SELECT id,title, category_id, description, picture
+                "SELECT id, title, title_lat, title_hun, category_id, description, picture
        FROM items
        ORDER BY RAND()
        LIMIT $limit"
@@ -105,9 +105,9 @@ Class Media_model extends CI_Model
     }
 
     public function single_item_array($id){
-       // include("connection.php");
+
        try{
-           $sql = "SELECT id, title, description, picture FROM items WHERE id = ?";
+           $sql = "SELECT * FROM items WHERE id = ?";
            $result = $this->db->query($sql,$id);
          }catch(Exception $e){
              echo "Unable to retrieve results";
@@ -115,6 +115,18 @@ Class Media_model extends CI_Model
          }
          $item = $result->result();
          return $item;
+    }
+
+    public function get_category_name($id){
+      try{
+          $sql = "SELECT name FROM categories WHERE id = ?";
+          $result = $this->db->query($sql,$id);
+        }catch(Exception $e){
+            echo "Unable to retrieve results";
+            exit;
+        }
+        $category_name = $result->result();
+        return $category_name[0];
     }
 /*
     public function full_genre_array($category = null){

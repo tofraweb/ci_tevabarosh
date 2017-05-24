@@ -5,59 +5,80 @@
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">קטלוג
+                <h1 class="page-header">Three Column Portfolio
+                    <small>Subheading</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="<?php echo base_url();?>">בית</a>
+                    <li><a href="index.html">Home</a>
                     </li>
-                    <li class="active">קטלוג</li>
+                    <li class="active">Three Column Portfolio</li>
                 </ol>
             </div>
         </div>
         <!-- /.row -->
 
-        <!-- Content Row -->
+        <!-- Projects Row -->
         <div class="row">
-            <div class="col-lg-12">
-                <h1><?php
-                    if($search != null){
-                        echo "Search results for the expression - \"".htmlspecialchars($search)."\"";
-                    }else{
-                        if($section != null){
-                            echo "<a href = 'catalog.php'>Full catalog</a> &gt;&gt;";
-                        }
-                        echo $pageTitle ;
-                    }?></h1>
-                <?php
-                // var_dump($total_items);
-                // exit;
-                if($total_items <1){
-                    echo "<p>No items were found matching the requested rearch expression.</p>";
-                    echo "<p>Search again or <a href=\"index.php/catalog.php\">Browse the full catalog</a></p>";
-                }else{
-                    echo $pagination;?>
-                    <table class="table">
-                      <tr>
-                        <th  style="text-align:right;">#</th>
-                        <th  style="text-align:right;">שם הציפור</th>
-                        <th  style="text-align:right;">תמונה</th>
-                      </tr>
+              <h3><?php
+                  if($search != null){
+                      echo "תוצאות חיפוש עבור ביטוי - \"".htmlspecialchars($search)."\"";
+                  }else{
+                      if($section != null){ ?>
+                          <a href = "<?php echo base_url();?>index.php/catalog">קטלוג המלא</a> &gt;&gt;
                       <?php
-                      $i = 0;
-                      $pic_path = base_url();
-                      foreach ($catalog as $var){
-                        $i+=1;
-                        echo "
-                        <tr>
-                          <td>".$i."</td>
-                          <td>".$var->title."</td>
-                          <td><img src='".$pic_path."assets/img/media/upload/".$var->picture."'</td>
-                        </tr>
-                      ";}?>
-                    </table>
-                    <?php echo $pagination;
-                }?>
+                      echo $pageTitle ;
+                    }
+                  }?></h3>
+              <?php
+              // var_dump($total_items);
+              // exit;
+              if($total_items <1){
+                  echo "<p>No items were found matching the requested rearch expression.</p>";
+                  echo "<p>Search again or <a href=\"index.php/catalog.php\">Browse the full catalog</a></p>";
+              }else{
+              echo $pagination.'<hr>';
+              foreach ($catalog as $item) {?>
+                <div class="col-md-4 img-portfolio">
+                    <a href="<?php echo base_url();?>index.php/catalog/getItem/<?php echo $item->id;?>">
+                        <img class="img-responsive img-hover" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $item->picture;?>" alt="">
+                    </a>
+                    <h3>
+                        <a href="<?php echo base_url();?>index.php/catalog/getItem/<?php echo $item->id;?>"><?php echo $item->title;?></a>
+                    </h3>
+                </div>
+              <?php }
+             }?>
+        </div>
+        <?php echo '<hr>'.$pagination; ?>
+        <!-- /.row -->
+        <hr>
 
+        <!-- Pagination -->
+        <div class="row text-center">
+            <div class="col-lg-12">
+                <ul class="pagination">
+                    <li>
+                        <a href="#">&laquo;</a>
+                    </li>
+                    <li class="active">
+                        <a href="#">1</a>
+                    </li>
+                    <li>
+                        <a href="#">2</a>
+                    </li>
+                    <li>
+                        <a href="#">3</a>
+                    </li>
+                    <li>
+                        <a href="#">4</a>
+                    </li>
+                    <li>
+                        <a href="#">5</a>
+                    </li>
+                    <li>
+                        <a href="#">&raquo;</a>
+                    </li>
+                </ul>
             </div>
         </div>
         <!-- /.row -->

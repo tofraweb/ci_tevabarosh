@@ -6,13 +6,12 @@
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Portfolio Item
-                    <small>Subheading</small>
+                <h1 class="page-header"><?php echo $item[0]->title;?>
+                    <small> - <?php echo $item[0]->title_lat;?></small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="index.html">Home</a>
-                    </li>
-                    <li class="active">Portfolio Item</li>
+                    <li><a href="<?php echo base_url();?>">בית</a></li>
+                    <li class="active"><?php echo $item[0]->title;?></li>
                 </ol>
             </div>
         </div>
@@ -48,15 +47,12 @@
             </div>
 
             <div class="col-md-4">
-                <h3><?php echo $item[0]->title;?></h3>
+                <?php if(!empty($item[0]->title_hun)) { ?>
+                  <h4>שם בהונגרית: <?php echo $item[0]->title_hun;?></h4>
+                  <hr>
+                <?php } ?>
+                <h3>תיאור קצר</h3>
                 <p><?php echo $item[0]->description;?></p>
-                <h3>Project Details</h3>
-                <ul>
-                    <li>Lorem Ipsum</li>
-                    <li>Dolor Sit Amet</li>
-                    <li>Consectetur</li>
-                    <li>Adipiscing Elit</li>
-                </ul>
             </div>
 
         </div>

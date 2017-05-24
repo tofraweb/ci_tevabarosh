@@ -52,19 +52,16 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">פורטפוליו <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="<?php echo base_url();?>index.php/page/get_name/portfolio_1_col">פורטפוליו - עמוד 1</a>
+                                <a href="<?php echo base_url();?>index.php/page/get_name/portfolio_1_col/100">פורטפוליו - עמוד 1</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>index.php/page/get_name/portfolio_2_col">פורטפוליו 2 עמודים</a>
+                                <a href="<?php echo base_url();?>index.php/page/get_name/portfolio_2_col/20">פורטפוליו 2 עמודים</a>
                             </li>
                             <li>
                                 <a href="<?php echo base_url();?>index.php/page/get_name/portfolio_3_col/9">פורטפוליו 3 עמודים</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>index.php/page/get_name/portfolio_4_col">פרוטפוליו 4 עמודים</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo base_url();?>index.php/page/get_name/portfolio_item">עמוד הצגת המוצר</a>
+                                <a href="<?php echo base_url();?>index.php/page/get_name/portfolio_4_col/12">פרוטפוליו 4 עמודים</a>
                             </li>
                         </ul>
                     </li>
@@ -109,13 +106,16 @@
                                 <a href="<?php echo base_url();?>index.php/upload">הוסף ציפור</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>index.php/item/getItem/1">רשימת כל הציפורים</a>
+                                <a href="<?php echo base_url();?>index.php/catalog/?cat=2">ציפורים</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>index.php/item/getItem/2">רשימת כל הצמחים</a>
+                                <a href="<?php echo base_url();?>index.php/catalog/?cat=3">צמחי גינה</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>index.php/item/newItem">הוסף אייטם חדש</a>
+                                <a href="<?php echo base_url();?>index.php/catalog/?cat=4">סוקולנטים</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url();?>index.php/catalog/?cat=1">פרחי שדה</a>
                             </li>
                         </ul>
                     </li>

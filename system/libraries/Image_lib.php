@@ -163,7 +163,7 @@ class CI_Image_lib {
 	 *
 	 * @var string
 	 */
-	public $wm_text			= '';
+	public $wm_text			= 'Tofra';
 
 	/**
 	 * Type of watermarking.  Options:  text/overlay
