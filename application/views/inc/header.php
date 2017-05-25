@@ -21,6 +21,8 @@
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/font-awesome/css/font-awesome.min.css" type="text/css">
 
+    <script src="<?php echo base_url();?>assets/grocery_crud/jquery-1.11.1.js"></script>
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -52,16 +54,16 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">פורטפוליו <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="<?php echo base_url();?>index.php/page/get_name/portfolio_1_col/100">פורטפוליו - עמוד 1</a>
+                                <a href="<?php echo base_url();?>index.php/page/dynamicPage/portfolio_1_col/100">פורטפוליו - עמוד 1</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>index.php/page/get_name/portfolio_2_col/20">פורטפוליו 2 עמודים</a>
+                                <a href="<?php echo base_url();?>index.php/page/dynamicPage/portfolio_2_col/20">פורטפוליו 2 עמודים</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>index.php/page/get_name/portfolio_3_col/9">פורטפוליו 3 עמודים</a>
+                                <a href="<?php echo base_url();?>index.php/page/dynamicPage/portfolio_3_col/9">פורטפוליו 3 עמודים</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>index.php/page/get_name/portfolio_4_col/12">פרוטפוליו 4 עמודים</a>
+                                <a href="<?php echo base_url();?>index.php/page/dynamicPage/portfolio_4_col/12">פרוטפוליו 4 עמודים</a>
                             </li>
                         </ul>
                     </li>
@@ -69,13 +71,13 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">בלוג <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="<?php echo base_url();?>index.php/page/get_name/blog_home_1">בלוג בית 1</a>
+                                <a href="<?php echo base_url();?>index.php/page/staticPage/blog_home_1">בלוג בית 1</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>index.php/page/get_name/blog_home_2">בלוג בית 2</a>
+                                <a href="<?php echo base_url();?>index.php/page/staticPage/blog_home_2">בלוג בית 2</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>index.php/page/get_name/blog_post">בלוג - פוסט</a>
+                                <a href="<?php echo base_url();?>index.php/page/staticPage/blog_post">בלוג - פוסט</a>
                             </li>
                         </ul>
                     </li>
@@ -83,19 +85,19 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">עמודים מיוחדים <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="<?php echo base_url();?>index.php/page/get_name/fullwidth">רוחב מלא</a>
+                                <a href="<?php echo base_url();?>index.php/page/staticPage/fullwidth">רוחב מלא</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>index.php/page/get_name/sidebar">סיידבר</a>
+                                <a href="<?php echo base_url();?>index.php/page/staticPage/sidebar">סיידבר</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>index.php/page/get_name/faq">שאלות ותשובות</a>
+                                <a href="<?php echo base_url();?>index.php/page/staticPage/faq">שאלות ותשובות</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>index.php/page/get_name/page_404">404</a>
+                                <a href="<?php echo base_url();?>index.php/page/staticPage/page_404">404</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>index.php/page/get_name/pricing">טבלאות תמחור</a>
+                                <a href="<?php echo base_url();?>index.php/page/staticPage/pricing">טבלאות תמחור</a>
                             </li>
                         </ul>
                     </li>
@@ -120,13 +122,16 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="<?php echo base_url();?>index.php/page/get_name/about">מי אנחנו</a>
+                        <a href="<?php echo base_url();?>index.php/page/staticPage/about">מי אנחנו</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url();?>index.php/page/get_name/services">שרותים</a>
+                        <a href="<?php echo base_url();?>index.php/page/staticPage/services">שרותים</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url();?>index.php/page/get_name/contact">צור קשר</a>
+                        <a href="<?php echo base_url();?>index.php/page/staticPage/contact">צור קשר</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url();?>index.php/admin">ניהול</a>
                     </li>
                     <li>
                       <div style="margin-top: 15px;margin-right: 15px; ">

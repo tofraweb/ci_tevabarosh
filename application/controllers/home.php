@@ -10,13 +10,9 @@ class Home extends CI_Controller {
 
   public function index()
   {
-    $this->load->model('media_model','',TRUE);
-    if($this->session->userdata('logged_in'))
-    {
-      $session_data = $this->session->userdata('logged_in');
+      $this->load->model('media_model','',TRUE);
       $featuring = $this->media_model->random_catalog_array(3,'featuring');
       $frontpage = $this->media_model->random_catalog_array(8,'frontpage');
-      $data['username'] = $session_data['username'];
       $data['section'] = "books";
       $data['pageTitle'] = 'This the books page';
       $data['featuring'] = $featuring;
@@ -24,20 +20,8 @@ class Home extends CI_Controller {
       $this->load->view('inc/header');
       $this->load->view('bootstrap/frontpage_view', $data);
       $this->load->view('inc/footer');
-    }
-    else
-    {
-      //If no session, redirect to login page
-      redirect('login', 'refresh');
-	}
   }
 
-  public function logout()
-  {
-    $this->session->unset_userdata('logged_in');
-    session_destroy();
-    redirect('home', 'refresh');
-  }
 
 
 }

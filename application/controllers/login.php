@@ -11,7 +11,6 @@ class Login extends CI_Controller {
   function index()
   {
       $data['section'] = null;
-      $this->load->view('inc/header',$data);
       $this->load->view('login_view');
       $this->load->view('inc/footer');
   }
@@ -32,23 +31,22 @@ class Login extends CI_Controller {
           );
           $this->session->set_flashdata($val_errors);
           $data['section'] = null;
-          $this->load->view('inc/header',$data);
           $this->load->view('login_view');
       }
       else
       {
           //Go to private area
-          redirect('home', 'refresh');
+          redirect('admin', 'refresh');
       }
 
   }
 
-  
+
   function check_database($password)
   {
     //Field validation succeeded.  Validate against database
     $username = $this->input->post('username');
-    
+
     //query the database
     $result = $this->user->login($username, $password);
     if($result)
@@ -69,5 +67,12 @@ class Login extends CI_Controller {
       $this->form_validation->set_message('check_database', 'Invalid username or password');
       return false;
     }
+  }
+
+  public function logout()
+  {
+    $this->session->unset_userdata('logged_in');
+    session_destroy();
+    redirect('admin', 'refresh');
   }
 }

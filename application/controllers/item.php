@@ -7,17 +7,48 @@ class Item extends CI_Controller {
 		parent::__construct();
 
 			$this->load->model('item_model');
+			$this->load->library('grocery_CRUD');
 
 	}
 
 	public function index(){
-
+		$this->_example_output((object)array('output' => '' , 'js_files' => array() , 'css_files' => array()));
     $this->load->view('inc/header');
     $this->load->view('bootstrap/frontpage_view');
 		$this->load->view('inc/footer');
 
 	}
 
+	public function _example_output($output = null)
+	{
+		$this->load->view('example.php',(array)$output);
+	}
+
+	public function editItems()
+	{
+
+		try{
+			$crud = new grocery_CRUD();
+
+			$crud->set_theme('datatables');
+			$crud->set_table('items');
+			$crud->set_subject('Items');
+			$crud->required_fields('title');
+			$crud->columns('title','title_lat','title_hun','category_id','description','picture','featuring','frontpage');
+			$output = $crud->render();
+
+			//$this->_example_output($output);
+
+		//	$this->load->view('inc/header');
+			$this->load->view('example', $output);
+	    $this->load->view('inc/footer');
+
+			// var_dump('haha');
+			// exit;
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
 
 	public function getItem($category){
 

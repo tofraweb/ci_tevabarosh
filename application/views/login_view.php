@@ -4,8 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Welcome to CodeIgniter</title>
+    <title>Tevabarosh Admin Area</title>
     <link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.css">
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap_rtl.css" type="text/css">
     <script src="<?php echo base_url();?>assets/js/jquery-3.2.1.min.js"></script>
     <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
 
@@ -68,53 +69,58 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             width: 600px;
             text-align: left;
         }
+
+        .wrap {
+            margin-top: 50px;
+        }
+
+
     </style>
 </head>
 <body>
+<div class="wrap">
+  <div id="container">
+      <h1>Please login</h1>
 
-<div id="container">
-    <h1>Please login</h1>
-
-    <div id="body">
-        <code>
-            <?php
-            if($this->session->flashdata('errors')){
-                echo "<span style='color:red'>".$this->session->flashdata('errors')."</span>";
-            }
-            $form_attributes = array(
-                'class' => 'form-horizontal',
-                'method' => "post"
-            );
-            $username_input_attributes = array(
-                'class' => 'form-control',
-                'name' => 'username',
-                'placeholder' => 'Enter your username',
-                'type' => 'text'
-            );
-            $password_input_attributes = array(
-                'class' => 'form-control',
-                'name' => 'password',
-                'placeholder' => 'Enter your password',
-                'type' => 'password'
-            );
-            $button_attributes = array(
-                'class' => 'btn btn-success',
-                'name' => 'send_form',
-                'type' => 'submit',
-                'value' => 'Submit'
-            );
-            echo form_open('login/verifylogin', $form_attributes);
-            echo form_label('Username:');
-            echo form_input($username_input_attributes);
-            echo form_label('Password:');
-            echo form_input($password_input_attributes);
-            echo form_input($button_attributes);
-            echo form_close();
-            ?>
-        </code>
-    </div>
-
-    <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
+      <div id="body">
+          <code>
+              <?php
+              if($this->session->flashdata('errors')){
+                  echo "<span style='color:red'>".$this->session->flashdata('errors')."</span>";
+              }
+              $form_attributes = array(
+                  'class' => 'form-horizontal',
+                  'method' => "post"
+              );
+              $username_input_attributes = array(
+                  'class' => 'form-control',
+                  'name' => 'username',
+                  'placeholder' => 'Enter your username',
+                  'type' => 'text'
+              );
+              $password_input_attributes = array(
+                  'class' => 'form-control',
+                  'name' => 'password',
+                  'placeholder' => 'Enter your password',
+                  'type' => 'password'
+              );
+              $button_attributes = array(
+                  'class' => 'btn btn-success',
+                  'name' => 'send_form',
+                  'type' => 'submit',
+                  'value' => 'Submit'
+              );
+              echo form_open('login/verifylogin', $form_attributes);
+              echo form_label('Username:');
+              echo form_input($username_input_attributes);
+              echo form_label('Password:');
+              echo form_input($password_input_attributes);
+              echo form_input($button_attributes);
+              echo form_close();
+              ?>
+          </code>
+      </div>
+  </div>
 </div>
 
 </body>
