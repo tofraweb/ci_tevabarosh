@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>טופרבוט תבנית בוסטרפ</title>
+    <title>טבע בראש</title>
 
     <!-- Bootstrap Core CSS-->
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap_rtl.css" type="text/css">
@@ -43,7 +43,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php echo base_url();?>">טופרבוט - תבנית</a>
+                <div class = "logo-text"><a href="<?php echo base_url();?>">טבע בראש</a></div>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -103,9 +103,6 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">בסיס נתונים<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="<?php echo base_url();?>index.php/upload">הוסף ציפור</a>
-                            </li>
-                            <li>
                                 <a href="<?php echo base_url();?>index.php/catalog/?cat=2">ציפורים</a>
                             </li>
                             <li>
@@ -116,6 +113,9 @@
                             </li>
                             <li>
                                 <a href="<?php echo base_url();?>index.php/catalog/?cat=1">פרחי שדה</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url();?>index.php/item/newItem">הוסף ציפור וצמח</a>
                             </li>
                         </ul>
                     </li>

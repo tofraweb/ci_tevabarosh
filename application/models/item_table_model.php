@@ -4,9 +4,13 @@ class Item_table_model extends CI_Model{
 
 	public $id = null;
 	public $title = null;
+	public $title_lat = null;
+	public $title_hun = null;
 	public $category_id = null;
 	public $description = null;
 	public $picture = 'null';
+	public $featuring = 0;
+	public $frontpage = 0;
 
 	public function __construct()
 	{

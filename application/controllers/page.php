@@ -5,7 +5,7 @@ class Page extends CI_Controller {
     function get_name($page = null, $rand = 4)
   {
     $this->load->model('media_model','',TRUE);
-    $catalog = $this->media_model->random_catalog_array($rand);
+    $catalog = $this->media_model->random_catalog_array($rand, null);
     if(!$page){
       $page = 'frontpage';
     }

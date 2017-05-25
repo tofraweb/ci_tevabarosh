@@ -23,6 +23,16 @@ body {
     opacity: 0.8;
 }
 
+.logo-text {
+  font-size: 45px;
+  text-decoration-style: double;
+}
+
+.logo-text a {
+  margin-top: 0px;
+  text-decoration:none;
+}
+
 /* Home Page Carousel */
 
 header.carousel {
@@ -98,4 +108,15 @@ footer {
 
 .search {
   margin-top: 20px;
+}
+
+code {
+    font-family: Consolas, Monaco, Courier New, Courier, monospace;
+    font-size: 12px;
+    background-color: #f9f9f9;
+    border: 1px solid #D0D0D0;
+    color: #002166;
+    display: block;
+    margin: 14px 0 14px 0;
+    padding: 12px 10px 12px 10px;
 }

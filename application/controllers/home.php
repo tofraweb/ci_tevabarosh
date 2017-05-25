@@ -14,11 +14,13 @@ class Home extends CI_Controller {
     if($this->session->userdata('logged_in'))
     {
       $session_data = $this->session->userdata('logged_in');
-      $catalog = $this->media_model->random_catalog_array();
+      $featuring = $this->media_model->random_catalog_array(3,'featuring');
+      $frontpage = $this->media_model->random_catalog_array(8,'frontpage');
       $data['username'] = $session_data['username'];
       $data['section'] = "books";
       $data['pageTitle'] = 'This the books page';
-      $data['catalog'] = $catalog;
+      $data['featuring'] = $featuring;
+      $data['frontpage'] = $frontpage;
       $this->load->view('inc/header');
       $this->load->view('bootstrap/frontpage_view', $data);
       $this->load->view('inc/footer');

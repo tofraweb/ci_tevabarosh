@@ -6,26 +6,40 @@
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
             <li data-target="#myCarousel" data-slide-to="1"></li>
             <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+            <li data-target="#myCarousel" data-slide-to="4"></li>
         </ol>
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
             <div class="item active">
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=סלייד 1');"></div>
+                <div class="fill" style="background-image:url('<?php echo base_url();?>assets/img/media/upload/slider/IMG_1360-s.jpg');"></div>
                 <div class="carousel-caption">
-                    <img class="img-responsive img-hover" src="<?php echo base_url();?>assets/img/media/upload/IMG_1899898.jpg" alt="">
+                    <h2></h2>
                 </div>
             </div>
             <div class="item">
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=סלייד 2');"></div>
+                <div class="fill" style="background-image:url('<?php echo base_url();?>assets/img/media/upload/slider/IMG_9320-s.jpg');"></div>
                 <div class="carousel-caption">
-                    <h2>תמונה 2</h2>
+                    <h2></h2>
                 </div>
             </div>
             <div class="item">
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=סלייד 3');"></div>
+                <div class="fill" style="background-image:url('<?php echo base_url();?>assets/img/media/upload/slider/IMG_0510-s.jpg');"></div>
                 <div class="carousel-caption">
-                    <h2>תמונה 3</h2>
+                    <h2></h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('<?php echo base_url();?>assets/img/media/upload/slider/IMG_9646-s.jpg');"></div>
+                <div class="carousel-caption">
+                    <h2></h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('<?php echo base_url();?>assets/img/media/upload/slider/suculents.jpg');"></div>
+                <div class="carousel-caption">
+                    <h2></h2>
                 </div>
             </div>
         </div>
@@ -46,7 +60,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                מלא מה החול זקוק ואמנות
+              על צמחים וציפורים
             </h1>
         </div>
         <div class="col-md-4">
@@ -93,17 +107,15 @@
             </h2>
         </div>
         <?php
-        $pic_path = base_url();
-        foreach ($catalog as $item) {?>
+        foreach ($featuring as $item) {?>
 
           <div class="col-md-4 img-portfolio">
               <a href="<?php echo base_url();?>index.php/catalog/getItem/<?php echo $item->id;?>">
-                  <img class="img-responsive img-hover" src="<?php echo $pic_path;?>assets/img/media/upload/<?php echo $item->picture;?>" alt="">
+                  <img class="img-responsive img-hover" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $item->picture;?>" alt="">
               </a>
               <h3>
                   <a href="<?php echo base_url();?>index.php/catalog/getItem/<?php echo $item->id;?>"><?php echo $item->title;?></a>
               </h3>
-              <p><?php echo $item->description;?></p>
           </div>
 
         <?php } ?>
@@ -112,39 +124,21 @@
 
     <!-- Portfolio Section -->
     <div class="row">
-        <div class="col-lg-12">
-            <h2 class="page-header">כותרת פורטפוליו</h2>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <a href="portfolio-item.html">
-                <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <a href="portfolio-item.html">
-                <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <a href="portfolio-item.html">
-                <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <a href="portfolio-item.html">
-                <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <a href="portfolio-item.html">
-                <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-            </a>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <a href="portfolio-item.html">
-                <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-            </a>
-        </div>
+      <div class="col-lg-12">
+          <h2 class="page-header">
+              עוד צמחים וציפורים
+          </h2>
+      </div>
+        <?php foreach ($frontpage as $item) {?>
+          <div class="col-md-3 img-portfolio">
+          <a href="<?php echo base_url();?>index.php/catalog/getItem/<?php echo $item->id;?>">
+              <img class="img-responsive img-hover" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $item->picture;?>" alt="">
+          </a>
+          <h5>
+              <a href="<?php echo base_url();?>index.php/catalog/getItem/<?php echo $item->id;?>"><?php echo $item->title;?></a>
+          </h5>
+          </div>
+        <?php } ?>
     </div>
     <!-- /.row -->
 

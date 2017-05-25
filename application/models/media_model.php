@@ -41,14 +41,26 @@ Class Media_model extends CI_Model
         return $catalog;
     }
 
-    public function random_catalog_array($limit = 3){
+    public function random_catalog_array($limit = 0, $type= null){
         try{ //pulling only 4 random items from the DB
+            switch ($type) {
+              case 'featuring':
+                # code...
+                break;
+              case 'frontpage':
+                  # code...
+                  break;
+              default:
+                # code...
+                break;
+            }
             $results = $this->db->query(
                 "SELECT id, title, title_lat, title_hun, category_id, description, picture
-       FROM items
-       ORDER BY RAND()
-       LIMIT $limit"
-            );
+             FROM items
+             WHERE $type = 'on'
+             ORDER BY RAND()
+             LIMIT $limit"
+                  );
         }catch(Exception $e){
             echo "Unable to retrieve results";
         }

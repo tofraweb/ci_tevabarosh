@@ -18,7 +18,7 @@
 
         <!-- Content Row -->
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-4">
 
               <h2>הוסף שך של קטגוריה</h2>
               <!-- old form
@@ -42,7 +42,7 @@
                   </table>
               </form>
               end of old form -->
-              <code>
+              <code style="width:500px;">
                   <?php
                   if(isset($error_message['name'])){
                       echo "<span style='color:red'>".$error_message['name']."</span>";
