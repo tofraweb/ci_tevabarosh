@@ -6,7 +6,7 @@ Class Catalog_model extends CI_Model
         try {
             $sql = " SELECT * FROM species";
             if(!empty($search)){
-                $sql .=  " WHERE title LIKE ?";
+                $sql .=  " WHERE name_he LIKE ?";
                 $result = $this->db->query($sql, '%'.$search.'%' ); //binding values to query
             }elseif(!empty($category)){
                 $sql .= " WHERE category_id = ? ";
@@ -24,9 +24,9 @@ Class Catalog_model extends CI_Model
 
     public function full_catalog_array($limit = null, $offset = 0){
         try{
-            $sql = "SELECT id,title, category_id, picture
+            $sql = "SELECT id,name_he, category_id, picture
       FROM species
-      ORDER BY REPLACE(REPLACE(REPLACE(title,'The ',''), 'An ' , ''), 'A ', '')";
+      ORDER BY REPLACE(REPLACE(REPLACE(name_he,'The ',''), 'An ' , ''), 'A ', '')";
             if(is_integer($limit)){
                 $sql .= " LIMIT ? OFFSET ? ";
                 $results = $this->db->query($sql,array($limit,$offset));
@@ -55,7 +55,7 @@ Class Catalog_model extends CI_Model
             //     break;
             // }
             $results = $this->db->query(
-                "SELECT id, title, title_lat, title_hun, category_id, description, picture
+                "SELECT id, name_he, name_lat, name_hu, category_id, description, picture
              FROM species
              WHERE $type = 'on'
              ORDER BY RAND()
@@ -72,10 +72,10 @@ Class Catalog_model extends CI_Model
     public function category_catalog_array($category, $limit = null, $offset = 0){
 
         try{
-            $sql = "SELECT id,title, category_id, picture
+            $sql = "SELECT id,name_he, category_id, picture
       FROM species
       WHERE category_id = ?
-      ORDER BY REPLACE(REPLACE(REPLACE(title,'The ',''), 'An ' , ''), 'A ', '')";
+      ORDER BY REPLACE(REPLACE(REPLACE(name_he,'The ',''), 'An ' , ''), 'A ', '')";
             if(is_integer($limit)){
                 $sql .= " LIMIT ? OFFSET ? ";
                 $results = $this->db->query($sql,array($category,$limit,$offset));
@@ -94,10 +94,10 @@ Class Catalog_model extends CI_Model
     public function search_catalog_array($search, $limit = null, $offset = 0){
 
         try{
-            $sql = " SELECT id,title,category_id, picture
+            $sql = " SELECT id,name_he,category_id, picture
                 FROM species
-                WHERE title LIKE ?
-                ORDER BY REPLACE(REPLACE(REPLACE(title,'The ',''), 'An ' , ''), 'A ', '')";
+                WHERE name_he LIKE ?
+                ORDER BY REPLACE(REPLACE(REPLACE(name_he,'The ',''), 'An ' , ''), 'A ', '')";
             if(is_integer($limit)){
                 $sql .= " LIMIT ? OFFSET ? ";
                 $results = $this->db->query($sql, array('%'.$search.'%',$limit,$offset));
@@ -127,6 +127,46 @@ Class Catalog_model extends CI_Model
          }
          $species = $result->result();
          return $species;
+    }
+
+    public function get_genus($id){
+      try{
+          $sql = "SELECT Genus.family_id, Genus.name_he, Genus.name_lat FROM Genus
+          Join Species ON Genus.id = Species.genus_id
+          WHERE Species.id = ?";
+          $result = $this->db->query($sql,$id);
+        }catch(Exception $e){
+            echo "Unable to retrieve results";
+            exit;
+        }
+        $genus = $result->result();
+        return $genus[0];
+    }
+
+    public function get_family($id){
+      try{
+          $sql = "SELECT order_id, name_he, name_lat FROM Family
+          WHERE id = ?";
+          $result = $this->db->query($sql,$id);
+        }catch(Exception $e){
+            echo "Unable to retrieve results";
+            exit;
+        }
+        $family = $result->result();
+        return $family[0];
+    }
+
+    public function get_order($id){
+      try{
+          $sql = "SELECT name_he, name_lat FROM Orders
+          WHERE id = ?";
+          $result = $this->db->query($sql,$id);
+        }catch(Exception $e){
+            echo "Unable to retrieve results";
+            exit;
+        }
+        $order = $result->result();
+        return $order[0];
     }
 
     public function get_category_name($id){

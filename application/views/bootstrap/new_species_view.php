@@ -1,5 +1,4 @@
-
-    <!-- Page Content -->
+  <!-- Page Content -->
     <div class="container">
 
         <!-- Page Heading/Breadcrumbs -->
@@ -23,16 +22,16 @@
           <form style="width:500px;" action="checkItem" method="post" enctype="multipart/form-data"">
               <table>
                   <tr>
-                    <td><label for="title">שם בעברית</label></td>
-                    <td><input class="form-control" type="text" name="title" id="title" value="" /></td>
+                    <td><label for="name_he">שם בעברית</label></td>
+                    <td><input class="form-control" type="text" name="name_he" id="name_he" value="" /></td>
                   </tr>
                   <tr>
-                    <td><label for="title_lat">שם בלטינית</label></td>
-                    <td><input class="form-control" type="text" name="title_lat" id="title_lat" value="" /></td>
+                    <td><label for="name_lat">שם בלטינית</label></td>
+                    <td><input class="form-control" type="text" name="name_lat" id="name_lat" value="" /></td>
                   </tr>
                   <tr>
-                    <td><label for="title_hun">שם בהונגרית</label></td>
-                    <td><input class="form-control" type="text" name="title_hun" id="title_hun" value="" /></td>
+                    <td><label for="name_hu">שם בהונגרית</label></td>
+                    <td><input class="form-control" type="text" name="name_hu" id="name_hu" value="" /></td>
                   </tr>
                   <tr>
                     <td><label for="featuring">מובחר</label></td>
@@ -66,7 +65,7 @@
                   <tr>
                     <td><?php if(isset($error_message)){echo "Error:";} ?></td>
                     <td>
-                      <?php if(isset($error_message['title'])){echo $error_message['title'];}
+                      <?php if(isset($error_message['name_he'])){echo $error_message['name_he'];}
                       if (isset($error_message['description'])){echo $error_message['description'];}?>
                     </td>
                   </tr>

@@ -5,8 +5,8 @@
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Three Column Portfolio
-                    <small>Subheading</small>
+                <h1 class="page-header">קטלוג מלא
+                    <small><?php echo $pageTitle; ?></small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="index.html">Home</a>
@@ -43,7 +43,7 @@
                         <img class="img-responsive img-hover" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
                     </a>
                     <h3>
-                        <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>"><?php echo $species->title;?></a>
+                        <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>"><?php echo $species->name_he;?></a>
                     </h3>
                 </div>
               <?php }

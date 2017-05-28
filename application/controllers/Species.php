@@ -33,8 +33,8 @@ class Species extends CI_Controller {
 	// 		$crud->set_theme('datatables');
 	// 		$crud->set_table('species');
 	// 		$crud->set_subject('Species');
-	// 		$crud->required_fields('title');
-	// 		$crud->columns('title','title_lat','title_hun','category_id','description','picture','featuring','frontpage');
+	// 		$crud->required_fields('name_he');
+	// 		$crud->columns('name_he','name_lat','name_hun','category_id','description','picture','featuring','frontpage');
 	// 		$output = $crud->render();
 	//
 	// 		//$this->_example_output($output);
@@ -53,9 +53,9 @@ class Species extends CI_Controller {
 	public function getSpecies($category){
 
     $this->load->view('inc/header');
-		$data['speciess'] = $this->species_model->getSpeciesList($category);
+		$data['species'] = $this->species_model->getSpeciesList($category);
 		$data['category'] = $category;
-		$this->load->view('bootstrap/Species_view', $data, $category);
+		$this->load->view('bootstrap/species_view', $data, $category);
     $this->load->view('inc/footer');
 
 	}

@@ -114,7 +114,7 @@
                   <img class="img-responsive img-hover" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
               </a>
               <h3>
-                  <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>"><?php echo $species->title;?></a>
+                  <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>"><?php echo $species->name_he;?></a>
               </h3>
           </div>
 
@@ -135,7 +135,7 @@
               <img class="img-responsive img-hover" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
           </a>
           <h5>
-              <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>"><?php echo $species->title;?></a>
+              <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>"><?php echo $species->name_he;?></a>
           </h5>
           </div>
         <?php } ?>

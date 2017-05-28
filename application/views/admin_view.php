@@ -13,16 +13,21 @@ foreach($css_files as $file): ?>
 </head>
 <body>
 	<div>
-		<a href='<?php echo site_url('home')?>'>View Site</a> |
-		<a href='<?php echo site_url('admin/customers_management')?>'>Customers</a> |
-		<a href='<?php echo site_url('admin/orders_management')?>'>Orders</a> |
+		<a href='<?php echo site_url('home')?>'>דף הבית</a> |
+		<!--
+		<a href='<?php //echo site_url('admin/customers_management')?>'>Customers</a> |
+		<a href='<?php //echo site_url('admin/orders_management')?>'>Orders</a> |
 		<a href='<?php echo site_url('admin/products_management')?>'>Products</a> |
 		<a href='<?php echo site_url('admin/offices_management')?>'>Offices</a> |
 		<a href='<?php echo site_url('admin/employees_management')?>'>Employees</a> |
 		<a href='<?php echo site_url('admin/film_management')?>'>Films</a> |
-		<a href='<?php echo site_url('admin/multigrids')?>'>Multigrid [BETA]</a>
-		<a href='<?php echo site_url('admin/species_management')?>'>Items Management</a>
-		<a href='<?php echo site_url('login/logout')?>'>Logout</a>
+		<a href='<?php echo site_url('admin/multigrids')?>'>Multigrid [BETA]</a>|
+		-->
+		<a href='<?php echo site_url('admin/species_management')?>'>ניהול מינים</a>|
+		<a href='<?php echo site_url('admin/genus_management')?>'>ניהול סוגים</a>|
+		<a href='<?php echo site_url('admin/family_management')?>'>ניהול משפחות</a>|
+		<a href='<?php echo site_url('admin/orders')?>'>ניהול סדרות</a>|
+		<a href='<?php echo site_url('login/logout')?>'>יציאה</a>
 
 	</div>
 	<div style='height:20px;'></div>

@@ -36,7 +36,7 @@
                 echo "
                 <tr>
                   <td>".$i."</td>
-                  <td>".$var->title."</td>
+                  <td>".$var->name_he."</td>
                   <td><img src='".$pic_path."assets/img/media/upload/".$var->picture."'</td>
                 </tr>
                 ";}

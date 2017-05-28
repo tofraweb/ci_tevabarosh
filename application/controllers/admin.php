@@ -37,6 +37,59 @@ class Admin extends CI_Controller {
 		$this->_example_output($output);
 	}
 
+	public function orders()
+	{
+		$output = $this->grocery_crud->render();
+
+		$this->_example_output($output);
+	}
+
+
+	public function family_management()
+	{
+		try{
+			$crud = new grocery_CRUD();
+
+			$crud->set_theme('datatables');
+			$crud->set_table('family');
+			$crud->set_subject('Family');
+			$crud->required_fields('name_he');
+			$crud->columns('name_he','name_lat','order_id');
+			$crud->set_subject('family');
+			$crud->set_relation('order_id','orders','name_he');
+
+			$output = $crud->render();
+
+			$this->_example_output($output);
+
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+
+	public function genus_management()
+	{
+		try{
+			$crud = new grocery_CRUD();
+
+			$crud->set_theme('datatables');
+			$crud->set_table('genus');
+			$crud->set_subject('Genus');
+			$crud->required_fields('name_he');
+			$crud->columns('name_he','name_lat','family_id');
+			$crud->set_subject('genus');
+			$crud->set_relation('family_id','family','name_he');
+
+			$output = $crud->render();
+
+			$this->_example_output($output);
+
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+
+
 	public function species_management()
 	{
 		try{
@@ -45,12 +98,12 @@ class Admin extends CI_Controller {
 			$crud->set_theme('datatables');
 			$crud->set_table('species');
 			$crud->set_subject('Species');
-			$crud->required_fields('title', 'category_id');
-			$crud->columns('title','title_lat','title_hun','category_id','description', 'picture', 'featuring','frontpage');
+			$crud->required_fields('name_he', 'category_id');
+			$crud->columns('name_he','name_lat','name_hun', 'genus_id', 'category_id', 'picture', 'featuring','frontpage');
       $crud->set_field_upload('picture','assets/img/media/upload');
 			$crud->set_subject('species');
 			$crud->set_relation('category_id','categories','name');
-
+			$crud->set_relation('genus_id','genus','name_he');
 
 			$crud->callback_after_upload(array($this,'resize_img_after_upload'));
 
@@ -62,6 +115,7 @@ class Admin extends CI_Controller {
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
 	}
+
 
 	public function resize_img_after_upload($uploader_response,$field_info, $files_to_upload) {
 		$this->load->library('image_moo');

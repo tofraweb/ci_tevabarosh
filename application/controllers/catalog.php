@@ -171,7 +171,15 @@ class Catalog extends CI_Controller {
 
   public function getSpecies($id){
     $species = $this->catalog_model->single_species_array($id);
+    $genus = $this->catalog_model->get_genus($id);
+    $family = $this->catalog_model->get_family($genus->family_id);
+    $order = $this->catalog_model->get_order($family->order_id);
+    $session_data = $this->session->userdata('logged_in');
     $data['species'] = $species;
+    $data['genus'] = $genus;
+    $data['family'] = $family;
+    $data['order'] = $order;
+    $data['logged_in'] = $session_data;
     $this->load->view('inc/header');
     $this->load->view('bootstrap/portfolio_species_view',$data);
     $this->load->view('inc/footer');

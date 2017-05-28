@@ -6,20 +6,64 @@
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header"><?php echo $species[0]->title;?>
-                    <small> - <?php echo $species[0]->title_lat;?></small>
-                </h1>
                 <ol class="breadcrumb">
                     <li><a href="<?php echo base_url();?>">בית</a></li>
-                    <li class="active"><?php echo $species[0]->title;?></li>
+                    <li class="active"><?php echo $order->name_he;?></li>
+                    <li class="active"><?php echo $family->name_he;?></li>
+                    <li class="active"><?php echo $genus->name_he;?></li>
+                    <li class="active"><?php echo $species[0]->name_he;?></li>
                 </ol>
+                <h1 class="page-header"><?php echo $species[0]->name_he;?>
+                    <small> - <?php echo $species[0]->name_lat;?></small>
+                    <?php if($logged_in){ ?>
+                    <small> - <a target="_blank" href="<?php echo base_url();?>admin/species_management/edit/<?php echo $species[0]->id;?>">ערוך</a></small>
+                    <?php } ?>
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+
+        <!-- Species Family Details Row -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <table class = "table table-bordered">
+                <tr>
+                  <th class="info" style="text-align:right">סוג</td>
+                  <th class="info" style="text-align:right">משפחה</td>
+                  <th class="info"style="text-align:right">סדרה</td>
+                </tr>
+                <tr>
+                  <td><?php echo $genus->name_he;?></td>
+                  <td><?php echo $family->name_he;?></td>
+                  <td><?php echo $order->name_he;?></td>
+                </tr>
+                <tr>
+                  <td><?php echo $genus->name_lat;?></td>
+                  <td><?php echo $family->name_lat;?></td>
+                  <td><?php echo $order->name_lat;?></td>
+                </tr>
+              </table>
+            </div>
+            <div class="table-responsive">
+              <?php if(!empty($species[0]->name_hu)) { ?>
+                <table class = "table table-bordered">
+                  <tr>
+                    <th class="info" style="text-align:right">שם בהונגרית</td>
+                  </tr>
+                  <tr>
+                    <td><?php echo $species[0]->name_hu;?></td>
+                  </tr>
+                </table>
+              <?php } ?>
+              </div>
             </div>
         </div>
         <!-- /.row -->
 
         <!-- Portfolio Species Row -->
         <div class="row">
-
             <div class="col-md-8">
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
@@ -47,12 +91,9 @@
             </div>
 
             <div class="col-md-4">
-                <?php if(!empty($species[0]->title_hun)) { ?>
-                  <h4>שם בהונגרית: <?php echo $species[0]->title_hun;?></h4>
-                  <hr>
-                <?php } ?>
                 <h3>תיאור קצר</h3>
                 <p><?php echo $species[0]->description;?></p>
+                <p><a class="btn btn-info" href="javascript:history.back()">חזור</a></p>
             </div>
 
         </div>

@@ -3,9 +3,9 @@
 class Species_table_model extends CI_Model{
 
 	public $id = null;
-	public $title = null;
-	public $title_lat = null;
-	public $title_hun = null;
+	public $name_he = null;
+	public $name_lat = null;
+	public $name_hu = null;
 	public $category_id = null;
 	public $description = null;
 	public $picture = 'null';
@@ -24,8 +24,8 @@ class Species_table_model extends CI_Model{
 
 	public function check(){
 		$error = array();
-		if($this->title==""){
-			$error['title'] = 'Please fill the title!';
+		if($this->name_he==""){
+			$error['name_he'] = 'Please fill the title!';
 		}
 		if($this->category_id==""){
 			$error['category_id'] = 'Please fill the genre!';
