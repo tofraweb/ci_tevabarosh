@@ -4,7 +4,7 @@ class Catalog extends CI_Controller {
 
   public $pageTitle = "קטלוג מלא";
   public $section = null;
-  public $items_per_page = 8;
+  public $items_per_page = 9;
   public $search = null;
   public $total_items = 0;
   public $current_page = null;
@@ -70,7 +70,8 @@ class Catalog extends CI_Controller {
       if(isset($_GET["pg"])){
           $this->current_page = filter_input(INPUT_GET,"pg", FILTER_SANITIZE_NUMBER_INT);
       }
-
+      // var_dump($this->current_page);
+      // exit;
       if(empty($this->current_page)){
           $this->current_page = 1;
       }
@@ -79,10 +80,6 @@ class Catalog extends CI_Controller {
 
       if(!empty($this->search)){
           $pagination_result['catalog'] = $this->catalog_model->search_catalog_array($this->search,$this->items_per_page,$this->offset);
-          // echo '<pre>';
-          // var_dump($catalog);
-          // echo '</pre>';
-          // exit;
       }elseif(empty($this->section)){
           $pagination_result['catalog'] = $this->catalog_model->full_catalog_array($this->items_per_page,$this->offset);
       }else{
@@ -119,11 +116,11 @@ class Catalog extends CI_Controller {
         }
         //redirect too-large page numbers to the last page
         if($this->current_page > $total_pages){
-            header("location:catalog.php?".$limit_results."pg=".$total_pages);
+            header("location:catalog?".$limit_results."pg=".$total_pages);
         }
         //redirect too-small page numbers to the first page
         if($this->current_page < 1){
-            header("location:catalog.php?".$limit_results."pg=1");
+            header("location:catalog?".$limit_results."pg=1");
         }
         //determine the offset (numberm of items to skip) for the current page
         //for example: on page 3 with 8 items per page, the offset will be 16
@@ -135,22 +132,29 @@ class Catalog extends CI_Controller {
         $pagination_result = array();
         $pagination_result['catalog'] = $catalog;
 
-        $pagination = "<div class = \"pagination\">";
-        $pagination .= "Pages: ";
+        $pagination = "<div class = \"col-lg-12\">";
+        $pagination .= "<ul class=\"pagination\">";
+        $pagination .= "<li><a href='#'> &laquo;</a></li>";
         for($i = 1; $i <= $total_pages; $i++){
-            if($i == $this->current_page){
-                $pagination .= "<span> $i </span>";
-            }else{
-                $pagination .= "<a href='catalog.php?";
+
+    //            $pagination .= "<li> $i </li>";
+    //        }else{
+                $pagination .= "<li ";
+                if($i == $this->current_page){
+                  $pagination .= "class=\"active\"";
+                }
+                $pagination .= "><a href='?";
                 if(!empty($this->search)){
                     //validating $search value input by the user
                     $pagination .= "s=".urlencode(htmlspecialchars($this->search))."&";
                 }elseif(!empty($this->section)){
                     $pagination .= "cat=".$this->section."&";
                 }
-                $pagination .= "pg=$i'> $i </a>";
-            }
+                $pagination .= "pg=$i'> $i </a></li>";
+    //        }
         }
+        $pagination .= "<li><a href='#'> &raquo;</a></li>";
+        $pagination .= "</ul>";
         $pagination .= "</div>";
         $pagination_result['pagination'] = $pagination;
         // echo '<pre>';

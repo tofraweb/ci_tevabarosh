@@ -27,6 +27,7 @@
         <!-- Species Family Details Row -->
         <div class="row">
           <div class="col-md-12">
+            <?php if(!empty($genus->name_he)) { ?>
             <div class="table-responsive">
               <table class = "table table-bordered">
                 <tr>
@@ -46,6 +47,7 @@
                 </tr>
               </table>
             </div>
+            <?php } ?>
             <div class="table-responsive">
               <?php if(!empty($species[0]->name_hu)) { ?>
                 <table class = "table table-bordered">
@@ -64,6 +66,7 @@
 
         <!-- Portfolio Species Row -->
         <div class="row">
+            <?php if(!empty($species[0]->picture)) { ?>
             <div class="col-md-8">
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
@@ -89,13 +92,15 @@
                     </a>
                 </div>
             </div>
+            <?php } ?>
 
             <div class="col-md-4">
+                <?php if(!empty($species[0]->description)) { ?>
                 <h3>תיאור קצר</h3>
                 <p><?php echo $species[0]->description;?></p>
+                <?php } ?>
                 <p><a class="btn btn-info" href="javascript:history.back()">חזור</a></p>
             </div>
-
         </div>
         <!-- /.row -->
 

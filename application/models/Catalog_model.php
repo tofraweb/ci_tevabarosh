@@ -131,9 +131,9 @@ Class Catalog_model extends CI_Model
 
     public function get_genus($id){
       try{
-          $sql = "SELECT Genus.family_id, Genus.name_he, Genus.name_lat FROM Genus
-          Join Species ON Genus.id = Species.genus_id
-          WHERE Species.id = ?";
+          $sql = "SELECT genus.family_id, genus.name_he, genus.name_lat FROM genus
+          Join species ON genus.id = species.genus_id
+          WHERE species.id = ?";
           $result = $this->db->query($sql,$id);
         }catch(Exception $e){
             echo "Unable to retrieve results";
@@ -145,7 +145,7 @@ Class Catalog_model extends CI_Model
 
     public function get_family($id){
       try{
-          $sql = "SELECT order_id, name_he, name_lat FROM Family
+          $sql = "SELECT order_id, name_he, name_lat FROM family
           WHERE id = ?";
           $result = $this->db->query($sql,$id);
         }catch(Exception $e){
@@ -158,7 +158,7 @@ Class Catalog_model extends CI_Model
 
     public function get_order($id){
       try{
-          $sql = "SELECT name_he, name_lat FROM Orders
+          $sql = "SELECT name_he, name_lat FROM orders
           WHERE id = ?";
           $result = $this->db->query($sql,$id);
         }catch(Exception $e){
