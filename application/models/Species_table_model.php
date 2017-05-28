@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Item_table_model extends CI_Model{
+class Species_table_model extends CI_Model{
 
 	public $id = null;
 	public $title = null;
@@ -36,10 +36,10 @@ class Item_table_model extends CI_Model{
 		return $error;
 	}
 
-	public function storeItem($pic_name){
+	public function storeSpecies($pic_name){
     $this->picture = $pic_name;
 		$this->db->set($this);
-		$this->db->insert('items');
+		$this->db->insert('species');
 	}
 
 

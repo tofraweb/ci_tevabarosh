@@ -117,7 +117,7 @@
                                 <a href="<?php echo base_url();?>catalog/?cat=1">פרחי שדה</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>item/newItem">הוסף ציפור וצמח</a>
+                                <a href="<?php echo base_url();?>species/newSpecies">הוסף ציפור וצמח</a>
                             </li>
                         </ul>
                     </li>

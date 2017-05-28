@@ -14,13 +14,13 @@ class Catalog extends CI_Controller {
   public function __construct()
   {
     parent::__construct();
-    $this->load->model('media_model','',TRUE);
+    $this->load->model('catalog_model','',TRUE);
   }
 
   public function index()
   {
       if(isset($_GET['cat'])){
-          $this->category = $this->media_model->get_category_name($_GET['cat']);
+          $this->category = $this->catalog_model->get_category_name($_GET['cat']);
           // echo "<pre>";
           // var_dump($this->category);
           // exit;
@@ -78,15 +78,15 @@ class Catalog extends CI_Controller {
       $pagination_result = $this->setPagination();
 
       if(!empty($this->search)){
-          $pagination_result['catalog'] = $this->media_model->search_catalog_array($this->search,$this->items_per_page,$this->offset);
+          $pagination_result['catalog'] = $this->catalog_model->search_catalog_array($this->search,$this->items_per_page,$this->offset);
           // echo '<pre>';
           // var_dump($catalog);
           // echo '</pre>';
           // exit;
       }elseif(empty($this->section)){
-          $pagination_result['catalog'] = $this->media_model->full_catalog_array($this->items_per_page,$this->offset);
+          $pagination_result['catalog'] = $this->catalog_model->full_catalog_array($this->items_per_page,$this->offset);
       }else{
-          $this->media_model->category_catalog_array($this->section,$this->items_per_page,$this->offset);
+          $this->catalog_model->category_catalog_array($this->section,$this->items_per_page,$this->offset);
       }
 
       $data['search'] = $this->search;
@@ -103,7 +103,7 @@ class Catalog extends CI_Controller {
 
   public function setPagination(){
     //pagination calculations
-    $this->total_items = $this->media_model->get_catalog_count($this->section,$this->search);
+    $this->total_items = $this->catalog_model->get_catalog_count($this->section,$this->search);
     $total_pages = 1;
 
     if($this->total_items > 0){
@@ -129,7 +129,7 @@ class Catalog extends CI_Controller {
         //for example: on page 3 with 8 items per page, the offset will be 16
         $this->offset = ($this->current_page - 1)  * $this->items_per_page;
 
-        $catalog = $this->media_model->category_catalog_array($this->section,$this->items_per_page,$this->offset);
+        $catalog = $this->catalog_model->category_catalog_array($this->section,$this->items_per_page,$this->offset);
         //$catalog = category_catalog_array($section,$items_per_page,$offset);
 
         $pagination_result = array();
@@ -161,19 +161,19 @@ class Catalog extends CI_Controller {
     }
   }
 
-  public function getRandomItemList(){
-    $catalog = $this->media_model->random_catalog_array();
+  public function getRandomSpeciesList(){
+    $catalog = $this->catalog_model->random_catalog_array();
     $data['catalog'] = $catalog;
     $this->load->view('inc/header');
     $this->load->view('bootstrap/portfolio_3_col_view',$data);
     $this->load->view('inc/footer');
   }
 
-  public function getItem($id){
-    $item = $this->media_model->single_item_array($id);
-    $data['item'] = $item;
+  public function getSpecies($id){
+    $species = $this->catalog_model->single_species_array($id);
+    $data['species'] = $species;
     $this->load->view('inc/header');
-    $this->load->view('bootstrap/portfolio_item_view',$data);
+    $this->load->view('bootstrap/portfolio_species_view',$data);
     $this->load->view('inc/footer');
   }
 

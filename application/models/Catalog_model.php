@@ -1,10 +1,10 @@
 <?php
-Class Media_model extends CI_Model
+Class Catalog_model extends CI_Model
 {
 
     public function get_catalog_count($category = null, $search = null){
         try {
-            $sql = " SELECT * FROM items";
+            $sql = " SELECT * FROM species";
             if(!empty($search)){
                 $sql .=  " WHERE title LIKE ?";
                 $result = $this->db->query($sql, '%'.$search.'%' ); //binding values to query
@@ -25,7 +25,7 @@ Class Media_model extends CI_Model
     public function full_catalog_array($limit = null, $offset = 0){
         try{
             $sql = "SELECT id,title, category_id, picture
-      FROM items
+      FROM species
       ORDER BY REPLACE(REPLACE(REPLACE(title,'The ',''), 'An ' , ''), 'A ', '')";
             if(is_integer($limit)){
                 $sql .= " LIMIT ? OFFSET ? ";
@@ -42,7 +42,7 @@ Class Media_model extends CI_Model
     }
 
     public function random_catalog_array($limit = 0, $type= null){
-        try{ //pulling only 4 random items from the DB
+        try{ //pulling only 4 random species from the DB
             // switch ($type) {
             //   case 'featuring':
             //     # code...
@@ -56,7 +56,7 @@ Class Media_model extends CI_Model
             // }
             $results = $this->db->query(
                 "SELECT id, title, title_lat, title_hun, category_id, description, picture
-             FROM items
+             FROM species
              WHERE $type = 'on'
              ORDER BY RAND()
              LIMIT $limit"
@@ -73,7 +73,7 @@ Class Media_model extends CI_Model
 
         try{
             $sql = "SELECT id,title, category_id, picture
-      FROM items
+      FROM species
       WHERE category_id = ?
       ORDER BY REPLACE(REPLACE(REPLACE(title,'The ',''), 'An ' , ''), 'A ', '')";
             if(is_integer($limit)){
@@ -95,7 +95,7 @@ Class Media_model extends CI_Model
 
         try{
             $sql = " SELECT id,title,category_id, picture
-                FROM items
+                FROM species
                 WHERE title LIKE ?
                 ORDER BY REPLACE(REPLACE(REPLACE(title,'The ',''), 'An ' , ''), 'A ', '')";
             if(is_integer($limit)){
@@ -116,17 +116,17 @@ Class Media_model extends CI_Model
         return $catalog;
     }
 
-    public function single_item_array($id){
+    public function single_species_array($id){
 
        try{
-           $sql = "SELECT * FROM items WHERE id = ?";
+           $sql = "SELECT * FROM species WHERE id = ?";
            $result = $this->db->query($sql,$id);
          }catch(Exception $e){
              echo "Unable to retrieve results";
              exit;
          }
-         $item = $result->result();
-         return $item;
+         $species = $result->result();
+         return $species;
     }
 
     public function get_category_name($id){

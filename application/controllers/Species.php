@@ -1,12 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Item extends CI_Controller {
+class Species extends CI_Controller {
 
 	public function __construct(){
 
 		parent::__construct();
 
-			$this->load->model('item_model');
+			$this->load->model('species_model');
 		//	$this->load->library('grocery_CRUD');
 
 	}
@@ -24,15 +24,15 @@ class Item extends CI_Controller {
 	// 	$this->load->view('example.php',(array)$output);
 	// }
 	//
-	// public function editItems()
+	// public function editSpecies()
 	// {
 	//
 	// 	try{
 	// 		$crud = new grocery_CRUD();
 	//
 	// 		$crud->set_theme('datatables');
-	// 		$crud->set_table('items');
-	// 		$crud->set_subject('Items');
+	// 		$crud->set_table('species');
+	// 		$crud->set_subject('Species');
 	// 		$crud->required_fields('title');
 	// 		$crud->columns('title','title_lat','title_hun','category_id','description','picture','featuring','frontpage');
 	// 		$output = $crud->render();
@@ -50,22 +50,22 @@ class Item extends CI_Controller {
 	// 	}
 	// }
 
-	public function getItem($category){
+	public function getSpecies($category){
 
     $this->load->view('inc/header');
-		$data['items'] = $this->item_model->getItemList($category);
+		$data['speciess'] = $this->species_model->getSpeciesList($category);
 		$data['category'] = $category;
-		$this->load->view('bootstrap/items_view', $data, $category);
+		$this->load->view('bootstrap/Species_view', $data, $category);
     $this->load->view('inc/footer');
 
 	}
 
-	public function newItem($err=null){
+	public function newSpecies($err=null){
 
     $this->load->view('inc/header');
-		$category_list = array('category_list'=>$this->item_model->getCategories());
+		$category_list = array('category_list'=>$this->species_model->getCategories());
 		$error_message['error_message'] = $err;
-		$this->load->view('bootstrap/new_item_view', $category_list, $error_message);
+		$this->load->view('bootstrap/new_species_view', $category_list, $error_message);
     $this->load->view('inc/footer');
 
 	}
@@ -110,17 +110,17 @@ class Item extends CI_Controller {
 			$data = array('upload_data' => $this->upload->data());
       $picture_name = $data['upload_data']['file_name'];
       $this->resizeImage($picture_name);
-      $this->item_table_model->storeItem($picture_name);
+      $this->species_table_model->storeSpecies($picture_name);
       $this->uploadMessage($data);
 		}
 
 	}
 
-	public function checkItem(){
-		$this->load->model('item_table_model');
-		$error = $this->item_table_model->check();
+	public function checkSpecies(){
+		$this->load->model('species_table_model');
+		$error = $this->species_table_model->check();
 		if(count($error)){
-			$this->newItem($error);
+			$this->newSpecies($error);
 			return;
 		}
 		$this->doUpload();

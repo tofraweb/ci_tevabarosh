@@ -30,25 +30,25 @@ class Admin extends CI_Controller {
 		$this->load->view('admin_view.php',(array)$output);
 	}
 
-	public function items()
+	public function species()
 	{
 		$output = $this->grocery_crud->render();
 
 		$this->_example_output($output);
 	}
 
-	public function items_management()
+	public function species_management()
 	{
 		try{
 			$crud = new grocery_CRUD();
 
 			$crud->set_theme('datatables');
-			$crud->set_table('items');
-			$crud->set_subject('Items');
+			$crud->set_table('species');
+			$crud->set_subject('Species');
 			$crud->required_fields('title', 'category_id');
 			$crud->columns('title','title_lat','title_hun','category_id','description', 'picture', 'featuring','frontpage');
       $crud->set_field_upload('picture','assets/img/media/upload');
-			$crud->set_subject('items');
+			$crud->set_subject('species');
 			$crud->set_relation('category_id','categories','name');
 
 

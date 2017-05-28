@@ -107,14 +107,14 @@
             </h2>
         </div>
         <?php
-        foreach ($featuring as $item) {?>
+        foreach ($featuring as $species) {?>
 
           <div class="col-md-4 img-portfolio">
-              <a href="<?php echo base_url();?>index.php/catalog/getItem/<?php echo $item->id;?>">
-                  <img class="img-responsive img-hover" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $item->picture;?>" alt="">
+              <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>">
+                  <img class="img-responsive img-hover" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
               </a>
               <h3>
-                  <a href="<?php echo base_url();?>index.php/catalog/getItem/<?php echo $item->id;?>"><?php echo $item->title;?></a>
+                  <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>"><?php echo $species->title;?></a>
               </h3>
           </div>
 
@@ -129,13 +129,13 @@
               עוד צמחים וציפורים
           </h2>
       </div>
-        <?php foreach ($frontpage as $item) {?>
+        <?php foreach ($frontpage as $species) {?>
           <div class="col-md-3 img-portfolio">
-          <a href="<?php echo base_url();?>index.php/catalog/getItem/<?php echo $item->id;?>">
-              <img class="img-responsive img-hover" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $item->picture;?>" alt="">
+          <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>">
+              <img class="img-responsive img-hover" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
           </a>
           <h5>
-              <a href="<?php echo base_url();?>index.php/catalog/getItem/<?php echo $item->id;?>"><?php echo $item->title;?></a>
+              <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>"><?php echo $species->title;?></a>
           </h5>
           </div>
         <?php } ?>

@@ -6,7 +6,7 @@ class Category extends CI_Controller {
 		parent::__construct();
 		// $this->load->library('template'); ///no need since the file is auto uploasded by configuration
 	//	$this->template->add_css('css/templatemo_style.css');
-		$this->load->model('item_model');
+		$this->load->model('species_model');
 	}
 
 	public function index()

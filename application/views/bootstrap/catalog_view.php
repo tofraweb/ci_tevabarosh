@@ -30,20 +30,20 @@
                     }
                   }?></h3>
               <?php
-              // var_dump($total_items);
+              // var_dump($total_species);
               // exit;
               if($total_items <1){
-                  echo "<p>No items were found matching the requested rearch expression.</p>";
+                  echo "<p>No species were found matching the requested rearch expression.</p>";
                   echo "<p>Search again or <a href=\"index.php/catalog.php\">Browse the full catalog</a></p>";
               }else{
               echo $pagination.'<hr>';
-              foreach ($catalog as $item) {?>
+              foreach ($catalog as $species) {?>
                 <div class="col-md-4 img-portfolio">
-                    <a href="<?php echo base_url();?>index.php/catalog/getItem/<?php echo $item->id;?>">
-                        <img class="img-responsive img-hover" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $item->picture;?>" alt="">
+                    <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>">
+                        <img class="img-responsive img-hover" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
                     </a>
                     <h3>
-                        <a href="<?php echo base_url();?>index.php/catalog/getItem/<?php echo $item->id;?>"><?php echo $item->title;?></a>
+                        <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>"><?php echo $species->title;?></a>
                     </h3>
                 </div>
               <?php }

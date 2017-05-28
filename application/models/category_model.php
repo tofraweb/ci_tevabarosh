@@ -13,12 +13,12 @@ class Category_model extends CI_Model{
     }
 
 	public function getItemsList($cCategory){
-		$products = $this->db->query("SELECT * FROM items WHERE category_id = $cCategory");
+		$products = $this->db->query("SELECT * FROM species WHERE category_id = $cCategory");
 		return $products->result();
     }
 
 	public function getItem($cCategory){
-		$products = $this->db->query("SELECT * FROM items WHERE category_id = $cCategory");
+		$products = $this->db->query("SELECT * FROM species WHERE category_id = $cCategory");
 		return $products->result();
     }
 

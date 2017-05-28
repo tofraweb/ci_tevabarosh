@@ -5,14 +5,14 @@ class Home extends CI_Controller {
   // public function __construct()
   // {
   //   parent::__construct();
-  //   $this->load->model('media_model','',TRUE);
+  //   $this->load->model('catalog_model','',TRUE);
   // }
 
   public function index()
   {
-      $this->load->model('media_model','',TRUE);
-      $featuring = $this->media_model->random_catalog_array(3,'featuring');
-      $frontpage = $this->media_model->random_catalog_array(8,'frontpage');
+      $this->load->model('catalog_model','',TRUE);
+      $featuring = $this->catalog_model->random_catalog_array(3,'featuring');
+      $frontpage = $this->catalog_model->random_catalog_array(8,'frontpage');
       $data['section'] = "books";
       $data['pageTitle'] = 'This the books page';
       $data['featuring'] = $featuring;

@@ -4,8 +4,8 @@ class Page extends CI_Controller {
 
   function dynamicPage($page = null, $rand = 4)
   {
-    // $this->load->model('media_model','',TRUE);
-    // $catalog = $this->media_model->random_catalog_array($rand, $frontpage);
+    // $this->load->model('catalog_model','',TRUE);
+    // $catalog = $this->catalog_model->random_catalog_array($rand, $frontpage);
     if(!$page){
       $page = 'frontpage';
     }

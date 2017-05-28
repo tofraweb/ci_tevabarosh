@@ -21,7 +21,7 @@ foreach($css_files as $file): ?>
 		<a href='<?php echo site_url('admin/employees_management')?>'>Employees</a> |
 		<a href='<?php echo site_url('admin/film_management')?>'>Films</a> |
 		<a href='<?php echo site_url('admin/multigrids')?>'>Multigrid [BETA]</a>
-		<a href='<?php echo site_url('admin/items_management')?>'>Items Management</a>
+		<a href='<?php echo site_url('admin/species_management')?>'>Items Management</a>
 		<a href='<?php echo site_url('login/logout')?>'>Logout</a>
 
 	</div>
