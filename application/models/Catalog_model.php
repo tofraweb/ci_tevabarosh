@@ -6,8 +6,8 @@ Class Catalog_model extends CI_Model
         try {
             $sql = " SELECT * FROM species";
             if(!empty($search)){
-                $sql .=  " WHERE name_he LIKE ?";
-                $result = $this->db->query($sql, '%'.$search.'%' ); //binding values to query
+                $sql .=  " WHERE name_he LIKE ? OR name_lat LIKE ? OR name_hu LIKE ?";
+                $result = $this->db->query($sql, array('%'.$search.'%','%'.$search.'%','%'.$search.'%') ); //binding values to query
             }elseif(!empty($category)){
                 $sql .= " WHERE category_id = ? ";
                 $result = $this->db->query($sql, $category);
@@ -24,7 +24,7 @@ Class Catalog_model extends CI_Model
 
     public function full_catalog_array($limit = null, $offset = 0){
         try{
-            $sql = "SELECT id,name_he, category_id, picture
+            $sql = "SELECT id,name_he,name_lat,name_hu, category_id, picture
       FROM species
       ORDER BY REPLACE(REPLACE(REPLACE(name_he,'The ',''), 'An ' , ''), 'A ', '')";
             if(is_integer($limit)){
@@ -72,7 +72,7 @@ Class Catalog_model extends CI_Model
     public function category_catalog_array($category, $limit = null, $offset = 0){
 
         try{
-            $sql = "SELECT id,name_he, category_id, picture
+            $sql = "SELECT id,name_he,name_lat,name_hu, category_id, picture
       FROM species
       WHERE category_id = ?
       ORDER BY REPLACE(REPLACE(REPLACE(name_he,'The ',''), 'An ' , ''), 'A ', '')";
@@ -94,15 +94,17 @@ Class Catalog_model extends CI_Model
     public function search_catalog_array($search, $limit = null, $offset = 0){
 
         try{
-            $sql = " SELECT id,name_he,category_id, picture
+            $sql = " SELECT id,name_he,name_lat,name_hu,category_id, picture
                 FROM species
                 WHERE name_he LIKE ?
+                OR name_lat LIKE ?
+                OR name_hu LIKE ?
                 ORDER BY REPLACE(REPLACE(REPLACE(name_he,'The ',''), 'An ' , ''), 'A ', '')";
             if(is_integer($limit)){
                 $sql .= " LIMIT ? OFFSET ? ";
-                $results = $this->db->query($sql, array('%'.$search.'%',$limit,$offset));
+                $results = $this->db->query($sql, array('%'.$search.'%','%'.$search.'%','%'.$search.'%',$limit,$offset));
             }else{
-                $results = $this->db->query($sql, array('%'.$search.'%'));
+                $results = $this->db->query($sql, array('%'.$search.'%','%'.$search.'%','%'.$search.'%'));
             }
         }catch(Exception $e){
             echo "Unable to retrieve results";
