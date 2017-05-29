@@ -19,9 +19,15 @@
 
 <!-- Script to Activate the Carousel -->
 <script>
-$('.carousel').carousel({
-interval: 5000 //changes the speed
-})
+  $('.carousel').carousel({
+  interval: 5000 //changes the speed
+  })
+  $(function() {
+        $('img').on('click', function() {
+        $('.enlargeImageModalSource').attr('src', $(this).attr('src'));
+        $('#enlargeImageModal').modal('show');
+      });
+  });
 </script>
 
 </body>

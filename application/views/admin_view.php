@@ -27,6 +27,7 @@ foreach($css_files as $file): ?>
 		<a href='<?php echo site_url('admin/genus_management')?>'>ניהול סוגים</a>|
 		<a href='<?php echo site_url('admin/family_management')?>'>ניהול משפחות</a>|
 		<a href='<?php echo site_url('admin/orders')?>'>ניהול סדרות</a>|
+		<a href='<?php echo site_url('admin/pictures_management')?>'>ניהול תמונות</a>|
 		<a href='<?php echo site_url('login/logout')?>'>יציאה</a>
 
 	</div>

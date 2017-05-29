@@ -111,7 +111,7 @@
 
           <div class="col-md-4 img-portfolio">
               <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>">
-                  <img class="img-responsive img-hover" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
+                  <img class="img-responsive img-hover img-rounded" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
               </a>
               <h3>
                   <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>"><?php echo $species->name_he;?></a>
@@ -132,7 +132,7 @@
         <?php foreach ($frontpage as $species) {?>
           <div class="col-md-3 img-portfolio">
           <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>">
-              <img class="img-responsive img-hover" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
+              <img class="img-responsive img-hover img-rounded" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
           </a>
           <h5>
               <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>"><?php echo $species->name_he;?></a>

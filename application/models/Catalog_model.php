@@ -129,6 +129,19 @@ Class Catalog_model extends CI_Model
          return $species;
     }
 
+    public function get_pictures($id) {
+      try{
+          $sql = "SELECT * FROM pictures WHERE species_id = ?";
+          $result = $this->db->query($sql,$id);
+        }catch(Exception $e){
+            echo "Unable to retrieve results";
+            exit;
+        }
+        $pictures = $result->result();
+        return $pictures;
+    }
+
+
     public function get_genus($id){
       try{
           $sql = "SELECT genus.family_id, genus.name_he, genus.name_lat FROM genus

@@ -1,4 +1,17 @@
 
+    <!-- Popup Image -->
+    <div class="modal fade" id="enlargeImageModal" tabindex="-1" role="dialog" aria-labelledby="enlargeImageModal" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+         </div>
+         <div class="modal-body">
+           <img src="" class="enlargeImageModalSource" style="width: 100%;">
+         </div>
+       </div>
+      </div>
+    </div>
 
     <!-- Page Content -->
     <div class="container">
@@ -8,101 +21,140 @@
             <div class="col-lg-12">
                 <ol class="breadcrumb">
                     <li><a href="<?php echo base_url();?>">בית</a></li>
-                    <li class="active"><?php echo $order->name_he;?></li>
-                    <li class="active"><?php echo $family->name_he;?></li>
-                    <li class="active"><?php echo $genus->name_he;?></li>
+                    <?php if($order->name_he) { ?><li class="active"><?php echo $order->name_he;?></li><?php } ?>
+                    <?php if($family->name_he) { ?><li class="active"><?php echo $family->name_he;?></li><?php } ?>
+                    <?php if($genus->name_he) { ?><li class="active"><?php echo $genus->name_he;?></li><?php } ?>
                     <li class="active"><?php echo $species[0]->name_he;?></li>
                 </ol>
-                <h1 class="page-header"><?php echo $species[0]->name_he;?>
-                    <small> - <?php echo $species[0]->name_lat;?></small>
-                    <?php if($logged_in){ ?>
-                    <small> - <a target="_blank" href="<?php echo base_url();?>admin/species_management/edit/<?php echo $species[0]->id;?>">ערוך</a></small>
-                    <?php } ?>
-                </h1>
             </div>
         </div>
         <!-- /.row -->
 
 
-        <!-- Species Family Details Row -->
         <div class="row">
+
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active" style="width:33%;"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">מידע מדעי</a></li>
+            <li role="presentation" style="width:33%;"><a href="#pictures" aria-controls="pictures" role="tab" data-toggle="tab">תמונות</a></li>
+            <li role="presentation" style="width:33%;"><a href="#slider" aria-controls="slider" role="tab" data-toggle="tab">סלידר</a></li>
+          </ul>
           <div class="col-md-12">
-            <?php if(!empty($genus->name_he)) { ?>
-            <div class="table-responsive">
-              <table class = "table table-bordered">
-                <tr>
-                  <th class="info" style="text-align:right">סוג</td>
-                  <th class="info" style="text-align:right">משפחה</td>
-                  <th class="info"style="text-align:right">סדרה</td>
-                </tr>
-                <tr>
-                  <td><?php echo $genus->name_he;?></td>
-                  <td><?php echo $family->name_he;?></td>
-                  <td><?php echo $order->name_he;?></td>
-                </tr>
-                <tr>
-                  <td><?php echo $genus->name_lat;?></td>
-                  <td><?php echo $family->name_lat;?></td>
-                  <td><?php echo $order->name_lat;?></td>
-                </tr>
-              </table>
-            </div>
-            <?php } ?>
-            <div class="table-responsive">
-              <?php if(!empty($species[0]->name_hu)) { ?>
-                <table class = "table table-bordered">
-                  <tr>
-                    <th class="info" style="text-align:right">שם בהונגרית</td>
-                  </tr>
-                  <tr>
-                    <td><?php echo $species[0]->name_hu;?></td>
-                  </tr>
-                </table>
-              <?php } ?>
+            <h1 class="page-header"><?php echo $species[0]->name_he;?>
+                <small> - <?php echo $species[0]->name_hu;?></small>
+                <small> - <?php echo $species[0]->name_lat;?></small>
+                <?php if($logged_in){ ?>
+                <small> - <a target="_blank" href="<?php echo base_url();?>admin/species_management/edit/<?php echo $species[0]->id;?>">ערוך</a></small>
+                <?php } ?>
+            </h1>
+          </div>
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="info">
+              <h2></h2>
+              <div class="col-md-5">
+                <div class="table-responsive">
+                  <table class = "table table-bordered"  style="width:100%">
+                    <tr>
+                      <th class="info" style="text-align:right">סדרה</th>
+                      <td><?php echo $order->name_he;?></td>
+                      <td><?php echo $order->name_lat;?></td>
+                    </tr>
+                    <tr>
+                      <th class="info" style="text-align:right">משפחה</th>
+                      <td><?php echo $family->name_he;?></td>
+                      <td><?php echo $family->name_lat;?></td>
+                    </tr>
+                    <tr>
+                      <th class="info" style="text-align:right">סוג</th>
+                      <td><?php echo $genus->name_he;?></td>
+                      <td><?php echo $genus->name_lat;?></td>
+                    </tr>
+                  </table>
+                </div>
+              <div>
+                  <?php if(!empty($species[0]->description)) { ?>
+                  <h4 style="background-color:#d9edf7">תיאור קצר</h4>
+                  <p><?php echo $species[0]->description;?></p>
+                  <?php } ?>
+                  <p><a class="btn btn-info" href="javascript:history.back()">חזור</a></p>
+              </div>
+              </div>
+              <div class="col-md-7">
+                <img class="img-rounded img-species" style="cursor: zoom-in;" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species[0]->picture;?>" alt="">
               </div>
             </div>
-        </div>
-        <!-- /.row -->
-
-        <!-- Portfolio Species Row -->
-        <div class="row">
-            <?php if(!empty($species[0]->picture)) { ?>
-            <div class="col-md-8">
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                    </ol>
-
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <img class="img-responsive" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species[0]->picture;?>" alt="">
-                        </div>
+            <div role="tabpanel" class="tab-pane" id="pictures">
+              <div class="row">
+                  <?php// var_dump($pictures[2]->filename); exit; ?>
+                  <?php if(!empty($pictures)) { ?>
+                  <div class="col-md-12">
+                  <?php foreach ($pictures as $picture) {?>
+                    <div class="col-md-4 img-portfolio">
+                      <img class="img-responsive img-hover img-rounded img-thumbnail" style="cursor: zoom-in;" src="<?php echo base_url();?>assets/img/media/upload/small/<?php echo $picture->filename;?>" alt="">
                     </div>
-
-                    <!-- Controls -->
-                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                    </a>
-                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                    </a>
-                </div>
+                  <?php } ?>
+                  </div>
+                  <?php } ?>
+              </div>
+              <!-- /.row -->
             </div>
-            <?php } ?>
+            <div role="tabpanel" class="tab-pane" id="slider">
+              <div id="speciesCarousel" class="carousel slide">
+                  <!-- Indicators -->
+                  <ol class="carousel-indicators">
+                      <li data-target="#speciesCarousel" data-slide-to="0" class="active"></li>
+                      <li data-target="#speciesCarousel" data-slide-to="1"></li>
+                      <li data-target="#speciesCarousel" data-slide-to="2"></li>
+                      <li data-target="#speciesCarousel" data-slide-to="3"></li>
+                      <li data-target="#speciesCarousel" data-slide-to="4"></li>
+                  </ol>
 
-            <div class="col-md-4">
-                <?php if(!empty($species[0]->description)) { ?>
-                <h3>תיאור קצר</h3>
-                <p><?php echo $species[0]->description;?></p>
-                <?php } ?>
-                <p><a class="btn btn-info" href="javascript:history.back()">חזור</a></p>
-            </div>
+                  <!-- Wrapper for slides -->
+                  <div class="carousel-inner">
+                      <div class="item active">
+                          <div class="fill" style="background-image:url('<?php echo base_url();?>assets/img/media/upload/slider/IMG_1360-s.jpg');"></div>
+                          <div class="carousel-caption">
+                              <h2></h2>
+                          </div>
+                      </div>
+                      <div class="item">
+                          <div class="fill" style="background-image:url('<?php echo base_url();?>assets/img/media/upload/slider/IMG_9320-s.jpg');"></div>
+                          <div class="carousel-caption">
+                              <h2></h2>
+                          </div>
+                      </div>
+                      <div class="item">
+                          <div class="fill" style="background-image:url('<?php echo base_url();?>assets/img/media/upload/slider/IMG_0510-s.jpg');"></div>
+                          <div class="carousel-caption">
+                              <h2></h2>
+                          </div>
+                      </div>
+                      <div class="item">
+                          <div class="fill" style="background-image:url('<?php echo base_url();?>assets/img/media/upload/slider/IMG_9646-s.jpg');"></div>
+                          <div class="carousel-caption">
+                              <h2></h2>
+                          </div>
+                      </div>
+                      <div class="item">
+                          <div class="fill" style="background-image:url('<?php echo base_url();?>assets/img/media/upload/slider/suculents.jpg');"></div>
+                          <div class="carousel-caption">
+                              <h2></h2>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Controls -->
+                  <a class="right carousel-control" href="#speciesCarousel" data-slide="prev">
+                      <span class="icon-prev"></span>
+                  </a>
+                  <a class="left carousel-control" href="#speciesCarousel" data-slide="next">
+                      <span class="icon-next"></span>
+                  </a>
+              </div>
+          </div>
+
         </div>
-        <!-- /.row -->
 
         <!-- Related Projects Row -->
         <div class="row">
@@ -137,5 +189,4 @@
 
         </div>
         <!-- /.row -->
-
         <hr>
