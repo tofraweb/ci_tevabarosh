@@ -21,9 +21,9 @@
             <div class="col-lg-12">
                 <ol class="breadcrumb">
                     <li><a href="<?php echo base_url();?>">בית</a></li>
-                    <?php if($order->name_he) { ?><li class="active"><?php echo $order->name_he;?></li><?php } ?>
-                    <?php if($family->name_he) { ?><li class="active"><?php echo $family->name_he;?></li><?php } ?>
-                    <?php if($genus->name_he) { ?><li class="active"><?php echo $genus->name_he;?></li><?php } ?>
+                    <?php if($order->name_he) { ?><li class="active"><a href="<?php echo base_url();?>catalog/getSpeciesInOrder/<?php echo $order->id;?>"><?php echo $order->name_he;?></a></li><?php } ?>
+                    <?php if($family->name_he) { ?><li class="active"><a href="<?php echo base_url();?>catalog/getSpeciesListInGenus/<?php echo $order->id;?>"><?php echo $family->name_he;?></a></li><?php } ?>
+                    <?php if($genus->name_he) { ?><li class="active"><a href="<?php echo base_url();?>catalog/getSpeciesListInGenus/<?php echo $genus->id;?>"><?php echo $genus->name_he;?></a></li><?php } ?>
                     <li class="active"><?php echo $species[0]->name_he;?></li>
                 </ol>
             </div>
@@ -56,19 +56,28 @@
                 <div class="table-responsive">
                   <table class = "table table-bordered"  style="width:100%">
                     <tr>
+                      <th class="info"></th>
+                      <th class="info" style="text-align:right">עברית</td>
+                      <th class="info" style="text-align:left">Latin</td>
+                      <th class="info" style="text-align:left">Magyar</td>
+                    </tr>
+                    <tr>
                       <th class="info" style="text-align:right">סדרה</th>
                       <td><?php echo $order->name_he;?></td>
-                      <td><?php echo $order->name_lat;?></td>
+                      <td style="text-align:left"><?php echo $order->name_lat;?></td>
+                      <td style="text-align:left"><?php echo $order->name_hu;?></td>
                     </tr>
                     <tr>
                       <th class="info" style="text-align:right">משפחה</th>
                       <td><?php echo $family->name_he;?></td>
-                      <td><?php echo $family->name_lat;?></td>
+                      <td style="text-align:left"><?php echo $family->name_lat;?></td>
+                      <td style="text-align:left"><?php echo $family->name_hu;?></td>
                     </tr>
                     <tr>
                       <th class="info" style="text-align:right">סוג</th>
                       <td><?php echo $genus->name_he;?></td>
-                      <td><?php echo $genus->name_lat;?></td>
+                      <td style="text-align:left"><?php echo $genus->name_lat;?></td>
+                      <td style="text-align:left"><?php echo $genus->name_hu;?></td>
                     </tr>
                   </table>
                 </div>

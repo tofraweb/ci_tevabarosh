@@ -193,5 +193,40 @@ class Catalog extends CI_Controller {
     $this->load->view('inc/footer');
   }
 
+ //not ready yet
+  public function getSpeciesInOrder($id){
+    $family_list_in_order = $this->catalog_model->getFamilyListInOrder($id);
+    $genus_list_in_family = $this->catalog_model->getGenusListInFamily($family_list_in_order[0]->id);
+    $species_list_in_genus = $this->catalog_model->getSpeciesListInGenus($genus_list_in_family[0]->id);
+    // echo '<pre>';
+    // var_dump($species_list_in_genus);
+    // exit;
+    // echo '</pre>';
+  }
+
+  public function getSpeciesListInGenus($id){
+    $species_list = $this->catalog_model->getSpeciesListInGenus($id);
+
+    $pagination_result = $this->setPagination();
+
+    $data['search'] = $this->search;
+    $data['section'] = $this->section;
+    $data['total_items'] = $this->total_items;
+    $data['pageTitle'] = $this->pageTitle;
+    //$data['category'] = $this->category;
+    $data['pagination'] = $pagination_result['pagination'];
+    $data['catalog'] = $species_list;
+    $this->load->view('inc/header');
+    $this->load->view('bootstrap/catalog_view',$data);
+    $this->load->view('inc/footer');
+
+    // echo '<pre>';
+    // var_dump($species_list);
+    // exit;
+    // echo '</pre>';
+  }
+
+
+
 
 }
