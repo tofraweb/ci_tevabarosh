@@ -22,6 +22,10 @@ Class Catalog_model extends CI_Model
         return $count;
     }
 
+    public function get_results_count($table= null, $id){
+
+    }
+
     public function full_catalog_array($limit = null, $offset = 0){
         try{
             $sql = "SELECT id,name_he,name_lat,name_hu, category_id, picture
@@ -228,42 +232,7 @@ Class Catalog_model extends CI_Model
             exit;
         }
         $species = $result->result();
-        // echo '<pre>';
-        // var_dump($species);
-        // exit;
-        // echo '</pre>';
         return $species;
     }
 
-/*
-    public function full_genre_array($category = null){
-        $category = strtolower($category);
-      //  include("connection.php");
-        try{
-            $sql = "SELECT genre, category"
-                . " FROM Genres "
-                . " JOIN Genre_Categories "
-                . " ON Genres.genre_id = Genre_Categories.genre_id ";
-            if(!empty($category)){
-                $results = $this->db->prepare($sql
-                    ." WHERE LOWER(category) = ?"
-                    ." ORDER BY genre");
-                $results->bindParam(1,$category,PDO::PARAM_STR);
-            }else{
-                $results = $this->db->prepare($sql ." ORDER BY genre");
-            }
-            $results->execute();
-        }catch(Exception $e){
-            echo "Unable to retrieve results";
-            exit;
-        }
-        $genres = array();
-        while($row = $results->fetch(PDO::FETCH_ASSOC)){
-            //check explanation video - 05:46 min
-            //https://teamtreehouse.com/library/integrating-php-with-databases/limiting-records-in-sql/simplifying-with-a-function
-            $genres[$row["category"]][] = $row["genre"];
-        }
-        return $genres;
-    }
-*/
 }
