@@ -22,7 +22,7 @@
                 <ol class="breadcrumb">
                     <li><a href="<?php echo base_url();?>">בית</a></li>
                     <?php if($order->name_he) { ?><li><a href="<?php echo base_url();?>catalog/getSpeciesInOrder/<?php echo $order->id;?>"><?php echo $order->name_he;?></a></li><?php } ?>
-                    <?php if($family->name_he) { ?><li><a href="<?php echo base_url();?>catalog/getGenusListInFamily/<?php echo $family->id;?>"><?php echo $family->name_he;?></a></li><?php } ?>
+                    <?php if($family->name_he) { ?><li><a href="<?php echo base_url();?>catalog/getSpeciesListInFamily/<?php echo $family->id;?>"><?php echo $family->name_he;?></a></li><?php } ?>
                     <?php if($genus->name_he) { ?><li><a href="<?php echo base_url();?>catalog/getSpeciesListInGenus/<?php echo $genus->id;?>"><?php echo $genus->name_he;?></a></li><?php } ?>
                     <li class="active"><?php echo $species[0]->name_he;?></li>
                 </ol>

@@ -179,34 +179,39 @@ class Catalog extends CI_Controller {
     // echo '</pre>';
   }
 
-  public function getGenusListInFamily($id){
+  public function getSpeciesListInFamily($id){
 
     $genus_list = $this->catalog_model->getGenusListInFamily($id);
-    //  echo '<pre>';
-    //  var_dump($genus_list);
-    //  exit;
-    //  echo '</pre>';
     $genus_id_array = array();
     foreach ($genus_list as $genus=>$species) {
       $genus_id_array[] = $species->id;
     }
-      // echo '<pre>';
-      // var_dump($genus_id_array);
-      // exit;
-      // echo '</pre>';
-    $genus_array = array();
+    $species_list = array();
+    $temp_a = array();
     for($i = 0; $i < count($genus_id_array); $i++) {
-      $genus_array[] = $this->catalog_model->getSpeciesListInGenus($genus_id_array[$i]);
+      $temp_a = $this->catalog_model->getSpeciesListInGenus($genus_id_array[$i]);
+      for($j = 0; $j < count($temp_a); $j++ ){
+        $species_list[] = $temp_a[$j];
+      }
     }
 
-    echo '<pre>';
-    var_dump($genus_array);
-    exit;
-    echo '</pre>';
+    // echo '<pre>';
+    // var_dump($species_list);
+    // exit;
+    // echo '</pre>';
 
-    $genus_count = count($genus_list);
-    $pagination_result = $this->setPagination($genus_count);
+    $species_count = count($species_list);
+    $pagination_result = $this->setPagination($species_count);
 
+    $data['search'] = $this->search;
+    $data['section'] = $this->section;
+    $data['total_items'] = $this->total_items;
+    $data['pageTitle'] = $this->pageTitle;
+    $data['pagination'] = $pagination_result['pagination'];
+    $data['catalog'] = $species_list;
+    $this->load->view('inc/header');
+    $this->load->view('bootstrap/catalog_view',$data);
+    $this->load->view('inc/footer');
   }
 
   public function getSpeciesListInGenus($id){

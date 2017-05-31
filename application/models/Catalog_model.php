@@ -213,7 +213,7 @@ Class Catalog_model extends CI_Model
 
     public function getGenusListInFamily($id) {
       try{
-          $sql = "SELECT * FROM genus WHERE family_id = ?";
+          $sql = "SELECT id, family_id, name_he FROM genus WHERE family_id = ?";
           $result = $this->db->query($sql,$id);
         }catch(Exception $e){
             echo "Unable to retrieve results";
