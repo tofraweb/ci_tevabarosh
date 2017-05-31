@@ -157,6 +157,7 @@ class Catalog extends CI_Controller {
     $family = $this->catalog_model->get_family($genus->family_id);
     $order = $this->catalog_model->get_order($family->order_id);
     $session_data = $this->session->userdata('logged_in');
+
     $data['species'] = $species;
     $data['pictures'] = $pictures;
     $data['genus'] = $genus;
@@ -169,36 +170,69 @@ class Catalog extends CI_Controller {
   }
 
  //not ready yet
-  public function getSpeciesInOrder($id){
-    $family_list_in_order = $this->catalog_model->getFamilyListInOrder($id);
-    $genus_list_in_family = $this->catalog_model->getGenusListInFamily($family_list_in_order[0]->id);
-    $species_list_in_genus = $this->catalog_model->getSpeciesListInGenus($genus_list_in_family[0]->id);
-    // echo '<pre>';
-    // var_dump($species_list_in_genus);
-    // exit;
-    // echo '</pre>';
+  public function getSpeciesListInOrder($id){
+    $family_arr = array();
+    $genus_arr = array();
+    $species_list = array();
+    $temp_a = array();
+    $family_arr = $this->catalog_model->getFamilyListInOrder($id);
+    $family_id_array = array();
+
+    foreach ($family_arr as $key=>$family) {
+      $family_id_array[] = $family->id;
+    }
+
+    for($i=0; $i<count($family_id_array); $i++){
+      $temp_a = $this->catalog_model->getGenusListInFamily($family_id_array[$i]);
+      for($j=0; $j<count($temp_a); $j++){
+        $genus_arr[] = $temp_a[$j];
+      }
+    }
+
+    foreach ($genus_arr as $key=>$genus) {
+      $genus_id_array[] = $genus->id;
+    }
+
+    for($i=0; $i<count($genus_id_array); $i++){
+      $temp_a = $this->catalog_model->getSpeciesListInGenus($genus_id_array[$i]);
+      for($j=0; $j<count($temp_a); $j++){
+        $species_list[] = $temp_a[$j];
+      }
+    }
+
+    //  echo '<pre>';
+    //  var_dump($species_list);
+    //  exit;
+    //  echo '</pre>';
+    $species_count = count($species_list);
+    $pagination_result = $this->setPagination($species_count);
+
+    $data['search'] = $this->search;
+    $data['section'] = $this->section;
+    $data['total_items'] = $this->total_items;
+    $data['pageTitle'] = $this->pageTitle;
+    $data['pagination'] = $pagination_result['pagination'];
+    $data['catalog'] = $species_list;
+    $this->load->view('inc/header');
+    $this->load->view('bootstrap/catalog_view',$data);
+    $this->load->view('inc/footer');
   }
 
   public function getSpeciesListInFamily($id){
 
     $genus_list = $this->catalog_model->getGenusListInFamily($id);
-    $genus_id_array = array();
+    $species_id_array = array();
     foreach ($genus_list as $genus=>$species) {
-      $genus_id_array[] = $species->id;
+      $species_id_array[] = $species->id;
     }
     $species_list = array();
     $temp_a = array();
-    for($i = 0; $i < count($genus_id_array); $i++) {
-      $temp_a = $this->catalog_model->getSpeciesListInGenus($genus_id_array[$i]);
+    for($i = 0; $i < count($species_id_array); $i++) {
+      $temp_a = $this->catalog_model->getSpeciesListInGenus($species_id_array[$i]);
       for($j = 0; $j < count($temp_a); $j++ ){
         $species_list[] = $temp_a[$j];
       }
     }
-
-    // echo '<pre>';
-    // var_dump($species_list);
-    // exit;
-    // echo '</pre>';
 
     $species_count = count($species_list);
     $pagination_result = $this->setPagination($species_count);
