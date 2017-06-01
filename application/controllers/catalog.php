@@ -2,7 +2,8 @@
 
 class Catalog extends CI_Controller {
 
-  public $pageTitle = "קטלוג מלא";
+  public $pageTitle = '';
+  public $subTitle = '';
   public $section = null;
   public $items_per_page = 9;
   public $search = null;
@@ -40,6 +41,10 @@ class Catalog extends CI_Controller {
               $this->pageTitle = $this->category->name;
               $this->section = 4;
               break;
+              case '5':
+                $this->pageTitle = $this->category->name;
+                $this->section = 5;
+                break;
             default:
               # code...
               break;
@@ -66,7 +71,11 @@ class Catalog extends CI_Controller {
       $data['section'] = $this->section;
       $data['total_items'] = $this->total_items;
       $data['pageTitle'] = $this->pageTitle;
-      $data['pagination'] = $pagination_result['pagination'];
+      if($this->total_items > $this->items_per_page){
+        $data['pagination'] = $pagination_result['pagination'];
+      }else{
+        $data['pagination'] = null;
+      }
       $data['catalog'] = $pagination_result['catalog'];
       $this->load->view('inc/header');
       $this->load->view('bootstrap/catalog_view',$data);
@@ -211,7 +220,8 @@ class Catalog extends CI_Controller {
     $data['section'] = $this->section;
     $data['total_items'] = $this->total_items;
     $data['pageTitle'] = $this->pageTitle;
-    $data['pagination'] = $pagination_result['pagination'];
+    $data['pageTitle'] = $this->catalog_model->get_classification_name($id, 'orders')->name_he;
+    $data['pagination'] = null;
     $data['catalog'] = $species_list;
     $this->load->view('inc/header');
     $this->load->view('bootstrap/catalog_view',$data);
@@ -241,7 +251,8 @@ class Catalog extends CI_Controller {
     $data['section'] = $this->section;
     $data['total_items'] = $this->total_items;
     $data['pageTitle'] = $this->pageTitle;
-    $data['pagination'] = $pagination_result['pagination'];
+    $data['pageTitle'] = $this->catalog_model->get_classification_name($id, 'family')->name_he;
+    $data['pagination'] = null;
     $data['catalog'] = $species_list;
     $this->load->view('inc/header');
     $this->load->view('bootstrap/catalog_view',$data);
@@ -257,8 +268,8 @@ class Catalog extends CI_Controller {
     $data['search'] = $this->search;
     $data['section'] = $this->section;
     $data['total_items'] = $this->total_items;
-    $data['pageTitle'] = $this->pageTitle;
-    $data['pagination'] = $pagination_result['pagination'];
+    $data['pageTitle'] = $this->catalog_model->get_classification_name($id, 'genus')->name_he;
+    $data['pagination'] = null;
     $data['catalog'] = $species_list;
     $this->load->view('inc/header');
     $this->load->view('bootstrap/catalog_view',$data);

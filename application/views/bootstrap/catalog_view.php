@@ -5,14 +5,14 @@
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">קטלוג מלא
-                    <small><?php echo $pageTitle; ?></small>
-                </h1>
-                <ol class="breadcrumb">
-                    <li><a href="index.html">Home</a>
-                    </li>
-                    <li class="active">Three Column Portfolio</li>
-                </ol>
+                <?php
+                if($pageTitle) { ?>
+                <div class="panel-heading">
+                  <h1 class="page-header"><?php echo $pageTitle; ?>
+                      <small><?php echo $subTitle; ?></small>
+                  </h1>
+                </div>
+                <?php } ?>
             </div>
         </div>
         <!-- /.row -->
@@ -27,12 +27,6 @@
               <h3><?php
                   if($search != null){
                       echo "תוצאות חיפוש עבור ביטוי - \"".htmlspecialchars($search)."\"";
-                  }else{
-                      if($section != null){ ?>
-                          <a href = "<?php echo base_url();?>index.php/catalog">קטלוג המלא</a> &gt;&gt;
-                      <?php
-                      echo $pageTitle ;
-                    }
                   }?>
               </h3>
               <?php
@@ -40,14 +34,16 @@
                   echo "<p>לא נמצאו תוצאות עבור הביטוי שחיפשת</p>";
                   echo "<p>חפש שוב או  <a href=\"index.php/catalog\">נסה את האטלוג המלא</a></p>";
               }else{
-              echo $pagination.'<hr>';?>
+              if($pagination){
+                echo $pagination.'<hr>';
+              }?>
               <!-- Tab panes -->
               <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="hebrew">
                   <?php foreach ($catalog as $species) {?>
                     <div class="col-md-4 img-portfolio">
                         <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>">
-                            <img class="img-responsive img-hover img-rounded img-thumbnail" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
+                            <img class="img-hover img-rounded img-species img-thumbnail" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
                         </a>
                         <h3>
                             <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>"><?php echo $species->name_he;?></a>
@@ -81,6 +77,9 @@
                 </div>
             </div>
             <?php } ?>
-            <?php echo '<hr>'.$pagination; ?>
+            <?php if($pagination){
+              echo '<hr>'.$pagination;
+            }?>
+
         </div>
         <hr>

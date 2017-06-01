@@ -199,6 +199,18 @@ Class Catalog_model extends CI_Model
         return $category_name[0];
     }
 
+    public function get_classification_name($id, $table){
+      try{
+          $sql = "SELECT name_he FROM $table WHERE id = ?";
+          $result = $this->db->query($sql,$id);
+        }catch(Exception $e){
+            echo "Unable to retrieve results";
+            exit;
+        }
+        $classification_name = $result->result();
+        return $classification_name[0];
+    }
+
     public function getFamilyListInOrder($id) {
       try{
           $sql = "SELECT * FROM family WHERE order_id = ?";

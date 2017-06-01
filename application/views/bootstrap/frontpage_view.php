@@ -57,7 +57,7 @@
 		<div class="container">
 
     <!-- Marketing Icons Section -->
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
               על צמחים וציפורים
@@ -96,14 +96,14 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- /.row -->
 
     <!-- Random From Portfolio -->
     <div class="row">
         <div class="col-lg-12">
             <h2 class="page-header">
-                תמונות מובחרות
+              על צמחים וציפורים
             </h2>
         </div>
         <?php

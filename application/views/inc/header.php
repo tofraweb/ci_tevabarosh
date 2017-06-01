@@ -35,7 +35,7 @@
 
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -50,7 +50,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
+                    <!-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">פורטפוליו <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
@@ -66,8 +66,8 @@
                                 <a href="<?php echo base_url();?>page/dynamicPage/portfolio_4_col/12">פרוטפוליו 4 עמודים</a>
                             </li>
                         </ul>
-                    </li>
-                    <li class="dropdown">
+                    </li> -->
+                    <!-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">בלוג <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
@@ -80,8 +80,8 @@
                                 <a href="<?php echo base_url();?>page/staticPage/blog_post">בלוג - פוסט</a>
                             </li>
                         </ul>
-                    </li>
-                    <li class="dropdown">
+                    </li> -->
+                    <!-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">עמודים מיוחדים <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
@@ -100,13 +100,13 @@
                                 <a href="<?php echo base_url();?>page/staticPage/pricing">טבלאות תמחור</a>
                             </li>
                         </ul>
+                    </li> -->
+                    <li>
+                        <a href="<?php echo base_url();?>catalog/?cat=2">ציפורים</a>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">בסיס נתונים<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">צמחים<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li>
-                                <a href="<?php echo base_url();?>catalog/?cat=2">ציפורים</a>
-                            </li>
                             <li>
                                 <a href="<?php echo base_url();?>catalog/?cat=3">צמחי גינה</a>
                             </li>
@@ -117,11 +117,14 @@
                                 <a href="<?php echo base_url();?>catalog/?cat=1">פרחי שדה</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url();?>species/newSpecies">הוסף ציפור וצמח</a>
+                                <a href="<?php echo base_url();?>catalog/?cat=5">עצים ושיחים</a>
                             </li>
                         </ul>
                     </li>
                     <li>
+                        <a href="<?php echo base_url();?>">הגן שלי</a>
+                    </li>
+                    <!-- <li>
                         <a href="<?php echo base_url();?>page/staticPage/about">מי אנחנו</a>
                     </li>
                     <li>
@@ -129,19 +132,17 @@
                     </li>
                     <li>
                         <a href="<?php echo base_url();?>page/staticPage/contact">צור קשר</a>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="<?php echo base_url();?>admin">ניהול</a>
                     </li>
-                    <li>
-                      <div style="margin-top: 15px;margin-right: 15px; ">
-                        <form method="get" action="<?php echo base_url();?>catalog">
-                          <input type="text" name="s" id="s" />
-                          <input type="submit" value="חפש" />
-                        </form>
-                      </div>
-                    </li>
                 </ul>
+                <div style="margin-top: 15px;margin-right: 15px; float:left; ">
+                  <form method="get" action="<?php echo base_url();?>catalog">
+                    <input type="text" name="s" id="s" />
+                    <input type="submit" value="חפש" />
+                  </form>
+                </div>
             </div>
             <!-- /.navbar-collapse -->
         </div>
