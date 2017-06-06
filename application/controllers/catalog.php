@@ -166,20 +166,22 @@ class Catalog extends CI_Controller {
     $family = $this->catalog_model->get_family($genus->family_id);
     $order = $this->catalog_model->get_order($family->order_id);
     $session_data = $this->session->userdata('logged_in');
-
+    $species_in_order = $this->getSpeciesListInOrder($family->order_id, true);
+    $random_species = array_slice($species_in_order, 0, 4);
+    
     $data['species'] = $species;
     $data['pictures'] = $pictures;
     $data['genus'] = $genus;
     $data['family'] = $family;
     $data['order'] = $order;
     $data['logged_in'] = $session_data;
+    $data['random_species'] = $random_species;
     $this->load->view('inc/header');
     $this->load->view('bootstrap/portfolio_species_view',$data);
     $this->load->view('inc/footer');
   }
 
- //not ready yet
-  public function getSpeciesListInOrder($id){
+  public function getSpeciesListInOrder($id, $return_array = null){
     $family_arr = array();
     $genus_arr = array();
     $species_list = array();
@@ -209,23 +211,24 @@ class Catalog extends CI_Controller {
       }
     }
 
-    //  echo '<pre>';
-    //  var_dump($species_list);
-    //  exit;
-    //  echo '</pre>';
-    $species_count = count($species_list);
-    $pagination_result = $this->setPagination($species_count);
+    if(!$return_array){
 
-    $data['search'] = $this->search;
-    $data['section'] = $this->section;
-    $data['total_items'] = $this->total_items;
-    $data['pageTitle'] = $this->pageTitle;
-    $data['pageTitle'] = $this->catalog_model->get_classification_name($id, 'orders')->name_he;
-    $data['pagination'] = null;
-    $data['catalog'] = $species_list;
-    $this->load->view('inc/header');
-    $this->load->view('bootstrap/catalog_view',$data);
-    $this->load->view('inc/footer');
+      $species_count = count($species_list);
+      $pagination_result = $this->setPagination($species_count);
+
+      $data['search'] = $this->search;
+      $data['section'] = $this->section;
+      $data['total_items'] = $this->total_items;
+      $data['pageTitle'] = $this->pageTitle;
+      $data['pageTitle'] = $this->catalog_model->get_classification_name($id, 'orders')->name_he;
+      $data['pagination'] = null;
+      $data['catalog'] = $species_list;
+      $this->load->view('inc/header');
+      $this->load->view('bootstrap/catalog_view',$data);
+      $this->load->view('inc/footer');
+    }else{
+      return $species_list;
+    }
   }
 
   public function getSpeciesListInFamily($id){

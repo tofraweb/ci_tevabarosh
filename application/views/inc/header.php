@@ -45,7 +45,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <div class = "logo-text"><a href="<?php echo base_url();?>">טבע בראש</a></div>
+                <div class = "logo-text"><a href="<?php echo base_url();?>"><img class="logo-img" src="<?php echo base_url();?>assets/tevabarosh_logo_green.png" alt=""></a></div>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

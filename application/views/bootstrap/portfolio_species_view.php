@@ -43,9 +43,9 @@
 
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active" style="width:33%;"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">מידע מדעי</a></li>
-            <li role="presentation" style="width:33%;"><a href="#pictures" aria-controls="pictures" role="tab" data-toggle="tab">תמונות</a></li>
-            <li role="presentation" style="width:33%;"><a href="#slider" aria-controls="slider" role="tab" data-toggle="tab">סלידר</a></li>
+            <li role="presentation" class="active" style="width:50%;"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">מידע מדעי</a></li>
+            <li role="presentation" style="width:50%;"><a href="#pictures" aria-controls="pictures" role="tab" data-toggle="tab">תמונות</a></li>
+            <!-- <li role="presentation" style="width:33%;"><a href="#slider" aria-controls="slider" role="tab" data-toggle="tab">סלידר</a></li> -->
           </ul>
           <!-- Tab panes -->
           <div class="tab-content">
@@ -109,19 +109,19 @@
               </div>
               <!-- /.row -->
             </div>
-            <div role="tabpanel" class="tab-pane" id="slider">
-              <div id="speciesCarousel" class="carousel slide">
+            <!-- <div role="tabpanel" class="tab-pane" id="slider">
+              <div id="speciesCarousel" class="carousel slide"> -->
                   <!-- Indicators -->
-                  <ol class="carousel-indicators">
+                  <!-- <ol class="carousel-indicators">
                       <li data-target="#speciesCarousel" data-slide-to="0" class="active"></li>
                       <li data-target="#speciesCarousel" data-slide-to="1"></li>
                       <li data-target="#speciesCarousel" data-slide-to="2"></li>
                       <li data-target="#speciesCarousel" data-slide-to="3"></li>
                       <li data-target="#speciesCarousel" data-slide-to="4"></li>
-                  </ol>
+                  </ol> -->
 
                   <!-- Wrapper for slides -->
-                  <div class="carousel-inner">
+                  <!-- <div class="carousel-inner">
                       <div class="item active">
                           <div class="fill" style="background-image:url('<?php echo base_url();?>assets/img/media/upload/slider/IMG_1360-s.jpg');"></div>
                           <div class="carousel-caption">
@@ -152,16 +152,16 @@
                               <h2></h2>
                           </div>
                       </div>
-                  </div>
+                  </div> -->
 
                   <!-- Controls -->
-                  <a class="right carousel-control" href="#speciesCarousel" data-slide="prev">
+                  <!-- <a class="right carousel-control" href="#speciesCarousel" data-slide="prev">
                       <span class="icon-prev"></span>
                   </a>
                   <a class="left carousel-control" href="#speciesCarousel" data-slide="next">
                       <span class="icon-next"></span>
-                  </a>
-              </div>
+                  </a> -->
+              <!-- </div> -->
           </div>
 
         </div>
@@ -169,34 +169,21 @@
         <!-- Related Projects Row -->
         <div class="row">
 
-            <div class="col-lg-12">
-                <h3 class="page-header">Related Projects</h3>
+            <div class="col-lg-12" style="margin-top:10px; margin-bottom:10px">
+                <h3 class="page-header" style="padding-top:5px">עוד מינים מאותה סדרה</h3>
             </div>
-
+            <?php
+            foreach($random_species as $sp) {
+            ?>
             <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive img-hover img-related" src="http://placehold.it/500x300" alt="">
+                <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $sp->id;?>">
+                    <img class="img-responsive img-rounded img-hover img-related" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $sp->picture;?>" alt="">
                 </a>
             </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive img-hover img-related" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive img-hover img-related" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive img-hover img-related" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
+            <?php } ?>
         </div>
         <!-- /.row -->
+        <div class="row">
+          <p style="text-align:center;"><a href="<?php echo base_url();?>catalog/getSpeciesListInOrder/<?php echo $order->id;?>">ראה כל המינים בסדרה</a></p>
+        </div>
         <hr>
