@@ -20,11 +20,12 @@
         <div class="row">
           <div class="col-md-12">
             <h2 class="page-header"><?php echo $species[0]->name_he;?>
-                <small> - <?php echo $species[0]->name_hu;?></small>
-                <small> - <?php echo $species[0]->name_lat;?></small>
+                <?php if(!$is_mobile) { ?><small> - <?php echo $species[0]->name_hu;?></small><?php } ?>
+                <small><?php if(!$is_mobile) { ?> - <?php } ?><?php echo $species[0]->name_lat;?></small>
             </h2>
           </div>
         </div>
+        <?php if(!$is_mobile) { ?>
         <div class="row">
             <div class="col-lg-12">
                 <ol class="breadcrumb">
@@ -36,6 +37,7 @@
                 </ol>
             </div>
         </div>
+        <?php } ?>
         <!-- /.row -->
 
 
@@ -53,36 +55,43 @@
               <div class="col-md-6">
                 <div class="table-responsive">
                   <table class = "table table-bordered" style="width:100% !important">
-                    <tr "border:solid 1px">
-                      <th class="info" style="text-align:center">
-                      <?php if($logged_in){ ?>
-                        <small><a target="_blank" href="<?php echo base_url();?>admin/species_management/edit/<?php echo $species[0]->id;?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></small>
-                      <?php } ?></th>
-                      <th class="info" style="text-align:center"><?php echo $species[0]->name_he;?></td>
-                      <th class="info" style="text-align:center"><?php echo $species[0]->name_lat;?></td>
-                      <th class="info" style="text-align:center"><?php echo $species[0]->name_hu;?></td>
+                    <!-- <tr "border:solid 1px">
+                      <th class="info" style="text-align:center"></th>
+                      <th class="info" style="text-align:center"><?php echo $species[0]->name_he;?></th>
+                      <th class="info" style="text-align:center"><?php echo $species[0]->name_lat;?></th>
+                      <th class="info" style="text-align:center"><?php echo $species[0]->name_hu;?></th>
+                    </tr> -->
+                    <tr>
+                      <th class="info" style="text-align:right">שם
+                        <?php if($logged_in){ ?>
+                          <small><a target="_blank" href="<?php echo base_url();?>admin/species_management/edit/<?php echo $species[0]->id;?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></small>
+                        <?php } ?>
+                      </th>
+                      <td style="text-align:center; color: #629432"><b><?php echo $species[0]->name_he;?></b></td>
+                      <td style="text-align:center; color: #629432"><b><?php echo $species[0]->name_lat;?></b></td>
+                      <?php if(!$is_mobile) { ?><td style="text-align:center; color: #629432"><b><?php echo $species[0]->name_hu;?></b></td><?php } ?>
                     </tr>
                     <tr>
                       <th class="info" style="text-align:right">סוג</th>
                       <td style="text-align:center"><a href="<?php echo base_url();?>catalog/getSpeciesListInGenus/<?php echo $genus->id;?>"><?php echo $genus->name_he;?></a></td>
                       <td style="text-align:center"><?php echo $genus->name_lat;?></td>
-                      <td style="text-align:center"><?php echo $genus->name_hu;?></td>
+                      <?php if(!$is_mobile) { ?><td style="text-align:center"><?php echo $genus->name_hu;?></td><?php } ?>
                     </tr>
                     <tr>
                       <th class="info" style="text-align:right">משפחה</th>
                       <td style="text-align:center"><a href="<?php echo base_url();?>catalog/getSpeciesListInFamily/<?php echo $family->id;?>"><?php echo $family->name_he;?></a></td>
                       <td style="text-align:center"><?php echo $family->name_lat;?></td>
-                      <td style="text-align:center"><?php echo $family->name_hu;?></td>
+                      <?php if(!$is_mobile) { ?><td style="text-align:center"><?php echo $family->name_hu;?></td><?php } ?>
                     </tr>
                     <tr>
                       <th class="info" style="text-align:right">סדרה</th>
                       <td style="text-align:center"><a href="<?php echo base_url();?>catalog/getSpeciesListInOrder/<?php echo $order->id;?>"><?php echo $order->name_he;?></a></td>
                       <td style="text-align:center"><?php echo $order->name_lat;?></td>
-                      <td style="text-align:center"><?php echo $order->name_hu;?></td>
+                      <?php if(!$is_mobile) { ?><td style="text-align:center"><?php echo $order->name_hu;?></td><?php } ?>
                     </tr>
                   </table>
-                  <p style="text-align:center;"><a class="btn btn-info" href="javascript:history.back()">חזרה</a></p>
                 </div>
+                <p style="text-align:center; margin-top: 10px;"><a class="btn btn-info" href="javascript:history.back()">חזרה</a></p>
               <div>
                   <?php if(!empty($species[0]->description)) { ?>
                   <h4 style="background-color:#d9edf7">תיאור קצר</h4>
@@ -183,7 +192,4 @@
             <?php } ?>
         </div>
         <!-- /.row -->
-        <div class="row">
-          <p style="text-align:center;"><a href="<?php echo base_url();?>catalog/getSpeciesListInOrder/<?php echo $order->id;?>">ראה כל המינים בסדרה</a></p>
-        </div>
         <hr>

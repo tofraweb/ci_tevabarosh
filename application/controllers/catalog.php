@@ -16,6 +16,7 @@ class Catalog extends CI_Controller {
   {
     parent::__construct();
     $this->load->model('catalog_model','',TRUE);
+    $this->load->library('user_agent');
   }
 
   public function index()
@@ -199,6 +200,7 @@ class Catalog extends CI_Controller {
     $data['order'] = $order;
     $data['logged_in'] = $session_data;
     $data['random_species'] = $species_in_order;
+    $data['is_mobile'] = $this->agent->is_mobile();
     $this->load->view('inc/header');
     $this->load->view('bootstrap/portfolio_species_view',$data);
     $this->load->view('inc/footer');
