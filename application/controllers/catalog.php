@@ -159,7 +159,26 @@ class Catalog extends CI_Controller {
     $this->load->view('inc/footer');
   }
 
+  public function getRandomSpeciesFromArray($species, $current_species_id, $limit = 4){
+    $rand_numbers = array();
+
+    while(count($rand_numbers) < $limit && count($rand_numbers) < (count($species)-1)){
+      $rand_id = array_rand($species);
+      if($species[$rand_id]->id != $current_species_id && in_array($rand_id, $rand_numbers) == false){
+          $rand_numbers[] = $rand_id;
+      }
+    }
+
+
+    $random_species  = array();
+    for($i=0; $i<count($rand_numbers); $i++){
+      $random_species [] = $species[$rand_numbers[$i]];
+    }
+    return $random_species;
+  }
+
   public function getSpecies($id){
+    $limit = 4;
     $species = $this->catalog_model->single_species_array($id);
     $pictures = $this->catalog_model->get_pictures($id);
     $genus = $this->catalog_model->get_genus($id);
@@ -167,15 +186,19 @@ class Catalog extends CI_Controller {
     $order = $this->catalog_model->get_order($family->order_id);
     $session_data = $this->session->userdata('logged_in');
     $species_in_order = $this->getSpeciesListInOrder($family->order_id, true);
-    $random_species = array_slice($species_in_order, 0, 4);
-    
+    if(count($species_in_order) > 1){
+      $species_in_order = $this->getRandomSpeciesFromArray($species_in_order, $id, $limit);
+    }else{
+      $species_in_order = null;
+    }
+
     $data['species'] = $species;
     $data['pictures'] = $pictures;
     $data['genus'] = $genus;
     $data['family'] = $family;
     $data['order'] = $order;
     $data['logged_in'] = $session_data;
-    $data['random_species'] = $random_species;
+    $data['random_species'] = $species_in_order;
     $this->load->view('inc/header');
     $this->load->view('bootstrap/portfolio_species_view',$data);
     $this->load->view('inc/footer');

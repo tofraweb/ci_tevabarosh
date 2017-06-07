@@ -170,7 +170,7 @@
         <div class="row">
 
             <div class="col-lg-12" style="margin-top:10px; margin-bottom:10px">
-                <h3 class="page-header" style="padding-top:5px">עוד מינים מאותה סדרה</h3>
+                <h3 class="page-header" style="padding-top:5px">עוד מינים מסדרת <a href="<?php echo base_url();?>catalog/getSpeciesListInOrder/<?php echo $order->id;?>"><?php echo $order->name_he;?></a></h3>
             </div>
             <?php
             foreach($random_species as $sp) {
