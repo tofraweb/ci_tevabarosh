@@ -25,8 +25,9 @@ class Admin extends CI_Controller {
 
 	}
 
-	public function _example_output($output = null)
+	public function _example_output($output = null, $title = 'ניהול')
 	{
+		$_SESSION['title'] = $title;
 		$this->load->view('admin_view.php',(array)$output);
 	}
 
@@ -41,7 +42,7 @@ class Admin extends CI_Controller {
 	{
 		$output = $this->grocery_crud->render();
 
-		$this->_example_output($output);
+		$this->_example_output($output, 'סדרה');
 	}
 
 	public function pictures_management()
@@ -61,7 +62,7 @@ class Admin extends CI_Controller {
 
 			$output = $crud->render();
 
-			$this->_example_output($output);
+			$this->_example_output($output, 'תמונות');
 
 		}catch(Exception $e){
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
@@ -83,7 +84,7 @@ class Admin extends CI_Controller {
 
 			$output = $crud->render();
 
-			$this->_example_output($output);
+			$this->_example_output($output, 'משפחה');
 
 		}catch(Exception $e){
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
@@ -105,7 +106,7 @@ class Admin extends CI_Controller {
 
 			$output = $crud->render();
 
-			$this->_example_output($output);
+			$this->_example_output($output, 'סוג');
 
 		}catch(Exception $e){
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
@@ -132,7 +133,7 @@ class Admin extends CI_Controller {
 
 			$output = $crud->render();
 
-			$this->_example_output($output);
+			$this->_example_output($output, 'מינים');
 
 		}catch(Exception $e){
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
@@ -176,7 +177,7 @@ class Admin extends CI_Controller {
 
 			$output = $crud->render();
 
-			$this->_example_output($output);
+			$this->_example_output($output, 'אפיון צמחים');
 
 		}catch(Exception $e){
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());

@@ -104,9 +104,12 @@
                   <table class = "table table-bordered table-striped " style="width:100% !important">
                     <tr>
                       <th class="info" style="text-align:right; width:20%;">תנאי אור
-                        <?php if($logged_in){ ?>
+                        <?php if($logged_in){
+                            if($properties->id){ ?>
                           <small><a target="_blank" href="<?php echo base_url();?>admin/plant_properties_management/edit/<?php echo $properties->id;?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></small>
-                        <?php } ?>
+                        <?php } else { ?>
+                          <small><a target="_blank" href="<?php echo base_url();?>admin/plant_properties_management/add"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></small>
+                        <?php } } ?>
                       </th>
                       <td style="text-align:center"><?php echo $properties->light_conditions;?></td>
                     </tr>

@@ -10,6 +10,7 @@ foreach($css_files as $file): ?>
 <?php foreach($js_files as $file): ?>
 	<script src="<?php echo $file; ?>"></script>
 <?php endforeach; ?>
+<title><?php echo $_SESSION['title'];?></title>
 </head>
 <body>
 	<div>
@@ -34,7 +35,8 @@ foreach($css_files as $file): ?>
 	</div>
 	<div style='height:20px;'></div>
     <div>
-		<?php echo $output; ?>
+		<?php
+		echo $output; ?>
     </div>
 </body>
 </html>
