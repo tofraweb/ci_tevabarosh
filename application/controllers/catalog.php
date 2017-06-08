@@ -23,7 +23,7 @@ class Catalog extends CI_Controller {
   {
       if(isset($_GET['cat'])){
 
-          $this->category = $this->catalog_model->get_category_name($_GET['cat']);
+          $this->category = $this->catalog_model->get_category_details($_GET['cat']);
 
           switch ($_GET['cat']) {
             case '1':
@@ -185,8 +185,10 @@ class Catalog extends CI_Controller {
     $genus = $this->catalog_model->get_genus($id);
     $family = $this->catalog_model->get_family($genus->family_id);
     $order = $this->catalog_model->get_order($family->order_id);
+    $species_category = $this->catalog_model->get_category_details($species[0]->category_id);
     $session_data = $this->session->userdata('logged_in');
     $species_in_order = $this->getSpeciesListInOrder($family->order_id, true);
+    $species_properties = $this->catalog_model->get_species_properties($id, $species_category->type);
     if(count($species_in_order) > 1){
       $species_in_order = $this->getRandomSpeciesFromArray($species_in_order, $id, $limit);
     }else{
@@ -201,6 +203,8 @@ class Catalog extends CI_Controller {
     $data['logged_in'] = $session_data;
     $data['random_species'] = $species_in_order;
     $data['is_mobile'] = $this->agent->is_mobile();
+    $data['category'] = $species_category;
+    $data['properties'] = $species_properties;
     $this->load->view('inc/header');
     $this->load->view('bootstrap/portfolio_species_view',$data);
     $this->load->view('inc/footer');

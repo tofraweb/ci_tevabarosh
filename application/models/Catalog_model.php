@@ -95,6 +95,8 @@ Class Catalog_model extends CI_Model
     }
 
 
+
+
     public function search_catalog_array($search, $limit = null, $offset = 0){
 
         try{
@@ -187,16 +189,16 @@ Class Catalog_model extends CI_Model
         return $order[0];
     }
 
-    public function get_category_name($id){
+    public function get_category_details($id){
       try{
-          $sql = "SELECT name FROM categories WHERE id = ?";
+          $sql = "SELECT * FROM categories WHERE id = ?";
           $result = $this->db->query($sql,$id);
         }catch(Exception $e){
             echo "Unable to retrieve results";
             exit;
         }
-        $category_name = $result->result();
-        return $category_name[0];
+        $category_details = $result->result();
+        return $category_details[0];
     }
 
     public function get_classification_name($id, $table){
@@ -207,6 +209,28 @@ Class Catalog_model extends CI_Model
             echo "Unable to retrieve results";
             exit;
         }
+        $classification_name = $result->result();
+        return $classification_name[0];
+    }
+
+    public function get_species_properties($id, $type){
+      if($type == 1){
+        try{
+            $sql = "SELECT * FROM plant_properties WHERE species_id = ?";
+            $result = $this->db->query($sql,$id);
+          }catch(Exception $e){
+              echo "Unable to retrieve results";
+              exit;
+          }
+      }else{
+        try{
+            $sql = "SELECT * FROM plant_properties WHERE species_id = ?";
+            $result = $this->db->query($sql,$id);
+          }catch(Exception $e){
+              echo "Unable to retrieve results";
+              exit;
+          }
+      }
         $classification_name = $result->result();
         return $classification_name[0];
     }

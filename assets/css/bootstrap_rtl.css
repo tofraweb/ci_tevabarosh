@@ -1425,8 +1425,7 @@ a.bg-danger:focus {
 }
 .page-header {
   padding-bottom: 9px;
-  margin: 40px 0 20px;
-  border-bottom: 1px solid #eee;
+  margin: 10px 0 20px;
 }
 ul,
 ol {
@@ -4044,6 +4043,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   line-height: 1.42857143;
   border: 1px solid transparent;
   border-radius: 4px 4px 0 0;
+  border-color: #eee #eee #ddd;
+  background-color: #f5f5f5;
 }
 .nav-tabs > li > a:hover {
   border-color: #eee #eee #ddd;

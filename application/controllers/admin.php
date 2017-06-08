@@ -139,6 +139,49 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	public function plant_properties_management()
+	{
+		try{
+			$crud = new grocery_CRUD();
+
+			$crud->set_theme('datatables');
+			$crud->set_table('plant_properties');
+			$crud->set_subject('Plant Properties');
+			$crud->columns('species_id','light_conditions','watering', 'blooming_season');
+			$crud->required_fields('species_id');
+			$crud->set_relation('species_id','species','name_he');
+			$crud->field_type('watering','multiselect', array(
+                    			"מועטה"  => "מועטה",
+									  			"בינונית" => "בינונית",
+													"הרבה" => "הרבה",
+													"הרבה מאוד" => "הרבה מאוד",
+													"רגיש לעודף השקיה" => "רגיש לעודף השקיה"
+												));
+
+			$crud->field_type('light_conditions','multiselect', array(
+													"צל"  => "צל",
+													"שמש חלקית"  => "שמש חלקית",
+													"שמש מלאה"  => "שמש מלאה"
+												));
+
+			$crud->field_type('growing_speed','multiselect', array(
+													"איטי"  => "איטי",
+													"בינוני"  => "בינוני",
+													"מהיר"  => "מהיר"
+												));
+
+			//  $crud->field_type('fruits','multiselect', array(
+			// 	"banana"  => "banana",
+			//  	"banana" => "apple"));
+
+			$output = $crud->render();
+
+			$this->_example_output($output);
+
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
 
 	public function resize_img_after_upload($uploader_response,$field_info, $files_to_upload) {
 		$this->load->library('image_moo');

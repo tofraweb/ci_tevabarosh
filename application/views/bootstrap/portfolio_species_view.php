@@ -18,15 +18,15 @@
 
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
-          <div class="col-md-12">
-            <h2 class="page-header"><?php echo $species[0]->name_he;?>
+          <div>
+            <h2 class="page-header" style="background-color:#fff; margin:0px;"><?php echo $species[0]->name_he;?>
                 <?php if(!$is_mobile) { ?><small> - <?php echo $species[0]->name_hu;?></small><?php } ?>
                 <small><?php if(!$is_mobile) { ?> - <?php } ?><?php echo $species[0]->name_lat;?></small>
             </h2>
           </div>
         </div>
         <?php if(!$is_mobile) { ?>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-lg-12">
                 <ol class="breadcrumb">
                     <li><a href="<?php echo base_url();?>">בית</a></li>
@@ -36,7 +36,7 @@
                     <li class="active"><?php echo $species[0]->name_he;?></li>
                 </ol>
             </div>
-        </div>
+        </div> -->
         <?php } ?>
         <!-- /.row -->
 
@@ -44,32 +44,26 @@
         <div class="row">
 
           <!-- Nav tabs -->
-          <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active" style="width:50%;"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">מידע מדעי</a></li>
-            <li role="presentation" style="width:50%;"><a href="#pictures" aria-controls="pictures" role="tab" data-toggle="tab">תמונות</a></li>
-            <!-- <li role="presentation" style="width:33%;"><a href="#slider" aria-controls="slider" role="tab" data-toggle="tab">סלידר</a></li> -->
+          <ul class="nav nav-tabs" style="padding-right: 10px;" role="tablist">
+            <li role="presentation" class="active" style="width:33%"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">מידע מדעי</a></li>
+            <li role="presentation" style="width:33%"><a href="#properties" aria-controls="properties" role="tab" data-toggle="tab">מאפיינים</a></li>
+            <li role="presentation" style="width:33%"><a href="#pictures" aria-controls="pictures" role="tab" data-toggle="tab">תמונות</a></li>
           </ul>
           <!-- Tab panes -->
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="info">
               <div class="col-md-6">
                 <div class="table-responsive">
-                  <table class = "table table-bordered" style="width:100% !important">
-                    <!-- <tr "border:solid 1px">
-                      <th class="info" style="text-align:center"></th>
-                      <th class="info" style="text-align:center"><?php echo $species[0]->name_he;?></th>
-                      <th class="info" style="text-align:center"><?php echo $species[0]->name_lat;?></th>
-                      <th class="info" style="text-align:center"><?php echo $species[0]->name_hu;?></th>
-                    </tr> -->
+                  <table class = "table table-bordered table-striped " style="width:100% !important">
                     <tr>
                       <th class="info" style="text-align:right">שם
                         <?php if($logged_in){ ?>
                           <small><a target="_blank" href="<?php echo base_url();?>admin/species_management/edit/<?php echo $species[0]->id;?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></small>
                         <?php } ?>
                       </th>
-                      <td style="text-align:center; color: #629432"><b><?php echo $species[0]->name_he;?></b></td>
-                      <td style="text-align:center; color: #629432"><b><?php echo $species[0]->name_lat;?></b></td>
-                      <?php if(!$is_mobile) { ?><td style="text-align:center; color: #629432"><b><?php echo $species[0]->name_hu;?></b></td><?php } ?>
+                      <td style="text-align:center; color: #31b0d5"><b><?php echo $species[0]->name_he;?></b></td>
+                      <td style="text-align:center; color: #31b0d5"><b><?php echo $species[0]->name_lat;?></b></td>
+                      <?php if(!$is_mobile) { ?><td style="text-align:center; color: #31b0d5"><b><?php echo $species[0]->name_hu;?></b></td><?php } ?>
                     </tr>
                     <tr>
                       <th class="info" style="text-align:right">סוג</th>
@@ -102,6 +96,114 @@
               <div class="col-md-6">
                 <img class="img-rounded img-species" style="cursor: zoom-in;" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species[0]->picture;?>" alt="">
               </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="properties">
+              <div class="row" >
+                <?php if($category->type == 1) { ?>
+                <div class="col-md-6">
+                  <table class = "table table-bordered table-striped " style="width:100% !important">
+                    <tr>
+                      <th class="info" style="text-align:right; width:20%;">תנאי אור
+                        <?php if($logged_in){ ?>
+                          <small><a target="_blank" href="<?php echo base_url();?>admin/plant_properties_management/edit/<?php echo $properties->id;?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></small>
+                        <?php } ?>
+                      </th>
+                      <td style="text-align:center"><?php echo $properties->light_conditions;?></td>
+                    </tr>
+                    <tr>
+                      <th class="info" style="text-align:right; width:20%;">השקיה</th>
+                      <td style="text-align:center"><?php echo $properties->watering;?></td>
+                    </tr>
+                    <tr>
+                      <th class="info" style="text-align:right; width:20%;">צבע פריחה</th>
+                      <td style="text-align:center"><?php echo $properties->flower_color;?></td>
+                    </tr>
+                    <tr>
+                      <th class="info" style="text-align:right; width:20%;">עונת פריחה</th>
+                      <td style="text-align:center"><?php echo $properties->blooming_season;?></td>
+                    </tr>
+                    <tr>
+                      <th class="info" style="text-align:right;width:20%;">שימוש</th>
+                      <td style="text-align:center"><?php echo $properties->best_usage;?></td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="col-md-6">
+                  <table class = "table table-bordered table-striped " style="width:100% !important">
+                    <tr>
+                      <th class="info" style="text-align:right; width:20%;">מחזור חיים</th>
+                      <td style="text-align:center"><?php echo $properties->life_span;?></td>
+                    </tr>
+                    <tr>
+                      <th class="info" style="text-align:right;width:20%;">קצב צמיחה</th>
+                      <td style="text-align:center"><?php echo $properties->growing_speed;?></td>
+                    </tr>
+                    <tr>
+                      <th class="info" style="text-align:right;width:20%;">גובה</th>
+                      <td style="text-align:center"><?php echo $properties->height;?></td>
+                    </tr>
+                    <tr>
+                      <th class="info" style="text-align:right;width:20%;">רוחב</th>
+                      <td style="text-align:center"><?php echo $properties->width;?></td>
+                    </tr>
+                    <tr>
+                      <th class="info" style="text-align:right; width:20%;">ארץ מוצא</th>
+                      <td style="text-align:center"><?php echo $properties->origin;?></td>
+                    </tr>
+                  </table>
+                </div>
+                <?php } else { ?>
+                  <div class="col-md-6">
+                    <table class = "table table-bordered table-striped " style="width:100% !important">
+                      <tr>
+                        <th class="info" style="text-align:right; width:20%;">דגכע</th>
+                        <td style="text-align:center"><?php echo $order->name_lat;?></td>
+                      </tr>
+                      <tr>
+                        <th class="info" style="text-align:right; width:20%;">גכע</th>
+                        <td style="text-align:center"><?php echo $order->name_lat;?></td>
+                      </tr>
+                      <tr>
+                        <th class="info" style="text-align:right; width:20%;">קרא</th>
+                        <td style="text-align:center"><?php echo $order->name_lat;?></td>
+                      </tr>
+                      <tr>
+                        <th class="info" style="text-align:right; width:20%;">שדגכ</th>
+                        <td style="text-align:center"><?php echo $order->name_lat;?></td>
+                      </tr>
+                      <tr>
+                        <th class="info" style="text-align:right;width:20%;">שדגכ</th>
+                        <td style="text-align:center"><?php echo $order->name_lat;?></td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="col-md-6">
+                    <table class = "table table-bordered table-striped " style="width:100% !important">
+                      <tr>
+                        <th class="info" style="text-align:right; width:20%;">דגעג</th>
+                        <td style="text-align:center"><?php echo $order->name_lat;?></td>
+                      </tr>
+                      <tr>
+                        <th class="info" style="text-align:right;width:20%;">שדגקכ</th>
+                        <td style="text-align:center"><?php echo $order->name_lat;?></td>
+                      </tr>
+                      <tr>
+                        <th class="info" style="text-align:right;width:20%;">דגע</th>
+                        <td style="text-align:center"><?php echo $order->name_lat;?></td>
+                      </tr>
+                      <tr>
+                        <th class="info" style="text-align:right;width:20%;">דגכ</th>
+                        <td style="text-align:center"><?php echo $order->name_lat;?></td>
+                      </tr>
+                      <tr>
+                        <th class="info" style="text-align:right; width:20%;">ךשדלגחכ</th>
+                        <td style="text-align:center"><?php echo $order->name_lat;?></td>
+                      </tr>
+                    </table>
+                  </div>
+                  <?php } ?>
+              </div>
+              <!-- /.row -->
             </div>
             <div role="tabpanel" class="tab-pane" id="pictures">
               <div class="row">
