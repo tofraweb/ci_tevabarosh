@@ -23,7 +23,7 @@
   interval: 5000 //changes the speed
   })
   $(function() {
-        $('img').on('click', function() {
+        $('img').on('dblclick', function() {
         $('.enlargeImageModalSource').attr('src', $(this).attr('src'));
         $('#enlargeImageModal').modal('show');
       });

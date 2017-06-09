@@ -71,6 +71,19 @@ body {
   float: right;
 }
 
+.table th {
+  text-align:right;
+  width:30%;
+}
+
+.centered-td {
+  text-align:center;
+}
+
+.dropdown-menu > li > a {
+  font-size: 18px !important;
+}
+
 
 
 /* Home Page Carousel */

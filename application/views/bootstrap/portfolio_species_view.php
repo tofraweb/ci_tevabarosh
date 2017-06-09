@@ -1,5 +1,6 @@
 
     <!-- Popup Image -->
+    <?php if(!$is_mobile) { ?>
     <div class="modal fade" id="enlargeImageModal" tabindex="-1" role="dialog" aria-labelledby="enlargeImageModal" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
        <div class="modal-content">
@@ -12,6 +13,7 @@
        </div>
       </div>
     </div>
+    <?php } ?>
 
     <!-- Page Content -->
     <div class="container">
@@ -56,42 +58,57 @@
                 <div class="table-responsive">
                   <table class = "table table-bordered table-striped " style="width:100% !important">
                     <tr>
-                      <th class="info" style="text-align:right">שם
+                      <th class="info" style="width:15%">שם
                         <?php if($logged_in){ ?>
                           <small><a target="_blank" href="<?php echo base_url();?>admin/species_management/edit/<?php echo $species[0]->id;?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></small>
                         <?php } ?>
                       </th>
-                      <td style="text-align:center; color: #31b0d5"><b><?php echo $species[0]->name_he;?></b></td>
-                      <td style="text-align:center; color: #31b0d5"><b><?php echo $species[0]->name_lat;?></b></td>
-                      <?php if(!$is_mobile) { ?><td style="text-align:center; color: #31b0d5"><b><?php echo $species[0]->name_hu;?></b></td><?php } ?>
+                      <td class="centered-td" style="color: #31b0d5"><b><?php echo $species[0]->name_he;?></b></td>
+                      <td class="centered-td" style="color: #31b0d5"><b><?php echo $species[0]->name_lat;?></b></td>
+                      <?php if(!$is_mobile) { ?><td class="centered-td" style="color: #31b0d5"><b><?php echo $species[0]->name_hu;?></b></td><?php } ?>
                     </tr>
                     <tr>
-                      <th class="info" style="text-align:right">סוג</th>
-                      <td style="text-align:center"><a href="<?php echo base_url();?>catalog/getSpeciesListInGenus/<?php echo $genus->id;?>"><?php echo $genus->name_he;?></a></td>
-                      <td style="text-align:center"><?php echo $genus->name_lat;?></td>
-                      <?php if(!$is_mobile) { ?><td style="text-align:center"><?php echo $genus->name_hu;?></td><?php } ?>
+                      <th class="info" style="width:15%">סוג</th>
+                      <td class="centered-td"><a href="<?php echo base_url();?>catalog/getSpeciesListInGenus/<?php echo $genus->id;?>"><?php echo $genus->name_he;?></a></td>
+                      <td class="centered-td"><?php echo $genus->name_lat;?></td>
+                      <?php if(!$is_mobile) { ?><td class="centered-td"><?php echo $genus->name_hu;?></td><?php } ?>
                     </tr>
                     <tr>
-                      <th class="info" style="text-align:right">משפחה</th>
-                      <td style="text-align:center"><a href="<?php echo base_url();?>catalog/getSpeciesListInFamily/<?php echo $family->id;?>"><?php echo $family->name_he;?></a></td>
-                      <td style="text-align:center"><?php echo $family->name_lat;?></td>
-                      <?php if(!$is_mobile) { ?><td style="text-align:center"><?php echo $family->name_hu;?></td><?php } ?>
+                      <th class="info" style="width:15%">משפחה</th>
+                      <td class="centered-td"><a href="<?php echo base_url();?>catalog/getSpeciesListInFamily/<?php echo $family->id;?>"><?php echo $family->name_he;?></a></td>
+                      <td class="centered-td"><?php echo $family->name_lat;?></td>
+                      <?php if(!$is_mobile) { ?><td class="centered-td"><?php echo $family->name_hu;?></td><?php } ?>
                     </tr>
                     <tr>
-                      <th class="info" style="text-align:right">סדרה</th>
-                      <td style="text-align:center"><a href="<?php echo base_url();?>catalog/getSpeciesListInOrder/<?php echo $order->id;?>"><?php echo $order->name_he;?></a></td>
-                      <td style="text-align:center"><?php echo $order->name_lat;?></td>
-                      <?php if(!$is_mobile) { ?><td style="text-align:center"><?php echo $order->name_hu;?></td><?php } ?>
+                      <th class="info" style="width:15%">סדרה</th>
+                      <td class="centered-td"><a href="<?php echo base_url();?>catalog/getSpeciesListInOrder/<?php echo $order->id;?>"><?php echo $order->name_he;?></a></td>
+                      <td class="centered-td"><?php echo $order->name_lat;?></td>
+                      <?php if(!$is_mobile) { ?><td class="centered-td"><?php echo $order->name_hu;?></td><?php } ?>
                     </tr>
                   </table>
                 </div>
-                <p style="text-align:center; margin-top: 10px;"><a class="btn btn-info" href="javascript:history.back()">חזרה</a></p>
-              <div>
+                <?php if($category->type == 2) { ?>
+                <div>
+                  <table class = "table table-bordered table-striped " style="width:100% !important">
+                    <tr>
+                      <th class="info" style="width:15%">קול הציפור</th>
+                      <td class="centered-td">
+                        <audio controls>
+                          <source src="<?php echo base_url();?>assets/uploads/audio/<?php echo $audio->filename;?>">
+                        Your browser does not support the audio element.
+                        </audio>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <?php } ?>
+              <code>
+                  <h5 style="margin-top:-12px; background-color: #d9edf7">תיאור:</h5>
                   <?php if(!empty($species[0]->description)) { ?>
-                  <h4 style="background-color:#d9edf7">תיאור קצר</h4>
                   <p><?php echo $species[0]->description;?></p>
                   <?php } ?>
-              </div>
+              </code>
+              <p style="text-align:center; margin-top: 10px;"><a class="btn btn-info" href="javascript:history.back()">חזרה</a></p>
               </div>
               <div class="col-md-6">
                 <img class="img-rounded img-species" style="cursor: zoom-in;" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species[0]->picture;?>" alt="">
@@ -100,10 +117,10 @@
             <div role="tabpanel" class="tab-pane" id="properties">
               <div class="row" >
                 <?php if($category->type == 1) { ?>
-                <div class="col-md-6">
-                  <table class = "table table-bordered table-striped " style="width:100% !important">
+                <div class="col-md-4">
+                  <table class = "table table-bordered table-striped " style="width:95% !important; margin: 5px 10px;">
                     <tr>
-                      <th class="info" style="text-align:right; width:20%;">תנאי אור
+                      <th class="info">תנאי אור
                         <?php if($logged_in){
                             if($properties->id){ ?>
                           <small><a target="_blank" href="<?php echo base_url();?>admin/plant_properties_management/edit/<?php echo $properties->id;?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></small>
@@ -111,49 +128,52 @@
                           <small><a target="_blank" href="<?php echo base_url();?>admin/plant_properties_management/add"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></small>
                         <?php } } ?>
                       </th>
-                      <td style="text-align:center"><?php echo $properties->light_conditions;?></td>
+                      <td><?php echo $properties->light_conditions;?></td>
                     </tr>
                     <tr>
-                      <th class="info" style="text-align:right; width:20%;">השקיה</th>
-                      <td style="text-align:center"><?php echo $properties->watering;?></td>
+                      <th class="info">השקיה</th>
+                      <td><?php echo $properties->watering;?></td>
                     </tr>
                     <tr>
-                      <th class="info" style="text-align:right; width:20%;">צבע פריחה</th>
-                      <td style="text-align:center"><?php echo $properties->flower_color;?></td>
+                      <th class="info">צבע פריחה</th>
+                      <td><?php echo $properties->flower_color;?></td>
                     </tr>
                     <tr>
-                      <th class="info" style="text-align:right; width:20%;">עונת פריחה</th>
-                      <td style="text-align:center"><?php echo $properties->blooming_season;?></td>
+                      <th class="info">עונת פריחה</th>
+                      <td><?php echo $properties->blooming_season;?></td>
                     </tr>
                     <tr>
-                      <th class="info" style="text-align:right;width:20%;">שימוש</th>
-                      <td style="text-align:center"><?php echo $properties->best_usage;?></td>
+                      <th class="info">שימוש</th>
+                      <td><?php echo $properties->best_usage;?></td>
                     </tr>
                   </table>
                 </div>
-                <div class="col-md-6">
-                  <table class = "table table-bordered table-striped " style="width:100% !important">
+                <div class="col-md-4">
+                  <table class = "table table-bordered table-striped " style="width:95% !important; margin: 5px 10px;">
                     <tr>
-                      <th class="info" style="text-align:right; width:20%;">מחזור חיים</th>
-                      <td style="text-align:center"><?php echo $properties->life_span;?></td>
+                      <th class="info">מחזור חיים</th>
+                      <td><?php echo $properties->life_span;?></td>
                     </tr>
                     <tr>
-                      <th class="info" style="text-align:right;width:20%;">קצב צמיחה</th>
-                      <td style="text-align:center"><?php echo $properties->growing_speed;?></td>
+                      <th class="info">קצב צמיחה</th>
+                      <td><?php echo $properties->growing_speed;?></td>
                     </tr>
                     <tr>
-                      <th class="info" style="text-align:right;width:20%;">גובה</th>
-                      <td style="text-align:center"><?php echo $properties->height;?></td>
+                      <th class="info">גובה</th>
+                      <td><?php echo $properties->height;?></td>
                     </tr>
                     <tr>
-                      <th class="info" style="text-align:right;width:20%;">רוחב</th>
-                      <td style="text-align:center"><?php echo $properties->width;?></td>
+                      <th class="info">רוחב</th>
+                      <td><?php echo $properties->width;?></td>
                     </tr>
                     <tr>
-                      <th class="info" style="text-align:right; width:20%;">ארץ מוצא</th>
-                      <td style="text-align:center"><?php echo $properties->origin;?></td>
+                      <th class="info">ארץ מוצא</th>
+                      <td><?php echo $properties->origin;?></td>
                     </tr>
                   </table>
+                </div>
+                <div class="col-md-4">
+                  <img class="img-rounded img-species" style="cursor: zoom-in;" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species[0]->picture;?>" alt="">
                 </div>
                 <?php } else { ?>
                   <div class="col-md-6">

@@ -69,6 +69,30 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	public function audio_management()
+	{
+		try{
+			$crud = new grocery_CRUD();
+
+			$crud->set_theme('datatables');
+			$crud->set_table('audio');
+			$crud->set_subject('Audio');
+			$crud->required_fields('filename', 'species_id');
+			//$crud->set_subject('pictures');
+			$crud->set_relation('species_id','species','name_he');
+			$crud->set_field_upload('filename','assets/uploads/audio');
+
+			//$crud->callback_after_upload(array($this,'resize_img_after_upload'));
+
+			$output = $crud->render();
+
+			$this->_example_output($output, 'אודיו');
+
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+
 	public function family_management()
 	{
 		try{

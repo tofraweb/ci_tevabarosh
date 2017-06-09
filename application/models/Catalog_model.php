@@ -213,6 +213,18 @@ Class Catalog_model extends CI_Model
         return $classification_name[0];
     }
 
+    public function get_audio($id){
+      try{
+          $sql = "SELECT * FROM audio WHERE species_id = ?";
+          $result = $this->db->query($sql,$id);
+        }catch(Exception $e){
+            echo "Unable to retrieve results";
+            exit;
+        }
+        $audio = $result->result();
+        return $audio[0];
+    }
+
     public function get_species_properties($id, $type){
       if($type == 1){
         try{
