@@ -205,6 +205,7 @@ class Catalog extends CI_Controller {
     $data['is_mobile'] = $this->agent->is_mobile();
     $data['category'] = $species_category;
     $data['audio'] = $this->catalog_model->get_audio($id);
+    $data['video'] = $this->catalog_model->get_video($id);
     $data['properties'] = $species_properties;
     $this->load->view('inc/header');
     $this->load->view('bootstrap/portfolio_species_view',$data);

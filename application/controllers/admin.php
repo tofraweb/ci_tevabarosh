@@ -93,6 +93,27 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	public function video_management()
+	{
+		try{
+			$crud = new grocery_CRUD();
+
+			$crud->set_theme('datatables');
+			$crud->set_table('video');
+			$crud->set_subject('Video');
+			$crud->required_fields('filename', 'species_id');
+			//$crud->set_subject('pictures');
+			$crud->set_relation('species_id','species','name_he');
+
+			$output = $crud->render();
+
+			$this->_example_output($output, 'סרטון');
+
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+
 	public function family_management()
 	{
 		try{

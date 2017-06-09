@@ -30,6 +30,7 @@ foreach($css_files as $file): ?>
 		<a href='<?php echo site_url('admin/orders')?>'>ניהול סדרות</a>|
 		<a href='<?php echo site_url('admin/plant_properties_management')?>'>ניהול מאפייני צמיים</a>|
 		<a href='<?php echo site_url('admin/pictures_management')?>'>ניהול תמונות</a>|
+		<a href='<?php echo site_url('admin/video_management')?>'>ניהול סרטונים</a>|
 		<a href='<?php echo site_url('admin/audio_management')?>'>ניהול אודיו</a>|
 		<a href='<?php echo site_url('login/logout')?>'>יציאה</a>
 

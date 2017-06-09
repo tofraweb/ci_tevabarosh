@@ -225,6 +225,18 @@ Class Catalog_model extends CI_Model
         return $audio[0];
     }
 
+    public function get_video($id){
+      try{
+          $sql = "SELECT * FROM video WHERE species_id = ?";
+          $result = $this->db->query($sql,$id);
+        }catch(Exception $e){
+            echo "Unable to retrieve results";
+            exit;
+        }
+        $video = $result->result();
+        return $video[0];
+    }
+
     public function get_species_properties($id, $type){
       if($type == 1){
         try{

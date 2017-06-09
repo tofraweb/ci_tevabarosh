@@ -47,9 +47,12 @@
 
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" style="padding-right: 10px;" role="tablist">
-            <li role="presentation" class="active" style="width:33%"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">מידע מדעי</a></li>
-            <li role="presentation" style="width:33%"><a href="#properties" aria-controls="properties" role="tab" data-toggle="tab">מאפיינים</a></li>
-            <li role="presentation" style="width:33%"><a href="#pictures" aria-controls="pictures" role="tab" data-toggle="tab">תמונות</a></li>
+            <li role="presentation" class="active" style="<?php if($category->type == 1 || !$video) { ?>width:33% <?php } else { ?>width:24%<?php } ?>"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">מידע מדעי</a></li>
+            <li role="presentation" style="<?php if($category->type == 1 || !$video) { ?>width:33% <?php } else { ?>width:24%<?php } ?>"><a href="#properties" aria-controls="properties" role="tab" data-toggle="tab">מאפיינים</a></li>
+            <li role="presentation" style="<?php if($category->type == 1 || !$video) { ?>width:33% <?php } else { ?>width:24%<?php } ?>"><a href="#pictures" aria-controls="pictures" role="tab" data-toggle="tab">תמונות</a></li>
+            <?php if($category->type == 2 && $video) { ?>
+              <li role="presentation" style="width:24%"><a href="#video" aria-controls="video" role="tab" data-toggle="tab">סרטון</a></li>
+            <?php } ?>
           </ul>
           <!-- Tab panes -->
           <div class="tab-content">
@@ -230,7 +233,6 @@
             </div>
             <div role="tabpanel" class="tab-pane" id="pictures">
               <div class="row">
-                  <?php// var_dump($pictures[2]->filename); exit; ?>
                   <?php if(!empty($pictures)) { ?>
                   <div class="col-md-12">
                   <?php foreach ($pictures as $picture) {?>
@@ -240,6 +242,20 @@
                   <?php } ?>
                   </div>
                   <?php } ?>
+              </div>
+              <!-- /.row -->
+            </div>
+            <div role="tabpanel" class="tab-pane" id="video">
+              <div style="text-align:center">
+                <?php if(!$is_mobile) { ?>
+                  <iframe width="80%" height="700"
+                  src="https://www.youtube.com/embed/<?php echo $video->filename;?>">
+                  </iframe>
+                  <?php } else { ?>
+                  <iframe width="100%"
+                  src="https://www.youtube.com/embed/<?php echo $video->filename;?>">
+                  </iframe>
+                <?php } ?>
               </div>
               <!-- /.row -->
             </div>
