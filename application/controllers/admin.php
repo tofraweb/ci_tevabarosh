@@ -80,7 +80,9 @@ class Admin extends CI_Controller {
 			$crud->required_fields('filename', 'species_id');
 			//$crud->set_subject('pictures');
 			$crud->set_relation('species_id','species','name_he');
-			$crud->set_field_upload('filename','assets/uploads/audio');
+			$crud->set_field_upload('filename_song','assets/uploads/audio/song');
+			$crud->set_field_upload('filename_call','assets/uploads/audio/call');
+			$crud->set_field_upload('filename_alarm','assets/uploads/audio/alarm');
 
 			//$crud->callback_after_upload(array($this,'resize_img_after_upload'));
 
@@ -214,6 +216,29 @@ class Admin extends CI_Controller {
 													"איטי"  => "איטי",
 													"בינוני"  => "בינוני",
 													"מהיר"  => "מהיר"
+												));
+
+			$crud->field_type('blooming_season','multiselect', array(
+													"אביב"  => "אביב",
+													"קיץ"  => "קיץ",
+													"סתיו"  => "סתיו",
+													"חורף"  => "חורף",
+													"כל השנה"  => "כל השנה",
+												));
+
+			$crud->field_type('flower_color','multiselect', array(
+													"כחול"  => "כחול",
+													"סגול"  => "סגול",
+													"אדום"  => "אדום",
+													"כתום"  => "כתום",
+													"וורוד"  => "וורוד",
+													"צהוב"  => "צהוב"
+												));
+
+			$crud->field_type('life_span','multiselect', array(
+													"רב שנתי"  => "רב שנתי",
+													"קצר חיים"  => "קצר חיים",
+													"עונתי"  => "עונתי"
 												));
 
 			//  $crud->field_type('fruits','multiselect', array(

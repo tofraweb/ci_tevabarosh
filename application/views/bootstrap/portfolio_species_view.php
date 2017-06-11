@@ -90,27 +90,53 @@
                     </tr>
                   </table>
                 </div>
-                <?php if($category->type == 2) { ?>
+                <?php if($category->type == 2 && $audio) { ?>
                 <div>
                   <table class = "table table-bordered table-striped " style="width:100% !important">
+                    <?php if($audio->filename_song) { ?>
                     <tr>
-                      <th class="info" style="width:15%">קול הציפור</th>
+                      <th class="info" style="width:15%">קול שירה</th>
                       <td class="centered-td">
                         <audio controls>
-                          <source src="<?php echo base_url();?>assets/uploads/audio/<?php echo $audio->filename;?>">
+                          <source src="<?php echo base_url();?>assets/uploads/audio/song/<?php echo $audio->filename_song;?>">
                         Your browser does not support the audio element.
                         </audio>
                       </td>
                     </tr>
+                    <?php } ?>
+                    <?php if($audio->filename_call) { ?>
+                    <tr>
+                      <th class="info" style="width:15%">קול קריאה</th>
+                      <td class="centered-td">
+                        <audio controls>
+                          <source src="<?php echo base_url();?>assets/uploads/audio/call/<?php echo $audio->filename_call;?>">
+                        Your browser does not support the audio element.
+                        </audio>
+                      </td>
+                    </tr>
+                    <?php } ?>
+                    <?php if($audio->filename_alarm) { ?>
+                    <tr>
+                      <th class="info" style="width:15%">קול הזהרה</th>
+                      <td class="centered-td">
+                        <audio controls>
+                          <source src="<?php echo base_url();?>assets/uploads/audio/alarm<?php echo $audio->filename_alarm;?>">
+                        Your browser does not support the audio element.
+                        </audio>
+                      </td>
+                    </tr>
+                    <?php } ?>
                   </table>
                 </div>
                 <?php } ?>
-              <code>
-                  <h5 style="margin-top:-12px; background-color: #d9edf7">תיאור:</h5>
-                  <?php if(!empty($species[0]->description)) { ?>
-                  <p><?php echo $species[0]->description;?></p>
-                  <?php } ?>
-              </code>
+                <?php if($category->type == 1) { ?>
+                <code>
+                    <h5 style="margin-top:-12px; background-color: #d9edf7">תיאור:</h5>
+                    <?php if(!empty($species[0]->description)) { ?>
+                    <p><?php echo $species[0]->description;?></p>
+                    <?php } ?>
+                </code>
+                <?php } ?>
               <p style="text-align:center; margin-top: 10px;"><a class="btn btn-info" href="javascript:history.back()">חזרה</a></p>
               </div>
               <div class="col-md-6">
