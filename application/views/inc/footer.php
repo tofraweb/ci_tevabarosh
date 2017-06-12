@@ -2,8 +2,8 @@
 <!-- Footer -->
 <footer>
     <div class="row">
-        <div class="col-lg-12">
-            <p>Copyright &copy; 2014 Tofra Web Development</p>
+        <div class="col-lg-12 text-center">
+            <p>Copyright &copy; <?php echo date(Y); ?> Tofra Web Development</p>
         </div>
     </div>
 </footer>

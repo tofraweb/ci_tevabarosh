@@ -45,30 +45,19 @@ Class Catalog_model extends CI_Model
         return $catalog;
     }
 
-    public function random_catalog_array($limit = 0, $type= null){
-        try{ //pulling only 4 random species from the DB
-            // switch ($type) {
-            //   case 'featuring':
-            //     # code...
-            //     break;
-            //   case 'frontpage':
-            //       # code...
-            //       break;
-            //   default:
-            //     # code...
-            //     break;
-            // }
+    public function random_catalog_array($cat_id, $limit = null){
+        try{ //pulling random species by category from the DB
             $results = $this->db->query(
                 "SELECT id, name_he, name_lat, name_hu, category_id, description, picture
              FROM species
-             WHERE $type = 'on'
+             WHERE category_id = '$cat_id'
+             AND featuring = 'on'
              ORDER BY RAND()
              LIMIT $limit"
                   );
         }catch(Exception $e){
             echo "Unable to retrieve results";
         }
-        //returning results as array with keys as number (FETCH_NUM) or assoc names (FETCH_ASSOC)
         $catalog = $results->result();
         return $catalog;
     }

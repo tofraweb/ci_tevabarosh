@@ -11,12 +11,12 @@ class Home extends CI_Controller {
   public function index()
   {
       $this->load->model('catalog_model','',TRUE);
-      $featuring = $this->catalog_model->random_catalog_array(3,'featuring');
-      $frontpage = $this->catalog_model->random_catalog_array(8,'frontpage');
-      $data['section'] = "books";
-      $data['pageTitle'] = 'This the books page';
-      $data['featuring'] = $featuring;
-      $data['frontpage'] = $frontpage;
+      $data['bird'] = $this->catalog_model->random_catalog_array(2,1);
+      $data['garden'] = $this->catalog_model->random_catalog_array(4,1);
+      $data['field'] = $this->catalog_model->random_catalog_array(1,1);
+      $data['tree'] = $this->catalog_model->random_catalog_array(5,1);
+      $data['best_succulents'] = $this->catalog_model->random_catalog_array(4,3);
+      $data['best_birds'] = $this->catalog_model->random_catalog_array(2,4);
       $this->load->view('inc/header');
       $this->load->view('bootstrap/frontpage_view', $data);
       $this->load->view('inc/footer');

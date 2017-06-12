@@ -1,17 +1,17 @@
 
     <!-- Header Carousel -->
-    <header id="myCarousel" class="carousel slide">
+    <!-- <header id="myCarousel" class="carousel slide">
         <!-- Indicators -->
-        <ol class="carousel-indicators">
+        <!-- <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
             <li data-target="#myCarousel" data-slide-to="1"></li>
             <li data-target="#myCarousel" data-slide-to="2"></li>
             <li data-target="#myCarousel" data-slide-to="3"></li>
             <li data-target="#myCarousel" data-slide-to="4"></li>
-        </ol>
+        </ol> -->
 
         <!-- Wrapper for slides -->
-        <div class="carousel-inner">
+        <!-- <div class="carousel-inner">
             <div class="item active">
                 <div class="fill" style="background-image:url('<?php echo base_url();?>assets/img/media/upload/slider/IMG_1360-s.jpg');"></div>
                 <div class="carousel-caption">
@@ -42,16 +42,16 @@
                     <h2></h2>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- Controls -->
-        <a class="right carousel-control" href="#myCarousel" data-slide="prev">
+        <!-- <a class="right carousel-control" href="#myCarousel" data-slide="prev">
             <span class="icon-prev"></span>
         </a>
         <a class="left carousel-control" href="#myCarousel" data-slide="next">
             <span class="icon-next"></span>
-        </a>
-    </header>
+        </a> -->
+    <!-- </header> -->
 
 		<!-- Page Content -->
 		<div class="container">
@@ -99,15 +99,81 @@
     </div> -->
     <!-- /.row -->
 
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">על צמחים וציפורים</h1>
+        </div>
+        <div class="col-md-3 text-center">
+            <div class="thumbnail">
+              <a href="<?php echo base_url();?>index.php/catalog/?cat=<?php echo $bird[0]->category_id;?>">
+                <img class="img-responsive img-hover" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $bird[0]->picture;?>" alt="">
+              </a>                <div class="caption">
+                    <h3>ציפורים<br>
+                        <small>לחופש נולדו</small>
+                    </h3>
+                    <p>לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס מונפרד אדנדום סילקוף, מרגשי ומרגשח. עמחליף קוואזי במר מודוף. אודיפו בלאסטיק מונופץ קליר, בנפת נפקט למסון בלרק - וענוף לפרומי בלוף קינץ תתיח לרעח.</p>
+                    <a href="<?php echo base_url();?>index.php/catalog/?cat=<?php echo $bird[0]->category_id;?>" class="btn btn-primary">ראה עוד</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div class="thumbnail">
+              <a href="<?php echo base_url();?>index.php/catalog/?cat=<?php echo $garden[0]->category_id;?>">
+                <img class="img-responsive img-hover" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $garden[0]->picture;?>" alt="">
+              </a>                <div class="caption">
+                    <h3>צמחי גינה<br>
+                        <small>עם הרבה סוקולנטים</small>
+                    </h3>
+                    <p>לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס מונפרד אדנדום סילקוף, מרגשי ומרגשח. עמחליף קוואזי במר מודוף. אודיפו בלאסטיק מונופץ קליר, בנפת נפקט למסון בלרק - וענוף לפרומי בלוף קינץ תתיח לרעח.</p>
+                    <a href="<?php echo base_url();?>index.php/catalog/?cat=<?php echo $garden[0]->category_id;?>" class="btn btn-primary">ראה עוד</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div class="thumbnail">
+              <a href="<?php echo base_url();?>index.php/catalog/?cat=<?php echo $field[0]->category_id;?>">
+                <img class="img-responsive img-hover" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $field[0]->picture;?>" alt="">
+              </a>
+              <div class="caption">
+                    <h3>פרחי שדה<br>
+                        <small>טיול צבעוני</small>
+                    </h3>
+                    <p>לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס מונפרד אדנדום סילקוף, מרגשי ומרגשח. עמחליף קוואזי במר מודוף. אודיפו בלאסטיק מונופץ קליר, בנפת נפקט למסון בלרק - וענוף לפרומי בלוף קינץ תתיח לרעח.</p>
+                    <a href="<?php echo base_url();?>index.php/catalog/?cat=<?php echo $field[0]->category_id;?>" class="btn btn-primary">ראה עוד</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div class="thumbnail">
+              <a href="<?php echo base_url();?>index.php/catalog/?cat=<?php echo $tree[0]->category_id;?>">
+                <img class="img-responsive img-hover" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $tree[0]->picture;?>" alt="">
+              </a>
+              <div class="caption">
+                  <h3>עצים ושיחים<br>
+                      <small>על הצמח המושלם</small>
+                  </h3>
+                  <p>לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס מונפרד אדנדום סילקוף, מרגשי ומרגשח. עמחליף קוואזי במר מודוף. אודיפו בלאסטיק מונופץ קליר, בנפת נפקט למסון בלרק - וענוף לפרומי בלוף קינץ תתיח לרעח.</p>
+                  <a href="<?php echo base_url();?>index.php/catalog/?cat=<?php echo $tree[0]->category_id;?>" class="btn btn-primary">ראה עוד</a>
+              </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+
     <!-- Random From Portfolio -->
     <div class="row">
         <div class="col-lg-12">
             <h2 class="page-header">
-              על צמחים וציפורים
+              עולם הסוקולנטים
+              <small>
+                קקטוסים וסוקולנטים אחרים
+              </small>
             </h2>
         </div>
         <?php
-        foreach ($featuring as $species) {?>
+        foreach ($best_succulents as $species) {?>
 
           <div class="col-md-4 img-portfolio">
               <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>">
@@ -126,10 +192,13 @@
     <div class="row">
       <div class="col-lg-12">
           <h2 class="page-header">
-              עוד צמחים וציפורים
+              ציפורים נבחרים
+              <small>
+                תמונות מוצלחות ביותר
+              </small>
           </h2>
       </div>
-        <?php foreach ($frontpage as $species) {?>
+        <?php foreach ($best_birds as $species) {?>
           <div class="col-md-3 img-portfolio">
           <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>">
               <img class="img-frontpage-thumbnail img-responsive img-hover img-rounded" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
@@ -143,7 +212,7 @@
     <!-- /.row -->
 
     <!-- Features Section -->
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-lg-12">
             <h2 class="page-header">Modern Business Features</h2>
         </div>
@@ -163,13 +232,13 @@
         <div class="col-md-6">
             <img class="img-responsive" src="http://placehold.it/700x450" alt="">
         </div>
-    </div>
+    </div> -->
     <!-- /.row -->
 
-    <hr>
+    <!-- <hr> -->
 
     <!-- Call to Action Section -->
-    <div class="well">
+    <!-- <div class="well">
         <div class="row">
             <div class="col-md-8">
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
@@ -178,6 +247,6 @@
                 <a class="btn btn-lg btn-default btn-block" href="#">Call to Action</a>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <hr>

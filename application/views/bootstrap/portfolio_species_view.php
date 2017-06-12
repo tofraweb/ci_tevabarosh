@@ -28,7 +28,7 @@
           </div>
         </div>
         <?php if(!$is_mobile) { ?>
-        <!-- <div class="row">
+        <div class="row">
             <div class="col-lg-12">
                 <ol class="breadcrumb">
                     <li><a href="<?php echo base_url();?>">בית</a></li>
@@ -38,7 +38,7 @@
                     <li class="active"><?php echo $species[0]->name_he;?></li>
                 </ol>
             </div>
-        </div> -->
+        </div>
         <?php } ?>
         <!-- /.row -->
 
