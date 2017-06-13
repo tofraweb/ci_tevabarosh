@@ -64,36 +64,42 @@
                   <div role="tabpanel" class="tab-pane active" id="hebrew">
                     <?php foreach ($catalog as $species) {?>
                       <div class="col-md-4 img-portfolio">
+                        <div class="thumbnail">
                           <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>">
-                              <img class="img-hover img-rounded img-species img-thumbnail" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
+                              <img class="img-hover img-catalog" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
                           </a>
-                          <h3>
+                          <h4>
                               <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>"><?php echo $species->name_he;?></a>
-                          </h3>
+                          </h4>
+                        </div>
                       </div>
                     <?php } ?>
                   </div>
                   <div role="tabpanel" class="tab-pane" id="latin">
                     <?php foreach ($catalog as $species) {?>
                       <div class="col-md-4 img-portfolio">
+                        <div class="thumbnail">
                           <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>">
-                              <img class="img-hover img-rounded img-species img-thumbnail" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
+                              <img class="img-hover img-catalog" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
                           </a>
-                          <h3>
+                          <h4>
                               <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>"><?php echo $species->name_lat;?></a>
-                          </h3>
+                          </h4>
+                        </div>
                       </div>
                     <?php } ?>
                   </div>
                   <div role="tabpanel" class="tab-pane" id="hungarian">
                     <?php foreach ($catalog as $species) {?>
                       <div class="col-md-4 img-portfolio">
+                        <div class="thumbnail">
                           <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>">
-                              <img class="img-hover img-rounded img-species img-thumbnail" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
+                              <img class="img-hover img-catalog" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
                           </a>
-                          <h3>
+                          <h4>
                               <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>"><?php echo $species->name_hu;?></a>
-                          </h3>
+                          </h4>
+                        </div>
                       </div>
                     <?php } ?>
                   </div>

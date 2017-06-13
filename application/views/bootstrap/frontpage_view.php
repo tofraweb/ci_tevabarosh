@@ -111,7 +111,7 @@
                     <h3>ציפורים<br>
                         <small>לחופש נולדו</small>
                     </h3>
-                    <p>לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס מונפרד אדנדום סילקוף, מרגשי ומרגשח. עמחליף קוואזי במר מודוף. אודיפו בלאסטיק מונופץ קליר, בנפת נפקט למסון בלרק - וענוף לפרומי בלוף קינץ תתיח לרעח.</p>
+                    <p style="text-align: justify">לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס מונפרד אדנדום סילקוף, מרגשי ומרגשח. עמחליף קוואזי במר מודוף. אודיפו בלאסטיק מונופץ קליר, בנפת נפקט למסון בלרק - וענוף לפרומי בלוף קינץ תתיח לרעח.</p>
                     <a href="<?php echo base_url();?>index.php/catalog/?cat=<?php echo $bird[0]->category_id;?>" class="btn btn-primary">ראה עוד</a>
                 </div>
             </div>
@@ -124,7 +124,7 @@
                     <h3>צמחי גינה<br>
                         <small>עם הרבה סוקולנטים</small>
                     </h3>
-                    <p>לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס מונפרד אדנדום סילקוף, מרגשי ומרגשח. עמחליף קוואזי במר מודוף. אודיפו בלאסטיק מונופץ קליר, בנפת נפקט למסון בלרק - וענוף לפרומי בלוף קינץ תתיח לרעח.</p>
+                    <p style="text-align: justify">לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס מונפרד אדנדום סילקוף, מרגשי ומרגשח. עמחליף קוואזי במר מודוף. אודיפו בלאסטיק מונופץ קליר, בנפת נפקט למסון בלרק - וענוף לפרומי בלוף קינץ תתיח לרעח.</p>
                     <a href="<?php echo base_url();?>index.php/catalog/?cat=<?php echo $garden[0]->category_id;?>" class="btn btn-primary">ראה עוד</a>
                 </div>
             </div>
@@ -138,7 +138,7 @@
                     <h3>פרחי שדה<br>
                         <small>טיול צבעוני</small>
                     </h3>
-                    <p>לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס מונפרד אדנדום סילקוף, מרגשי ומרגשח. עמחליף קוואזי במר מודוף. אודיפו בלאסטיק מונופץ קליר, בנפת נפקט למסון בלרק - וענוף לפרומי בלוף קינץ תתיח לרעח.</p>
+                    <p style="text-align: justify">לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס מונפרד אדנדום סילקוף, מרגשי ומרגשח. עמחליף קוואזי במר מודוף. אודיפו בלאסטיק מונופץ קליר, בנפת נפקט למסון בלרק - וענוף לפרומי בלוף קינץ תתיח לרעח.</p>
                     <a href="<?php echo base_url();?>index.php/catalog/?cat=<?php echo $field[0]->category_id;?>" class="btn btn-primary">ראה עוד</a>
                 </div>
             </div>
@@ -152,8 +152,8 @@
                   <h3>עצים ושיחים<br>
                       <small>על הצמח המושלם</small>
                   </h3>
-                  <p>לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס מונפרד אדנדום סילקוף, מרגשי ומרגשח. עמחליף קוואזי במר מודוף. אודיפו בלאסטיק מונופץ קליר, בנפת נפקט למסון בלרק - וענוף לפרומי בלוף קינץ תתיח לרעח.</p>
-                  <a href="<?php echo base_url();?>index.php/catalog/?cat=<?php echo $tree[0]->category_id;?>" class="btn btn-primary">ראה עוד</a>
+                  <p style="text-align: justify">לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס מונפרד אדנדום סילקוף, מרגשי ומרגשח. עמחליף קוואזי במר מודוף. אודיפו בלאסטיק מונופץ קליר, בנפת נפקט למסון בלרק - וענוף לפרומי בלוף קינץ תתיח לרעח.</p>
+                  <a href="<?php echo base_url();?>index.php/catalog/?cat=<?php echo $field[0]->category_id;?>" class="btn btn-primary">ראה עוד</a>
               </div>
             </div>
         </div>
@@ -176,12 +176,17 @@
         foreach ($best_succulents as $species) {?>
 
           <div class="col-md-4 img-portfolio">
+						<div class="thumbnail text-center">
               <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>">
                   <img class="img-responsive img-hover img-rounded" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
               </a>
-              <h3>
+              <h4>
                   <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>"><?php echo $species->name_he;?></a>
-              </h3>
+									<small>
+										<?php echo ' '.$species->name_lat;?>
+									</small>
+							</h4>
+						</div>
           </div>
 
         <?php } ?>
@@ -200,12 +205,14 @@
       </div>
         <?php foreach ($best_birds as $species) {?>
           <div class="col-md-3 img-portfolio">
-          <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>">
-              <img class="img-frontpage-thumbnail img-responsive img-hover img-rounded" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
-          </a>
-          <h5>
-              <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>"><?php echo $species->name_he;?></a>
-          </h5>
+						<div class="thumbnail text-center">
+		          <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>">
+		              <img class="img-frontpage-thumbnail img-responsive img-hover img-rounded" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
+		          </a>
+		          <h5>
+		              <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>"><?php echo $species->name_he;?></a>
+		          </h5>
+						</div>
           </div>
         <?php } ?>
     </div>

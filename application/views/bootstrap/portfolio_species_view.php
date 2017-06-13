@@ -47,7 +47,7 @@
 
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" style="padding-right: 10px;" role="tablist">
-            <li role="presentation" class="active" style="<?php if($category->type == 1 || !$video) { ?>width:33% <?php } else { ?>width:24%<?php } ?>"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">מידע מדעי</a></li>
+            <li role="presentation" class="active" style="<?php if($category->type == 1 || !$video) { ?>width:33% <?php } else { ?>width:24%<?php } ?>"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">זיהוי</a></li>
             <li role="presentation" style="<?php if($category->type == 1 || !$video) { ?>width:33% <?php } else { ?>width:24%<?php } ?>"><a href="#properties" aria-controls="properties" role="tab" data-toggle="tab">מאפיינים</a></li>
             <li role="presentation" style="<?php if($category->type == 1 || !$video) { ?>width:33% <?php } else { ?>width:24%<?php } ?>"><a href="#pictures" aria-controls="pictures" role="tab" data-toggle="tab">תמונות</a></li>
             <?php if($category->type == 2 && $video) { ?>
@@ -346,15 +346,23 @@
         <div class="row">
 
             <div class="col-lg-12" style="margin-top:10px; margin-bottom:10px">
-                <h3 class="page-header" style="padding-top:5px">עוד מינים מסדרת <a href="<?php echo base_url();?>catalog/getSpeciesListInOrder/<?php echo $order->id;?>"><?php echo $order->name_he;?></a></h3>
+                <h4 class="page-header" style="padding-top:5px">עוד מינים מבסדרת <a href="<?php echo base_url();?>catalog/getSpeciesListInOrder/<?php echo $order->id;?>"><?php echo $order->name_he;?></a></h4>
             </div>
             <?php
             foreach($random_species as $sp) {
             ?>
             <div class="col-sm-3 col-xs-6">
+              <div class="thumbnail">
                 <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $sp->id;?>">
                     <img class="img-responsive img-rounded img-hover img-related" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $sp->picture;?>" alt="">
                 </a>
+                <h5>
+                    <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $sp->id;?>"><?php echo $sp->name_he;?></a>
+                    <small>
+                      <?php echo $sp->name_lat;?>
+                    </small>
+                </h5>
+              </div>
             </div>
             <?php } ?>
         </div>

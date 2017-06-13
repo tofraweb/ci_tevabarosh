@@ -23,8 +23,8 @@ body {
     opacity: 0.8;
 }
 
-.img-thumbnail {
-  min-height: 240px;
+.img-catalog {
+  min-height: 170px !important;
 }
 
 .img-frontpage-thumbnail {
