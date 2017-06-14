@@ -119,6 +119,9 @@
                             <li>
                                 <a href="<?php echo base_url();?>catalog/?cat=5">עצים ושיחים</a>
                             </li>
+                            <li>
+                                <a href="<?php echo base_url();?>catalog/?cat=3">סיווג צמחים</a>
+                            </li>
                         </ul>
                     </li>
                     <li>

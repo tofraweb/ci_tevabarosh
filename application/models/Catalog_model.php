@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 Class Catalog_model extends CI_Model
 {
 
@@ -283,5 +283,40 @@ Class Catalog_model extends CI_Model
         $species = $result->result();
         return $species;
     }
+
+    public function get_species_by_id_array($id_array) {
+      $in = join(',', $id_array);
+      // var_dump($in);
+      // exit;
+      try{
+          $sql = "SELECT * FROM species WHERE id IN ($in)";
+          $result = $this->db->query($sql);
+        }catch(Exception $e){
+            echo "Unable to retrieve results";
+            exit;
+        }
+        $species = $result->result();
+        return $species;
+    }
+
+    // public function get_species_by_id_array($id_array) {
+    //   // var_dump($id_array);
+    //   // exit;
+    //   try{
+    //     $this->db->from('species');
+    //     $query = $this->db->where_in('id', $id_array);
+    //     // $result = $this->db->query($query);
+    //     //$query = $this->db->get('species');
+    //     var_dump($query->num_rows());
+    //     exit;
+    //     $species = $result->result();
+    //     return $species;
+    //     }catch(Exception $e){
+    //         echo "Unable to retrieve results";
+    //         exit;
+    //     }
+    //     //$species = $result->result();
+    //     //return $species;
+    // }
 
 }

@@ -16,6 +16,7 @@ class Catalog extends CI_Controller {
   {
     parent::__construct();
     $this->load->model('catalog_model','',TRUE);
+    $this->load->model('sorting_model','',TRUE);
     $this->load->library('user_agent');
   }
 
@@ -78,6 +79,7 @@ class Catalog extends CI_Controller {
         $data['pagination'] = null;
       }
       $data['catalog'] = $pagination_result['catalog'];
+      $data['category'] = $this->category;
       $this->load->view('inc/header');
       $this->load->view('bootstrap/catalog_view',$data);
       $this->load->view('inc/footer');
@@ -305,6 +307,31 @@ class Catalog extends CI_Controller {
     $data['pageTitle'] = $this->catalog_model->get_classification_name($id, 'genus')->name_he;
     $data['pagination'] = null;
     $data['catalog'] = $species_list;
+    $this->load->view('inc/header');
+    $this->load->view('bootstrap/catalog_view',$data);
+    $this->load->view('inc/footer');
+
+  }
+
+  public function getSpeciesSorted($species_to_sort, $table, $field, $value, $type){
+    $species_id_array = $this->sorting_model->get_sorted_species_id_array($table, $field, $value);
+    $id_array = array();
+    foreach ($species_id_array as $id) {
+      $id_array[] = $id->species_id;
+    }
+    $sorted_species = $this->catalog_model->get_species_by_id_array($id_array);
+    // var_dump($sorted_species);
+    // exit;
+    $species_count = count($species_list);
+    $pagination_result = $this->setPagination($species_count);
+
+    $data['search'] = $this->search;
+    $data['section'] = $this->section;
+    $data['total_items'] = $this->total_items;
+    //$data['pageTitle'] = $this->catalog_model->get_classification_name($id, 'genus')->name_he;
+    $data['pagination'] = null;
+    $data['cat_type'] = $type;
+    $data['catalog'] = $sorted_species;
     $this->load->view('inc/header');
     $this->load->view('bootstrap/catalog_view',$data);
     $this->load->view('inc/footer');
