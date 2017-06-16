@@ -17,6 +17,7 @@ class Catalog extends CI_Controller {
     parent::__construct();
     $this->load->model('catalog_model','',TRUE);
     $this->load->model('sorting_model','',TRUE);
+    $this->load->model('gallery_model','',TRUE);
     $this->load->library('user_agent');
   }
 
@@ -184,7 +185,8 @@ class Catalog extends CI_Controller {
   public function getSpecies($id){
     $limit = 4;
     $species = $this->catalog_model->single_species_array($id);
-    $pictures = $this->catalog_model->get_pictures($id);
+    $all_pictures = $this->catalog_model->get_pictures($id);
+    $limited_pictures = $this->catalog_model->get_pictures($id, 3);
     $genus = $this->catalog_model->get_genus($id);
     $family = $this->catalog_model->get_family($genus->family_id);
     $order = $this->catalog_model->get_order($family->order_id);
@@ -217,7 +219,8 @@ class Catalog extends CI_Controller {
 
 
     $data['species'] = $species;
-    $data['pictures'] = $pictures;
+    $data['pictures'] = $all_pictures;
+    $data['limited_pictures'] = $limited_pictures;
     $data['genus'] = $genus;
     $data['family'] = $family;
     $data['order'] = $order;

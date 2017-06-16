@@ -49,7 +49,7 @@
           <ul class="nav nav-tabs" style="padding-right: 10px;" role="tablist">
             <li role="presentation" class="active" style="<?php if($category->type == 1 || !$video) { ?>width:33% <?php } else { ?>width:24%<?php } ?>"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">זיהוי</a></li>
             <li role="presentation" style="<?php if($category->type == 1 || !$video) { ?>width:33% <?php } else { ?>width:24%<?php } ?>"><a href="#properties" aria-controls="properties" role="tab" data-toggle="tab">מאפיינים</a></li>
-            <li role="presentation" style="<?php if($category->type == 1 || !$video) { ?>width:33% <?php } else { ?>width:24%<?php } ?>"><a href="#pictures" aria-controls="pictures" role="tab" data-toggle="tab">תמונות</a></li>
+            <li role="presentation" style="<?php if($category->type == 1 || !$video) { ?>width:33% <?php } else { ?>width:24%<?php } ?>"><a href="#pictures" aria-controls="pictures" role="tab" data-toggle="tab">גלריית תמונות</a></li>
             <?php if($category->type == 2 && $video) { ?>
               <li role="presentation" style="width:24%"><a href="#video" aria-controls="video" role="tab" data-toggle="tab">סרטון</a></li>
             <?php } ?>
@@ -59,7 +59,7 @@
             <div role="tabpanel" class="tab-pane active" id="info">
               <div class="col-md-6">
                 <div class="table-responsive">
-                  <table class = "table table-bordered table-striped " style="width:100% !important">
+                  <table class = "table table-bordered table-striped " style="width:100% !important; margin-top:10px">
                     <tr>
                       <th class="info" style="width:15%">שם
                         <?php if($logged_in){ ?>
@@ -90,55 +90,19 @@
                     </tr>
                   </table>
                 </div>
-                <?php if($category->type == 2 && $audio) { ?>
-                <div>
-                  <table class = "table table-bordered table-striped " style="width:100% !important">
-                    <?php if($audio->filename_song) { ?>
-                    <tr>
-                      <th class="info" style="width:15%">קול שירה</th>
-                      <td class="centered-td">
-                        <audio controls>
-                          <source src="<?php echo base_url();?>assets/uploads/audio/song/<?php echo $audio->filename_song;?>">
-                        Your browser does not support the audio element.
-                        </audio>
-                      </td>
-                    </tr>
-                    <?php } ?>
-                    <?php if($audio->filename_call) { ?>
-                    <tr>
-                      <th class="info" style="width:15%">קול קריאה</th>
-                      <td class="centered-td">
-                        <audio controls>
-                          <source src="<?php echo base_url();?>assets/uploads/audio/call/<?php echo $audio->filename_call;?>">
-                        Your browser does not support the audio element.
-                        </audio>
-                      </td>
-                    </tr>
-                    <?php } ?>
-                    <?php if($audio->filename_alarm) { ?>
-                    <tr>
-                      <th class="info" style="width:15%">קול הזהרה</th>
-                      <td class="centered-td">
-                        <audio controls>
-                          <source src="<?php echo base_url();?>assets/uploads/audio/alarm/<?php echo $audio->filename_alarm;?>">
-                        Your browser does not support the audio element.
-                        </audio>
-                      </td>
-                    </tr>
-                    <?php } ?>
-                  </table>
+              <!-- More pictures from gallery -->
+              <?php foreach($limited_pictures as $picture) { ?>
+                <div class="col-sm-4" style="padding: 5px">
+                  <div class="thumbnail">
+                    <img class="img-responsive img-rounded img-hover img-related" style="cursor: zoom-in;" src="<?php echo base_url();?>assets/img/media/upload/small/<?php echo $picture->filename;?>" alt="">
+                  </div>
                 </div>
-                <?php } ?>
-                <?php if($category->type == 1) { ?>
-                <code>
-                    <h5 style="margin-top:-12px; background-color: #d9edf7">תיאור:</h5>
-                    <?php if(!empty($species[0]->description)) { ?>
-                    <p><?php echo $species[0]->description;?></p>
-                    <?php } ?>
-                </code>
-                <?php } ?>
-              <p style="text-align:center; margin-top: 10px;"><a class="btn btn-info" href="javascript:history.back()">חזרה</a></p>
+              <?php } ?>
+              <!-- End more pictures from gallery -->
+              <div class="col-md-12" style="text-align:center">
+                <a class="btn btn-info" href="javascript:history.back()">חזרה</a>
               </div>
+            </div>
               <div class="col-md-6">
                 <img class="img-rounded img-species" style="cursor: zoom-in;" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species[0]->picture;?>" alt="">
               </div>
@@ -176,6 +140,14 @@
                       <td><?php echo $properties->best_usage;?></td>
                     </tr>
                   </table>
+                  <?php if($category->type == 1) { ?>
+                  <code style="width:95%; margin-right:10px;">
+                      תיאור:
+                      <?php if(!empty($species[0]->description)) { ?>
+                      <p><?php echo $species[0]->description;?></p>
+                      <?php } ?>
+                  </code>
+                  <?php } ?>
                 </div>
                 <div class="col-md-4">
                   <table class = "table table-bordered table-striped " style="width:95% !important; margin: 5px 10px;">
@@ -230,28 +202,45 @@
                     </table>
                   </div>
                   <div class="col-md-6">
-                    <table class = "table table-bordered table-striped " style="width:100% !important">
-                      <tr>
-                        <th class="info" style="text-align:right; width:20%;">דגעג</th>
-                        <td style="text-align:center"><?php echo $order->name_lat;?></td>
-                      </tr>
-                      <tr>
-                        <th class="info" style="text-align:right;width:20%;">שדגקכ</th>
-                        <td style="text-align:center"><?php echo $order->name_lat;?></td>
-                      </tr>
-                      <tr>
-                        <th class="info" style="text-align:right;width:20%;">דגע</th>
-                        <td style="text-align:center"><?php echo $order->name_lat;?></td>
-                      </tr>
-                      <tr>
-                        <th class="info" style="text-align:right;width:20%;">דגכ</th>
-                        <td style="text-align:center"><?php echo $order->name_lat;?></td>
-                      </tr>
-                      <tr>
-                        <th class="info" style="text-align:right; width:20%;">ךשדלגחכ</th>
-                        <td style="text-align:center"><?php echo $order->name_lat;?></td>
-                      </tr>
-                    </table>
+                    <?php if($category->type == 2 && $audio) { ?>
+                    <div>
+                      <table class = "table table-bordered table-striped " style="width:95% !important">
+                        <?php if($audio->filename_song) { ?>
+                        <tr>
+                          <th class="info" style="width:15%">קול שירה</th>
+                          <td class="centered-td">
+                            <audio controls>
+                              <source src="<?php echo base_url();?>assets/uploads/audio/song/<?php echo $audio->filename_song;?>">
+                            Your browser does not support the audio element.
+                            </audio>
+                          </td>
+                        </tr>
+                        <?php } ?>
+                        <?php if($audio->filename_call) { ?>
+                        <tr>
+                          <th class="info" style="width:15%">קול קריאה</th>
+                          <td class="centered-td">
+                            <audio controls>
+                              <source src="<?php echo base_url();?>assets/uploads/audio/call/<?php echo $audio->filename_call;?>">
+                            Your browser does not support the audio element.
+                            </audio>
+                          </td>
+                        </tr>
+                        <?php } ?>
+                        <?php if($audio->filename_alarm) { ?>
+                        <tr>
+                          <th class="info" style="width:15%">קול הזהרה</th>
+                          <td class="centered-td">
+                            <audio controls>
+                              <source src="<?php echo base_url();?>assets/uploads/audio/alarm/<?php echo $audio->filename_alarm;?>">
+                            Your browser does not support the audio element.
+                            </audio>
+                          </td>
+                        </tr>
+                        <?php } ?>
+                      </table>
+                    </div>
+                    <?php } ?>
                   </div>
                   <?php } ?>
               </div>
@@ -380,16 +369,13 @@
             <?php
             foreach($species_in_order as $sp) {
             ?>
-            <div class="col-sm-3 col-xs-6">
+            <div class="col-sm-2 col-xs-6">
               <div class="thumbnail">
                 <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $sp->id;?>">
                     <img class="img-responsive img-rounded img-hover img-related" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $sp->picture;?>" alt="">
                 </a>
                 <h5>
                     <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $sp->id;?>"><?php echo $sp->name_he;?></a>
-                    <small>
-                      <?php echo $sp->name_lat;?>
-                    </small>
                 </h5>
               </div>
             </div>
