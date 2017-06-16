@@ -162,17 +162,23 @@ class Catalog extends CI_Controller {
     $this->load->view('inc/footer');
   }
 
-  public function getRandomSpeciesFromArray($species, $current_species_id, $limit = 4){
+  public function getRandomSpeciesFromArray($species, $current_species_id, $limit = 4, $exclude = null){
     $rand_numbers = array();
-
-    while(count($rand_numbers) < $limit && count($rand_numbers) < (count($species)-1)){
-      $rand_id = array_rand($species);
-      if($species[$rand_id]->id != $current_species_id && in_array($rand_id, $rand_numbers) == false){
-          $rand_numbers[] = $rand_id;
+    if($exclude){
+      while(count($rand_numbers) < $limit && count($rand_numbers) < (count($species)-1)){
+        $rand_id = array_rand($species);
+        if($species[$rand_id]->id != $current_species_id && in_array($rand_id, $rand_numbers) == false){
+            $rand_numbers[] = $rand_id;
+        }
+      }
+    } else {
+      while(count($rand_numbers) < $limit && count($rand_numbers) < (count($species)-1)){
+        $rand_id = array_rand($species);
+        if($species[$rand_id]->id != $current_species_id && in_array($rand_id, $rand_numbers) == false){
+            $rand_numbers[] = $rand_id;
+        }
       }
     }
-
-
     $random_species  = array();
     for($i=0; $i<count($rand_numbers); $i++){
       $random_species [] = $species[$rand_numbers[$i]];
@@ -189,13 +195,20 @@ class Catalog extends CI_Controller {
     $order = $this->catalog_model->get_order($family->order_id);
     $species_category = $this->catalog_model->get_category_details($species[0]->category_id);
     $session_data = $this->session->userdata('logged_in');
-    $species_in_order = $this->getSpeciesListInOrder($family->order_id, true);
     $species_properties = $this->catalog_model->get_species_properties($id, $species_category->type);
+    $species_in_family = $this->getSpeciesListInFamily($genus->family_id, true);
+    $species_in_order = $this->getSpeciesListInOrder($family->order_id, true);
     if(count($species_in_order) > 1){
       $species_in_order = $this->getRandomSpeciesFromArray($species_in_order, $id, $limit);
     }else{
       $species_in_order = null;
     }
+    if(count($species_in_family) > 1){
+      $species_in_family = $this->getRandomSpeciesFromArray($species_in_family, $id, $limit, $species_in_order);
+    }else{
+      $species_in_family = null;
+    }
+
 
     $data['species'] = $species;
     $data['pictures'] = $pictures;
@@ -203,7 +216,8 @@ class Catalog extends CI_Controller {
     $data['family'] = $family;
     $data['order'] = $order;
     $data['logged_in'] = $session_data;
-    $data['random_species'] = $species_in_order;
+    $data['species_in_family'] = $species_in_family;
+    $data['species_in_order'] = $species_in_order;
     $data['is_mobile'] = $this->agent->is_mobile();
     $data['category'] = $species_category;
     $data['audio'] = $this->catalog_model->get_audio($id);
@@ -264,7 +278,7 @@ class Catalog extends CI_Controller {
     }
   }
 
-  public function getSpeciesListInFamily($id){
+  public function getSpeciesListInFamily($id, $return_array = null){
 
     $genus_list = $this->catalog_model->getGenusListInFamily($id);
     $species_id_array = array();
@@ -279,20 +293,23 @@ class Catalog extends CI_Controller {
         $species_list[] = $temp_a[$j];
       }
     }
+    if(!$return_array){
+      $species_count = count($species_list);
+      $pagination_result = $this->setPagination($species_count);
 
-    $species_count = count($species_list);
-    $pagination_result = $this->setPagination($species_count);
-
-    $data['search'] = $this->search;
-    $data['section'] = $this->section;
-    $data['total_items'] = $this->total_items;
-    $data['pageTitle'] = $this->pageTitle;
-    $data['pageTitle'] = $this->catalog_model->get_classification_name($id, 'family')->name_he;
-    $data['pagination'] = null;
-    $data['catalog'] = $species_list;
-    $this->load->view('inc/header');
-    $this->load->view('bootstrap/catalog_view',$data);
-    $this->load->view('inc/footer');
+      $data['search'] = $this->search;
+      $data['section'] = $this->section;
+      $data['total_items'] = $this->total_items;
+      $data['pageTitle'] = $this->pageTitle;
+      $data['pageTitle'] = $this->catalog_model->get_classification_name($id, 'family')->name_he;
+      $data['pagination'] = null;
+      $data['catalog'] = $species_list;
+      $this->load->view('inc/header');
+      $this->load->view('bootstrap/catalog_view',$data);
+      $this->load->view('inc/footer');
+    } else{
+      return $species_list;
+    }
   }
 
   public function getSpeciesListInGenus($id){

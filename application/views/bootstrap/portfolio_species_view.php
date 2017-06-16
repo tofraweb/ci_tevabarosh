@@ -120,7 +120,7 @@
                       <th class="info" style="width:15%">קול הזהרה</th>
                       <td class="centered-td">
                         <audio controls>
-                          <source src="<?php echo base_url();?>assets/uploads/audio/alarm<?php echo $audio->filename_alarm;?>">
+                          <source src="<?php echo base_url();?>assets/uploads/audio/alarm/<?php echo $audio->filename_alarm;?>">
                         Your browser does not support the audio element.
                         </audio>
                       </td>
@@ -342,14 +342,15 @@
 
         </div>
 
-        <!-- Related Projects Row -->
+        <!-- More Species in Family -->
+        <?php if($species_in_family) { ?>
         <div class="row">
 
             <div class="col-lg-12" style="margin-top:10px; margin-bottom:10px">
-                <h4 class="page-header" style="padding-top:5px">עוד מינים מבסדרת <a href="<?php echo base_url();?>catalog/getSpeciesListInOrder/<?php echo $order->id;?>"><?php echo $order->name_he;?></a></h4>
+                <h4 class="page-header" style="padding-top:5px">עוד מינים ממשפחת <a href="<?php echo base_url();?>catalog/getSpeciesListInFamily/<?php echo $family->id;?>"><?php echo $family->name_he;?></a></h4>
             </div>
             <?php
-            foreach($random_species as $sp) {
+            foreach($species_in_family as $sp) {
             ?>
             <div class="col-sm-3 col-xs-6">
               <div class="thumbnail">
@@ -366,5 +367,34 @@
             </div>
             <?php } ?>
         </div>
+        <?php } ?>
+        <!-- /.row -->
+
+        <!-- More Species in Order -->
+        <?php if($species_in_order) { ?>
+        <div class="row">
+
+            <div class="col-lg-12" style="margin-top:10px; margin-bottom:10px">
+                <h4 class="page-header" style="padding-top:5px">עוד מינים מבסדרת <a href="<?php echo base_url();?>catalog/getSpeciesListInOrder/<?php echo $order->id;?>"><?php echo $order->name_he;?></a></h4>
+            </div>
+            <?php
+            foreach($species_in_order as $sp) {
+            ?>
+            <div class="col-sm-3 col-xs-6">
+              <div class="thumbnail">
+                <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $sp->id;?>">
+                    <img class="img-responsive img-rounded img-hover img-related" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $sp->picture;?>" alt="">
+                </a>
+                <h5>
+                    <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $sp->id;?>"><?php echo $sp->name_he;?></a>
+                    <small>
+                      <?php echo $sp->name_lat;?>
+                    </small>
+                </h5>
+              </div>
+            </div>
+            <?php } ?>
+        </div>
+        <?php } ?>
         <!-- /.row -->
         <hr>

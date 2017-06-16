@@ -77,11 +77,13 @@ class Admin extends CI_Controller {
 			$crud->set_theme('datatables');
 			$crud->set_table('audio');
 			$crud->set_subject('Audio');
-			$crud->required_fields('filename', 'species_id');
+			$crud->required_fields('species_id');
 			//$crud->set_subject('pictures');
 			$crud->set_relation('species_id','species','name_he');
 			$crud->set_field_upload('filename_song','assets/uploads/audio/song');
+			$crud->set_relation('species_id','species','name_he');
 			$crud->set_field_upload('filename_call','assets/uploads/audio/call');
+			$crud->set_relation('species_id','species','name_he');
 			$crud->set_field_upload('filename_alarm','assets/uploads/audio/alarm');
 
 			//$crud->callback_after_upload(array($this,'resize_img_after_upload'));
