@@ -162,21 +162,16 @@ class Catalog extends CI_Controller {
     $this->load->view('inc/footer');
   }
 
-  public function getRandomSpeciesFromArray($species, $current_species_id, $limit = 4, $exclude = null){
+  public function getRandomSpeciesFromArray($species, $current_species_id, $limit = 4, $sub_1 = true){
+    // echo "<pre>";
+    // var_dump($species);
+    // echo "</pre>";
+    // exit;
     $rand_numbers = array();
-    if($exclude){
-      while(count($rand_numbers) < $limit && count($rand_numbers) < (count($species)-1)){
-        $rand_id = array_rand($species);
-        if($species[$rand_id]->id != $current_species_id && in_array($rand_id, $rand_numbers) == false){
-            $rand_numbers[] = $rand_id;
-        }
-      }
-    } else {
-      while(count($rand_numbers) < $limit && count($rand_numbers) < (count($species)-1)){
-        $rand_id = array_rand($species);
-        if($species[$rand_id]->id != $current_species_id && in_array($rand_id, $rand_numbers) == false){
-            $rand_numbers[] = $rand_id;
-        }
+    while(count($rand_numbers) < $limit && count($rand_numbers) < (count($species)-$sub_1)){
+      $rand_id = array_rand($species);
+      if($species[$rand_id]->id != $current_species_id && in_array($rand_id, $rand_numbers) == false){
+          $rand_numbers[] = $rand_id;
       }
     }
     $random_species  = array();
@@ -198,15 +193,26 @@ class Catalog extends CI_Controller {
     $species_properties = $this->catalog_model->get_species_properties($id, $species_category->type);
     $species_in_family = $this->getSpeciesListInFamily($genus->family_id, true);
     $species_in_order = $this->getSpeciesListInOrder($family->order_id, true);
-    if(count($species_in_order) > 1){
-      $species_in_order = $this->getRandomSpeciesFromArray($species_in_order, $id, $limit);
-    }else{
-      $species_in_order = null;
-    }
+    //get limited random pieces from family
     if(count($species_in_family) > 1){
-      $species_in_family = $this->getRandomSpeciesFromArray($species_in_family, $id, $limit, $species_in_order);
+      // echo "<pre>";
+      // var_dump($species_in_order);
+      // echo "</pre>";
+      // exit;
+      $limited_species_in_family = $this->getRandomSpeciesFromArray($species_in_family, $id, $limit);
     }else{
-      $species_in_family = null;
+      $limited_species_in_family = null;
+    }
+    $species_not_in_family = $this->check_species_not_in_family($species_in_family, $species_in_order);
+    // echo "<pre>";
+    // var_dump($species_not_in_family);
+    // echo "</pre>";
+    // exit;
+    //get limited random pieces from order dot are NOT in the family
+    if($species_not_in_family){
+      $limited_species_in_order = $this->getRandomSpeciesFromArray($species_not_in_family, $id, $limit, false);
+    }else{
+      $limited_species_in_order = null;
     }
 
 
@@ -216,8 +222,8 @@ class Catalog extends CI_Controller {
     $data['family'] = $family;
     $data['order'] = $order;
     $data['logged_in'] = $session_data;
-    $data['species_in_family'] = $species_in_family;
-    $data['species_in_order'] = $species_in_order;
+    $data['species_in_family'] = $limited_species_in_family;
+    $data['species_in_order'] = $limited_species_in_order;
     $data['is_mobile'] = $this->agent->is_mobile();
     $data['category'] = $species_category;
     $data['audio'] = $this->catalog_model->get_audio($id);
@@ -355,7 +361,23 @@ class Catalog extends CI_Controller {
 
   }
 
-
+  public function check_species_not_in_family($sp_in_family, $sp_in_order) {
+    $id_array_family = array();
+    foreach ($sp_in_family as $id) {
+      $id_array_family[] = $id->id;
+    }
+    $id_array_order = array();
+    foreach ($sp_in_order as $id) {
+      $id_array_order[] = $id->id;
+    }
+    $sp_not_in_family_arr = array_diff($id_array_order, $id_array_family);
+    $sp_not_in_family = $this->catalog_model->get_species_by_id_array($sp_not_in_family_arr);
+    // echo "<pre>";
+    // var_dump($sp_not_in_family);
+    // echo "</pre>";
+    // exit;
+    return $sp_not_in_family;
+  }
 
 
 }

@@ -288,15 +288,19 @@ Class Catalog_model extends CI_Model
       $in = join(',', $id_array);
       // var_dump($in);
       // exit;
-      try{
-          $sql = "SELECT * FROM species WHERE id IN ($in)";
-          $result = $this->db->query($sql);
-        }catch(Exception $e){
-            echo "Unable to retrieve results";
-            exit;
-        }
-        $species = $result->result();
-        return $species;
+      if(count($id_array) > 0){
+        try{
+            $sql = "SELECT * FROM species WHERE id IN ($in)";
+            $result = $this->db->query($sql);
+          }catch(Exception $e){
+              echo "Unable to retrieve results";
+              exit;
+          }
+          $species = $result->result();
+          return $species;
+      } else{
+        return null;
+      }
     }
 
     // public function get_species_by_id_array($id_array) {

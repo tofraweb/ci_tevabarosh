@@ -153,7 +153,7 @@
                       <small>על הצמח המושלם</small>
                   </h3>
                   <p style="text-align: justify">לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס מונפרד אדנדום סילקוף, מרגשי ומרגשח. עמחליף קוואזי במר מודוף. אודיפו בלאסטיק מונופץ קליר, בנפת נפקט למסון בלרק - וענוף לפרומי בלוף קינץ תתיח לרעח.</p>
-                  <a href="<?php echo base_url();?>index.php/catalog/?cat=<?php echo $field[0]->category_id;?>" class="btn btn-primary">ראה עוד</a>
+                  <a href="<?php echo base_url();?>index.php/catalog/?cat=<?php echo $tree[0]->category_id;?>" class="btn btn-primary">ראה עוד</a>
               </div>
             </div>
         </div>
