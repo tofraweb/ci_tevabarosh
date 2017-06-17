@@ -186,7 +186,11 @@ class Catalog extends CI_Controller {
     $limit = 4;
     $species = $this->catalog_model->single_species_array($id);
     $all_pictures = $this->catalog_model->get_pictures($id);
-    $limited_pictures = $this->catalog_model->get_pictures($id, 3);
+    $premium_picture = $this->catalog_model->get_pictures($id, 'premium', 3);
+    $info_tab_1_picture = $this->catalog_model->get_pictures($id, '2');
+    $info_tab_2_picture = $this->catalog_model->get_pictures($id, '3');
+    $info_tab_3_picture = $this->catalog_model->get_pictures($id, '4');
+    $limited_pictures = $this->catalog_model->get_pictures($id, null, 3); //refactory needed
     $genus = $this->catalog_model->get_genus($id);
     $family = $this->catalog_model->get_family($genus->family_id);
     $order = $this->catalog_model->get_order($family->order_id);
@@ -221,6 +225,9 @@ class Catalog extends CI_Controller {
     $data['species'] = $species;
     $data['pictures'] = $all_pictures;
     $data['limited_pictures'] = $limited_pictures;
+    $data['info_tab_1_picture'] = $info_tab_1_picture;
+    $data['info_tab_2_picture'] = $info_tab_2_picture;
+    $data['info_tab_3_picture'] = $info_tab_3_picture;
     $data['genus'] = $genus;
     $data['family'] = $family;
     $data['order'] = $order;

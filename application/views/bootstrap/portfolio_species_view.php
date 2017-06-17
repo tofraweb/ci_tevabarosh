@@ -63,7 +63,7 @@
                     <tr>
                       <th class="info" style="width:15%">שם
                         <?php if($logged_in){ ?>
-                          <small><a target="_blank" href="<?php echo base_url();?>admin/species_management/edit/<?php echo $species[0]->id;?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></small>
+                          <small><a target="_blank" href="<?php echo base_url();?>admin/species_management/edit/<?php echo $species[0]->id;?>/?id=<?php echo $species[0]->id;?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></small>
                         <?php } ?>
                       </th>
                       <td class="centered-td" style="color: #31b0d5"><b><?php echo $species[0]->name_he;?></b></td>
@@ -91,16 +91,33 @@
                   </table>
                 </div>
               <!-- More pictures from gallery -->
-              <?php foreach($limited_pictures as $picture) { ?>
-                <div class="col-sm-4" style="padding: 5px">
-                  <div class="thumbnail">
-                    <img class="img-responsive img-rounded img-hover img-related" style="cursor: zoom-in;" src="<?php echo base_url();?>assets/img/media/upload/small/<?php echo $picture->filename;?>" alt="">
-                  </div>
+              <?php if($info_tab_1_picture) { ?>
+              <div class="col-sm-4" style="padding: 5px">
+                <div class="thumbnail">
+                  <img class="img-responsive img-rounded img-hover img-related" style="cursor: zoom-in;" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $info_tab_1_picture[0]->filename;?>" alt="">
                 </div>
+              </div>
+              <?php } ?>
+              <?php if($info_tab_2_picture) { ?>
+              <div class="col-sm-4" style="padding: 5px">
+                <div class="thumbnail">
+                  <img class="img-responsive img-rounded img-hover img-related" style="cursor: zoom-in;" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $info_tab_2_picture[0]->filename;?>" alt="">
+                </div>
+              </div>
+              <?php } ?>
+              <?php if($info_tab_3_picture) { ?>
+              <div class="col-sm-4" style="padding: 5px">
+                <div class="thumbnail">
+                  <img class="img-responsive img-rounded img-hover img-related" style="cursor: zoom-in;" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $info_tab_3_picture[0]->filename;?>" alt="">
+                </div>
+              </div>
               <?php } ?>
               <!-- End more pictures from gallery -->
               <div class="col-md-12" style="text-align:center">
                 <a class="btn btn-info" href="javascript:history.back()">חזרה</a>
+                <?php if($logged_in){ ?>
+                  <small><a target="_blank" href="<?php echo base_url();?>admin/pictures_management/<?php echo $species[0]->id;?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"> </span></a></small>
+                <?php } ?>
               </div>
             </div>
               <div class="col-md-6">
@@ -250,9 +267,12 @@
               <div class="row">
                   <?php if(!empty($pictures)) { ?>
                   <div class="col-md-12">
+                  <!-- <div class="col-md-4 img-portfolio">
+                    <img class="img-hover img-rounded img-species img-thumbnail" style="cursor: zoom-in;" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species[0]->picture;?>" alt="">
+                  </div> -->
                   <?php foreach ($pictures as $picture) {?>
                     <div class="col-md-4 img-portfolio">
-                      <img class="img-hover img-rounded img-species img-thumbnail" style="cursor: zoom-in;" src="<?php echo base_url();?>assets/img/media/upload/small/<?php echo $picture->filename;?>" alt="">
+                      <img class="img-hover img-rounded img-species img-thumbnail" style="cursor: zoom-in;" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $picture->filename;?>" alt="">
                     </div>
                   <?php } ?>
                   </div>

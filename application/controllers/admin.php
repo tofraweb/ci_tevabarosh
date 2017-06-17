@@ -45,18 +45,22 @@ class Admin extends CI_Controller {
 		$this->_example_output($output, 'סדרה');
 	}
 
-	public function pictures_management()
+	public function pictures_management($id = null)
 	{
 		try{
 			$crud = new grocery_CRUD();
 
 			$crud->set_theme('datatables');
 			$crud->set_table('pictures');
+			if($id){
+				$crud->where('species_id', $id);
+			}
 			$crud->set_subject('Pictures');
 			$crud->required_fields('filename', 'species_id');
 			$crud->set_subject('pictures');
 			$crud->set_relation('species_id','species','name_he');
-			$crud->set_field_upload('filename','assets/img/media/upload/small');
+			$crud->set_relation('img_type_id','img_type','name');
+			$crud->set_field_upload('filename','assets/img/media/upload');
 
 			$crud->callback_after_upload(array($this,'resize_img_after_upload'));
 
@@ -167,7 +171,9 @@ class Admin extends CI_Controller {
 	{
 		try{
 			$crud = new grocery_CRUD();
-
+			$id = $_GET['id'];
+			// var_dump($id);
+			// exit;
 			$crud->set_theme('datatables');
 			$crud->set_table('species');
 			$crud->set_subject('Species');
@@ -177,8 +183,12 @@ class Admin extends CI_Controller {
 			$crud->set_subject('species');
 			$crud->set_relation('category_id','categories','name');
 			$crud->set_relation('genus_id','genus','name_he');
-
-			$crud->callback_after_upload(array($this,'resize_img_after_upload'));
+			//$crud->set_relation('picture','pictures','filename',array('species_id' => $id, 'img_type_id' => '1' ));
+			//$crud->set_relation('user_id','users','username',array('status' => 'active'));
+			// $crud->set_relation_n_n('image', 'film_actor', 'actor', 'film_id', 'actor_id', 'fullname','priority');
+			$crud->add_action('Images', 'http://www.grocerycrud.com/assets/uploads/general/smiley.png', 'admin/pictures_management');
+			//$crud->where('pictures.species_id','41');
+			//$crud->callback_after_upload(array($this,'resize_img_after_upload'));
 
 			$output = $crud->render();
 
@@ -491,6 +501,21 @@ class Admin extends CI_Controller {
 		} else {
 			return $output;
 		}
+	}
+
+ /*DB related scripts*/
+	public function update_species_pictures()
+	{
+		$this->load->model('gallery_model','',TRUE);
+		$premium_pictures = $this->gallery_model->get_premium_pictures();
+		// var_dump($premium_pictures);
+		// exit;
+		foreach($premium_pictures as $picture){
+			// var_dump($picture->species_id);
+			// exit;
+			$this->gallery_model->insert_premium_pictures($picture->species_id,$picture->filename);
+		}
+		redirect('admin', 'refresh');
 	}
 
 }

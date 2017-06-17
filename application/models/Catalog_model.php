@@ -89,7 +89,7 @@ Class Catalog_model extends CI_Model
     public function search_catalog_array($search, $limit = null, $offset = 0){
 
         try{
-            $sql = " SELECT id,name_he,name_lat,name_hu,category_id, picture
+            $sql = " SELECT id,name_he,name_lat,name_hu,category_id,picture
                 FROM species
                 WHERE name_he LIKE ?
                 OR name_lat LIKE ?
@@ -126,16 +126,28 @@ Class Catalog_model extends CI_Model
          return $species;
     }
 
-    public function get_pictures($id, $limit = '100') {
-      try{
-          $sql = "SELECT * FROM pictures WHERE species_id = ? LIMIT $limit"; // refactory needed
-          $result = $this->db->query($sql,$id);
-        }catch(Exception $e){
-            echo "Unable to retrieve results";
-            exit;
-        }
-        $pictures = $result->result();
-        return $pictures;
+    public function get_pictures($id, $type = null, $limit = '100') {
+      if($type){
+        try{
+            $sql = "SELECT * FROM pictures
+            WHERE species_id = ? AND img_type_id = ?
+            LIMIT $limit"; // refactory needed
+            $result = $this->db->query($sql,array($id,$type));
+          }catch(Exception $e){
+              echo "Unable to retrieve results";
+              exit;
+          }
+      }else{
+        try{
+            $sql = "SELECT * FROM pictures WHERE species_id = ? LIMIT $limit"; // refactory needed
+            $result = $this->db->query($sql,$id);
+          }catch(Exception $e){
+              echo "Unable to retrieve results";
+              exit;
+          }
+      }
+      $pictures = $result->result();
+      return $pictures;
     }
 
     public function get_genus($id){
