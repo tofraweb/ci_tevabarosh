@@ -192,7 +192,7 @@ class Catalog extends CI_Controller {
     $info_tab_3_picture = $this->catalog_model->get_pictures($id, '4', '100');
     $limited_pictures = $this->catalog_model->get_pictures($id, null, '3'); //refactory needed
     $genus = $this->catalog_model->get_genus($id);
-    $family = $this->catalog_model->get_family($genus->family_id);
+    $family = $this->catalog_model->get_families($genus->family_id);
     $order = $this->catalog_model->get_orders($family->order_id);
     $species_category = $this->catalog_model->get_category_details($species[0]->category_id);
     $session_data = $this->session->userdata('logged_in');
@@ -301,6 +301,9 @@ class Catalog extends CI_Controller {
 
   public function getSpeciesListInFamily($id, $return_array = null){
 
+    $family = $this->catalog_model->get_families($id);
+    $all_families = $this->catalog_model->get_families();
+    $order = $this->catalog_model->get_orders($family->order_id);
     $genus_list = $this->catalog_model->getGenusListInFamily($id);
     $species_id_array = array();
     foreach ($genus_list as $genus=>$species) {
@@ -325,6 +328,10 @@ class Catalog extends CI_Controller {
       $data['pageTitle'] = $this->catalog_model->get_classification_name($id, 'family')->name_he;
       $data['pagination'] = null;
       $data['catalog'] = $species_list;
+      $data['order'] = $order;
+      $data['current_family'] = $family;
+      $data['all_families'] = $all_families;
+      $data['kingdom'] = $order->kingdom_id;
       $this->load->view('inc/header');
       $this->load->view('bootstrap/classification_view',$data);
       $this->load->view('inc/footer');

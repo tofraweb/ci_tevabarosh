@@ -164,7 +164,8 @@ Class Catalog_model extends CI_Model
         return $genus[0];
     }
 
-    public function get_family($id){
+    public function get_families($id = null){
+      if($id){
       try{
           $sql = "SELECT * FROM family
           WHERE id = ?";
@@ -173,8 +174,20 @@ Class Catalog_model extends CI_Model
             echo "Unable to retrieve results";
             exit;
         }
-        $family = $result->result();
-        return $family[0];
+        $families = $result->result();
+        return $families[0];
+      } else {
+        try{
+            $sql = "SELECT * FROM family
+            ORDER BY name_he ASC";
+            $result = $this->db->query($sql);
+          }catch(Exception $e){
+              echo "Unable to retrieve results";
+              exit;
+          }
+          $families = $result->result();
+          return $families;
+      }
     }
 
     public function get_orders($id = null){

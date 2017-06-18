@@ -18,7 +18,7 @@
         <!-- /.row -->
         <div class="row">
           <div class="col-md-3">
-            <div class="list-group panel well">
+            <div class="list-group panel well" style="width:95%">
               <!-- Blog Search Well -->
               <div>
                   <h5>חיפוש</h5>
@@ -31,8 +31,9 @@
                   <!-- /.input-group -->
               </div>
             </div>
-            <div class="list-group panel well">
-                 <h4>מיון לפי סדרות</h4>
+            <div class="list-group panel well" style="width:95%">
+                <?php if($all_orders) { ?>
+                 <h3 class="page-header" style="padding-right:11px"><small>סדרות במחלקת </small>עופות</h3>
                  <div class="row">
                    <?php
                    foreach($all_orders as $order) {
@@ -45,6 +46,26 @@
                      <?php } } ?>
                      <!-- /.col-lg-6 -->
                  </div>
+                 <?php } ?>
+                 <?php if($all_families) { ?>
+                  <h3  class="page-header" style="padding-right:11px"><small>משפחות בסדרת </small><a href="<?php echo base_url();?>catalog/getSpeciesListInOrder/<?php echo $order->id;?>"><?php echo $order->name_he;?></a></h3>
+                  <div class="row">
+                    <?php
+                    // echo "<pre>";
+                    // var_dump($all_families);
+                    // exit;
+                    // echo "</pre>";
+                    foreach($all_families as $family) {
+                      if($order->id == $family->order_id) { ?>
+                      <div style="margin-right: 0px">
+                          <ul>
+                              <li><a <?php if($current_family == $family) { ?> style="color:green; font-size:16px;"<?php } ?> href="<?php echo base_url();?>catalog/getSpeciesListInFamily/<?php echo $family->id;?>"><?php echo $family->name_he;?> - <?php echo $family->name_lat;?></a></li>
+                          </ul>
+                      </div>
+                      <?php } } ?>
+                      <!-- /.col-lg-6 -->
+                  </div>
+                  <?php } ?>
                  <!-- /.row -->
              </div>
           </div>
