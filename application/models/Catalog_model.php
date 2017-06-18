@@ -177,7 +177,8 @@ Class Catalog_model extends CI_Model
         return $family[0];
     }
 
-    public function get_order($id){
+    public function get_orders($id = null){
+      if($id){
       try{
           $sql = "SELECT * FROM orders
           WHERE id = ?";
@@ -188,6 +189,18 @@ Class Catalog_model extends CI_Model
         }
         $order = $result->result();
         return $order[0];
+      } else {
+        try{
+            $sql = "SELECT * FROM orders
+            ORDER BY name_he ASC";
+            $result = $this->db->query($sql);
+          }catch(Exception $e){
+              echo "Unable to retrieve results";
+              exit;
+          }
+          $order = $result->result();
+          return $order;
+      }
     }
 
     public function get_category_details($id){

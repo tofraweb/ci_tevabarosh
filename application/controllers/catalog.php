@@ -185,15 +185,15 @@ class Catalog extends CI_Controller {
   public function getSpecies($id){
     $limit = 4;
     $species = $this->catalog_model->single_species_array($id);
-    $all_pictures = $this->catalog_model->get_pictures($id);
-    $premium_picture = $this->catalog_model->get_pictures($id, 'premium', 3);
-    $info_tab_1_picture = $this->catalog_model->get_pictures($id, '2');
-    $info_tab_2_picture = $this->catalog_model->get_pictures($id, '3');
-    $info_tab_3_picture = $this->catalog_model->get_pictures($id, '4');
-    $limited_pictures = $this->catalog_model->get_pictures($id, null, 3); //refactory needed
+    $all_pictures = $this->catalog_model->get_pictures($id, null, '100');
+    $premium_picture = $this->catalog_model->get_pictures($id, 'premium', '3');
+    $info_tab_1_picture = $this->catalog_model->get_pictures($id, '2', '100');
+    $info_tab_2_picture = $this->catalog_model->get_pictures($id, '3', '100');
+    $info_tab_3_picture = $this->catalog_model->get_pictures($id, '4', '100');
+    $limited_pictures = $this->catalog_model->get_pictures($id, null, '3'); //refactory needed
     $genus = $this->catalog_model->get_genus($id);
     $family = $this->catalog_model->get_family($genus->family_id);
-    $order = $this->catalog_model->get_order($family->order_id);
+    $order = $this->catalog_model->get_orders($family->order_id);
     $species_category = $this->catalog_model->get_category_details($species[0]->category_id);
     $session_data = $this->session->userdata('logged_in');
     $species_properties = $this->catalog_model->get_species_properties($id, $species_category->type);
@@ -224,7 +224,7 @@ class Catalog extends CI_Controller {
 
     $data['species'] = $species;
     $data['pictures'] = $all_pictures;
-    $data['limited_pictures'] = $limited_pictures;
+    //$data['limited_pictures'] = $limited_pictures;
     $data['info_tab_1_picture'] = $info_tab_1_picture;
     $data['info_tab_2_picture'] = $info_tab_2_picture;
     $data['info_tab_3_picture'] = $info_tab_3_picture;
@@ -240,7 +240,7 @@ class Catalog extends CI_Controller {
     $data['video'] = $this->catalog_model->get_video($id);
     $data['properties'] = $species_properties;
     $this->load->view('inc/header');
-    $this->load->view('bootstrap/portfolio_species_view',$data);
+    $this->load->view('bootstrap/species_view',$data);
     $this->load->view('inc/footer');
   }
 
@@ -249,6 +249,8 @@ class Catalog extends CI_Controller {
     $genus_arr = array();
     $species_list = array();
     $temp_a = array();
+    $order = $this->catalog_model->get_orders($id);
+    $all_orders = $this->catalog_model->get_orders();
     $family_arr = $this->catalog_model->getFamilyListInOrder($id);
     $family_id_array = array();
 
@@ -286,8 +288,11 @@ class Catalog extends CI_Controller {
       $data['pageTitle'] = $this->catalog_model->get_classification_name($id, 'orders')->name_he;
       $data['pagination'] = null;
       $data['catalog'] = $species_list;
+      $data['current_order'] = $order;
+      $data['all_orders'] = $all_orders;
+      $data['kingdom'] = $order->kingdom_id;
       $this->load->view('inc/header');
-      $this->load->view('bootstrap/catalog_view',$data);
+      $this->load->view('bootstrap/classification_view',$data);
       $this->load->view('inc/footer');
     }else{
       return $species_list;
@@ -321,7 +326,7 @@ class Catalog extends CI_Controller {
       $data['pagination'] = null;
       $data['catalog'] = $species_list;
       $this->load->view('inc/header');
-      $this->load->view('bootstrap/catalog_view',$data);
+      $this->load->view('bootstrap/classification_view',$data);
       $this->load->view('inc/footer');
     } else{
       return $species_list;
@@ -341,7 +346,7 @@ class Catalog extends CI_Controller {
     $data['pagination'] = null;
     $data['catalog'] = $species_list;
     $this->load->view('inc/header');
-    $this->load->view('bootstrap/catalog_view',$data);
+    $this->load->view('bootstrap/classification_view',$data);
     $this->load->view('inc/footer');
 
   }
