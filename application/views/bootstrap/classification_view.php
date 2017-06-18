@@ -33,14 +33,14 @@
             </div>
             <div class="list-group panel well" style="width:95%">
                 <?php if($all_orders) { ?>
-                 <h3 class="page-header" style="padding-right:11px"><small>סדרות במחלקת </small>עופות</h3>
+                 <h3 class="page-header" style="padding-right:11px"><small>סדרות בקטגוריית </small><?php echo $classification_sidebar_header;?></h3>
                  <div class="row">
                    <?php
                    foreach($all_orders as $order) {
                      if($kingdom == $order->kingdom_id) { ?>
                      <div style="margin-right: 0px">
                          <ul>
-                             <li><a <?php if($current_order == $order) { ?> style="color:green; font-size:16px;"<?php } ?> href="<?php echo base_url();?>catalog/getSpeciesListInOrder/<?php echo $order->id;?>"><?php echo $order->name_he;?> - <?php echo $order->name_lat;?></a></li>
+                             <li><a <?php if($current_order == $order) { ?> style="color:green; font-weight:bold;"<?php } ?> href="<?php echo base_url();?>catalog/getSpeciesListInOrder/<?php echo $order->id;?>"><?php echo $order->name_he;?> - <?php echo $order->name_lat;?></a></li>
                          </ul>
                      </div>
                      <?php } } ?>
@@ -59,13 +59,32 @@
                       if($order->id == $family->order_id) { ?>
                       <div style="margin-right: 0px">
                           <ul>
-                              <li><a <?php if($current_family == $family) { ?> style="color:green; font-size:16px;"<?php } ?> href="<?php echo base_url();?>catalog/getSpeciesListInFamily/<?php echo $family->id;?>"><?php echo $family->name_he;?> - <?php echo $family->name_lat;?></a></li>
+                              <li><a <?php if($current_family == $family) { ?> style="color:green; font-weight:bold;"<?php } ?> href="<?php echo base_url();?>catalog/getSpeciesListInFamily/<?php echo $family->id;?>"><?php echo $family->name_he;?> - <?php echo $family->name_lat;?></a></li>
                           </ul>
                       </div>
                       <?php } } ?>
                       <!-- /.col-lg-6 -->
                   </div>
                   <?php } ?>
+                  <?php if($all_genus) { ?>
+                   <h3  class="page-header" style="padding-right:11px"><small>סוגים במשפחת </small><a href="<?php echo base_url();?>catalog/getSpeciesListInFamily/<?php echo $family->id;?>"><?php echo $family->name_he;?></a></h3>
+                   <div class="row">
+                     <?php
+                    //  echo "<pre>";
+                    //  var_dump($family);
+                    //  exit;
+                    //  echo "</pre>";
+                     foreach($all_genus as $genus) {
+                       if($family->id == $genus->family_id) { ?>
+                       <div style="margin-right: 0px">
+                           <ul>
+                               <li><a <?php if($current_genus == $genus) { ?> style="color:green; font-weight:bold;"<?php } ?> href="<?php echo base_url();?>catalog/getSpeciesListInGenus/<?php echo $genus->id;?>"><?php echo $genus->name_he;?> - <?php echo $genus->name_lat;?></a></li>
+                           </ul>
+                       </div>
+                       <?php } } ?>
+                       <!-- /.col-lg-6 -->
+                   </div>
+                   <?php } ?>
                  <!-- /.row -->
              </div>
           </div>
@@ -99,9 +118,12 @@
                           <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>">
                               <img class="img-hover img-catalog" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
                           </a>
-                          <h4>
-                              <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>"><?php echo $species->name_he;?></a>
-                          </h4>
+                          <h5>
+                            <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>"><?php echo $species->name_he;?></a>
+          									<small>
+          										<?php echo ' '.$species->name_lat;?>
+          									</small>
+            							</h5>
                         </div>
                       </div>
                     <?php } ?>

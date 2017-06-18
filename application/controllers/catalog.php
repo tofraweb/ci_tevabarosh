@@ -191,7 +191,7 @@ class Catalog extends CI_Controller {
     $info_tab_2_picture = $this->catalog_model->get_pictures($id, '3', '100');
     $info_tab_3_picture = $this->catalog_model->get_pictures($id, '4', '100');
     $limited_pictures = $this->catalog_model->get_pictures($id, null, '3'); //refactory needed
-    $genus = $this->catalog_model->get_genus($id);
+    $genus = $this->catalog_model->get_genus($id, true); //refactory needed, use of another function needed
     $family = $this->catalog_model->get_families($genus->family_id);
     $order = $this->catalog_model->get_orders($family->order_id);
     $species_category = $this->catalog_model->get_category_details($species[0]->category_id);
@@ -280,6 +280,11 @@ class Catalog extends CI_Controller {
 
       $species_count = count($species_list);
       $pagination_result = $this->setPagination($species_count);
+      if($order->kingdom_id == 1){
+        $classification_sidebar_header = 'צמחים';
+      } else {
+        $classification_sidebar_header = 'עופות';
+      }
 
       $data['search'] = $this->search;
       $data['section'] = $this->section;
@@ -291,6 +296,7 @@ class Catalog extends CI_Controller {
       $data['current_order'] = $order;
       $data['all_orders'] = $all_orders;
       $data['kingdom'] = $order->kingdom_id;
+      $data['classification_sidebar_header'] = $classification_sidebar_header;
       $this->load->view('inc/header');
       $this->load->view('bootstrap/classification_view',$data);
       $this->load->view('inc/footer');
@@ -331,7 +337,7 @@ class Catalog extends CI_Controller {
       $data['order'] = $order;
       $data['current_family'] = $family;
       $data['all_families'] = $all_families;
-      $data['kingdom'] = $order->kingdom_id;
+      //$data['kingdom'] = $order->kingdom_id;
       $this->load->view('inc/header');
       $this->load->view('bootstrap/classification_view',$data);
       $this->load->view('inc/footer');
@@ -341,6 +347,14 @@ class Catalog extends CI_Controller {
   }
 
   public function getSpeciesListInGenus($id){
+
+    $genus = $this->catalog_model->get_genus($id);
+    $all_genus = $this->catalog_model->get_genus();
+    // echo "<pre>";
+    // var_dump($genus,$all_genus);
+    // exit;
+    // echo "</pre>";
+    $family = $this->catalog_model->get_families($genus->family_id);
 
     $species_list = $this->catalog_model->getSpeciesListInGenus($id);
     $species_count = count($species_list);
@@ -352,6 +366,10 @@ class Catalog extends CI_Controller {
     $data['pageTitle'] = $this->catalog_model->get_classification_name($id, 'genus')->name_he;
     $data['pagination'] = null;
     $data['catalog'] = $species_list;
+    $data['family'] = $family;
+    $data['current_genus'] = $genus;
+    $data['all_genus'] = $all_genus;
+    //$data['kingdom'] = $order->kingdom_id;
     $this->load->view('inc/header');
     $this->load->view('bootstrap/classification_view',$data);
     $this->load->view('inc/footer');

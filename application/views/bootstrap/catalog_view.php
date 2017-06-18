@@ -114,9 +114,12 @@
                           <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>">
                               <img class="img-hover img-catalog" src="<?php echo base_url();?>assets/img/media/upload/<?php echo $species->picture;?>" alt="">
                           </a>
-                          <h4>
-                              <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>"><?php echo $species->name_he;?></a>
-                          </h4>
+                          <h5>
+                            <a href="<?php echo base_url();?>index.php/catalog/getSpecies/<?php echo $species->id;?>"><?php echo $species->name_he;?></a>
+          									<small>
+          										<?php echo ' '.$species->name_lat;?>
+          									</small>
+            							</h5>
                         </div>
                       </div>
                     <?php } ?>

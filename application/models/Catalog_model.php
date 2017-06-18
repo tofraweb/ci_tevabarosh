@@ -150,18 +150,42 @@ Class Catalog_model extends CI_Model
       return $pictures;
     }
 
-    public function get_genus($id){
-      try{
-          $sql = "SELECT genus.id, genus.family_id, genus.name_he, genus.name_lat, genus.name_hu FROM genus
-          Join species ON genus.id = species.genus_id
-          WHERE species.id = ?";
-          $result = $this->db->query($sql,$id);
-        }catch(Exception $e){
-            echo "Unable to retrieve results";
-            exit;
+    public function get_genus($id = null, $all_genus = null){
+      if($id){
+        if($all_genus){ //retrieves all species in genus
+          try{
+              $sql = "SELECT genus.id, genus.family_id, genus.name_he, genus.name_lat, genus.name_hu FROM genus
+              Join species ON genus.id = species.genus_id
+              WHERE species.id = ?";
+              $result = $this->db->query($sql,$id);
+            }catch(Exception $e){
+                echo "Unable to retrieve results";
+                exit;
+            }
+        } else { //retrieves only specific genus
+          try{
+              $sql = "SELECT * FROM genus
+              WHERE id = ?";
+              $result = $this->db->query($sql,$id);
+            }catch(Exception $e){
+                echo "Unable to retrieve results";
+                exit;
+            }
         }
-        $genus = $result->result();
-        return $genus[0];
+          $genus = $result->result();
+          return $genus[0];
+      } else {
+        try{
+            $sql = "SELECT * FROM genus
+            ORDER BY name_he ASC";
+            $result = $this->db->query($sql);
+          }catch(Exception $e){
+              echo "Unable to retrieve results";
+              exit;
+          }
+          $genus = $result->result();
+          return $genus;
+      }
     }
 
     public function get_families($id = null){
